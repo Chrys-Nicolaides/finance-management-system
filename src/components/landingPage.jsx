@@ -15,7 +15,9 @@ const LandingPage = () => {
         <div>
           <h1 className="text-6xl">Manage your finances on the go.</h1>
           <h2 className="text-4xl pb-10 pt-4">Or something nice like that.</h2>
-          <button>Get started</button>
+          <button className="ring-2 dark:border-gray-300 border-gray-700 outline-none focus:outline-none rounded p-2">
+            Get started
+          </button>
         </div>
         <div className="border-gray-700 border-2 flex justify-center">
           <h5 className=" self-center">Image goes here</h5>
