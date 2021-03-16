@@ -1,23 +1,25 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from "react";
+import LandingPage from "./components/landingPage";
 
 function App() {
+  const [darkTheme, setDarkTheme] = useState(
+    localStorage.darkTheme === "true" ||
+      (localStorage.darkTheme === undefined &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+  const themeChange = () => {
+    localStorage.darkTheme = !darkTheme;
+    setDarkTheme(!darkTheme);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          It's Happening!
-        </a>
-      </header>
+    <div className={"App" + (darkTheme ? " dark" : "")}>
+      <div className="dark:bg-black dark:text-gray-100 text-gray-800">
+        <button onClick={() => themeChange()}>
+          {darkTheme ? "dark mode" : "light mode"}
+        </button>
+        <LandingPage />
+      </div>
     </div>
   );
 }
