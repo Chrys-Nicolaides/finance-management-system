@@ -35,6 +35,8 @@ function App() {
     getTransactions()
       .then((data) => setData(data))
       .catch((error) => console.log("GET error", error));
+    getProfile(1);
+    saveProfile(1);
   }, []);
 
   // POST request
@@ -61,10 +63,9 @@ function App() {
 
   // GET profile request
 
-  const getProfile = async () => {
-    fetch("https://finanzer.normans.co.za/transactions", {
+  const getProfile = async (id) => {
+    fetch(`https://finanzer.normans.co.za/profile/${id}`, {
       method: "GET",
-      id: Number,
     })
       .then((response) => response.json())
       .then((result) => {
@@ -75,10 +76,9 @@ function App() {
 
   // PUT profile request
 
-  const saveProfile = async () => {
-    fetch("https://finanzer.normans.co.za/transactions", {
+  const saveProfile = async (id) => {
+    fetch(`https://finanzer.normans.co.za/profile/${id}`, {
       method: "PUT",
-      id: Number,
       body: JSON.stringify({
         id: 10,
         balance: 60.39,
@@ -95,13 +95,17 @@ function App() {
   // rest of code
 
   return (
-    <div className={"App" + (darkTheme ? " dark" : "")}>
-      <div className="dark:bg-black dark:text-gray-100 text-gray-800">
-        <button onClick={() => themeChange()}>
-          {darkTheme ? "dark mode" : "light mode"}
-        </button>
-        <button onClick={() => saveTransaction()}>POST!</button>
-        <LandingPage />
+    <div
+      className={"App min-h-screen fixed inset-0" + (darkTheme ? " dark" : "")}
+    >
+      <div className="dark:bg-black dark:text-gray-100 text-gray-800 h-full">
+        <LandingPage themeChange={themeChange} darkTheme={darkTheme} />
+        {/* <button
+          className="button-secondary p-1.5 ml-14 -mt-96 mb-96"
+          onClick={() => saveTransaction()}
+        >
+          POST!
+        </button> */}
       </div>
     </div>
   );
