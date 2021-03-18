@@ -23,6 +23,7 @@ const LandingPage = ({ darkTheme, themeChange, saveTransaction }) => {
       </div>
       <div className="grid grid-cols-2 p-14 gap-2">
         <div>
+
           <h1 className="display-primary">Manage your finances on the go.</h1>
           <h2 className="display-secondary pb-10 pt-4">
             Or something nice like that.
@@ -38,6 +39,7 @@ const LandingPage = ({ darkTheme, themeChange, saveTransaction }) => {
               Save transaction
             </button>
           </div>
+
         </div>
         <div className="flex justify-center rounded-lg">
           <HeroImage className="h-2/5" />
