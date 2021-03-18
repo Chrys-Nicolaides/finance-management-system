@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LandingPage from "./components/landingPage";
+import Navbar from "./components/navbar";
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,40 +19,40 @@ function App() {
 
   // GET request
 
-  const getTransactions = async () => {
+  const getTransactions = async (id) => {
     const response = await fetch(
-      "https://finanzer.normans.co.za/transactions",
+      `https://finanzer.normans.co.za/profile/${id}/transactions`,
       {
         method: "GET",
       }
     );
     const data = await response.json();
+    console.log("id:", id);
     return data;
   };
-
   console.log("it's happening", data);
 
   useEffect(() => {
-    getTransactions()
+    getProfile(1);
+    getTransactions(1)
       .then((data) => setData(data))
       .catch((error) => console.log("GET error", error));
-    getProfile(1);
-    saveProfile(1);
+    saveTransaction(1);
+    updateProfile(1);
   }, []);
 
   // POST request
 
-  const saveTransaction = async () => {
-    fetch("https://finanzer.normans.co.za/transactions", {
+  const saveTransaction = async (id) => {
+    fetch(`https://finanzer.normans.co.za/profile/${id}/transactions`, {
       method: "POST",
       body: JSON.stringify({
-        amount: 12,
-        description: "test transaction2",
-        day: 3,
-        recurring: false,
-        recurringType: false,
+        amount: 10,
+        description: "This is a awesome purchase",
+        day: 2,
+        recurring: true,
+        recurringType: "monthly",
         currency: "euros",
-        id: 4,
       }),
     })
       .then((response) => response.json())
@@ -76,11 +77,11 @@ function App() {
 
   // PUT profile request
 
-  const saveProfile = async (id) => {
+  const updateProfile = async (id) => {
     fetch(`https://finanzer.normans.co.za/profile/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        id: 10,
+        id: 3,
         balance: 60.39,
         currency: "euros",
       }),
@@ -98,7 +99,8 @@ function App() {
     <div
       className={"App min-h-screen fixed inset-0" + (darkTheme ? " dark" : "")}
     >
-      <div className="dark:bg-black dark:text-gray-100 text-gray-800 h-full">
+      <div className="dark:bg-gray-900 dark:text-gray-100 text-gray-800 h-full">
+        <Navbar />
         <LandingPage themeChange={themeChange} darkTheme={darkTheme} />
         {/* <button
           className="button-secondary p-1.5 ml-14 -mt-96 mb-96"

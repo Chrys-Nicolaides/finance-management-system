@@ -15,4 +15,28 @@
   .display-secondary {
     @apply font-display text-4xl font-semibold;
   }
+  .nav-item {
+    @apply w-full py-2.5;
+  }
+  .nav-link {
+    @apply flex items-center h-14 text-gray-400 font-medium m-1.5;
+  }
+  .nav-link:hover {
+    @apply text-indigo-400 bg-gray-900 m-2;
+  }
+  .navbar svg {
+    @apply mt-0 mr-6 w-6 h-6;
+  }
+  .link-text {
+    @apply ml-4 hidden;
+  }
+  .svg-logo {
+    @apply w-4 h-4 self-center;
+  }
+  .nav-logo {
+    @apply font-bold mb-4 align-middle text-gray-400 w-full;
+  }
+  svg {
+    @apply self-center;
+  }
 }
