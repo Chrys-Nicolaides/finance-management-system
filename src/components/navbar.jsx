@@ -46,7 +46,12 @@ const navbar = ({ darkTheme, themeChange }) => {
             </a>
           </li>
           <li className="nav-item m-auto mb-3">
-            <a className="nav-link" href="/" onClick={() => themeChange()}>
+            <a
+              className="nav-link"
+              id="theme-toggle"
+              href="/"
+              onClick={() => themeChange()}
+            >
               <RiMoonClearFill className="svg-logo" />
               <span className="link-text">
                 {darkTheme ? "dark mode" : "light mode"}

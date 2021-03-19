@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
 import FetchProfile from "../FetchProfile";
 import UpdateProfile from "../UpdateProfile";
@@ -6,8 +6,6 @@ import FetchTransactions from "../FetchTransactions";
 import SaveTransaction from "../SaveTransaction";
 
 const LandingPage = ({ darkTheme, themeChange }) => {
-  const [data, setData] = useState([]);
-
   const getRequests = async () => {
     let putBody = {
       balance: 200,
@@ -21,10 +19,10 @@ const LandingPage = ({ darkTheme, themeChange }) => {
       recurringType: "monthly",
       currency: "euros",
     };
-    let getProfile = await FetchProfile(1);
-    let putProfile = await UpdateProfile(1, putBody);
-    let getTransaction = await FetchTransactions(1);
-    let postTransaction = await SaveTransaction(1, postBody);
+    await FetchProfile(1);
+    await UpdateProfile(1, putBody);
+    await FetchTransactions(1);
+    await SaveTransaction(1, postBody);
   };
 
   useEffect(() => {
