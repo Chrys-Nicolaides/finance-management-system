@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
-import {
-  getProfile,
-  getTransactions,
-  saveTransaction,
-  updateProfile,
-} from "../Requests";
+import FetchProfile from "../FetchProfile";
+import UpdateProfile from "../UpdateProfile";
+import FetchTransactions from "../FetchTransactions";
+import SaveTransaction from "../SaveTransaction";
 
 const LandingPage = ({ darkTheme, themeChange }) => {
   const [data, setData] = useState([]);
 
-  const getRequests = async () => {
-    let body = {
-      amount: 10,
-      description: "This is a awesome purchase",
-      day: 2,
-      recurring: true,
-      recurringType: "monthly",
-      currency: "euros",
-    };
-    let response = await saveTransaction(1, body);
+  const getRequests = async (id, body) => {
+    // let response = await FetchProfile(1);
+    // let response = await UpdateProfile(1, body);
+    // let response = await FetchTransactions(1);
+    let response = await SaveTransaction(1, body);
     setData(response);
   };
 
@@ -58,7 +51,7 @@ const LandingPage = ({ darkTheme, themeChange }) => {
             </button>
             <button
               className="button-secondary p-1.5 mt-24 self-start"
-              onClick={() => saveTransaction}
+              onClick={() => SaveTransaction}
             >
               Save transaction
             </button>
