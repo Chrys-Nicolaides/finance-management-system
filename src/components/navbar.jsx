@@ -1,14 +1,14 @@
 import React from "react";
 import {
   RiMoonClearFill,
-  RiBarChartBoxFill,
+  // RiBarChartBoxFill,
   RiFileListFill,
   RiPieChartBoxFill,
 } from "react-icons/ri";
 import { GoSignOut } from "react-icons/go";
 import {
   IoChevronForwardCircleSharp,
-  IoChevronBackCircleSharp,
+  // IoChevronBackCircleSharp,
 } from "react-icons/io5";
 
 const navbar = ({ darkTheme, themeChange }) => {
@@ -19,7 +19,7 @@ const navbar = ({ darkTheme, themeChange }) => {
           <li className="nav-logo items-center">
             <a
               className="flex items-center h-14 text-gray-400 font-medium m-1.5"
-              href="#"
+              href="/"
             >
               <IoChevronForwardCircleSharp className="svg-logo" />
               <span className="nav-heading logo-text absolute ml-4">
@@ -28,25 +28,25 @@ const navbar = ({ darkTheme, themeChange }) => {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/">
               <RiPieChartBoxFill className="svg-logo" />
               <span className="link-text">Charts</span>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/">
               <RiFileListFill className="svg-logo" />
               <span className="link-text">Transactions</span>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/">
               <GoSignOut className="svg-logo" />
               <span className="link-text">Sign out</span>
             </a>
           </li>
           <li className="nav-item m-auto mb-3">
-            <a className="nav-link" href="#" onClick={() => themeChange()}>
+            <a className="nav-link" href="/" onClick={() => themeChange()}>
               <RiMoonClearFill className="svg-logo" />
               <span className="link-text">
                 {darkTheme ? "dark mode" : "light mode"}
