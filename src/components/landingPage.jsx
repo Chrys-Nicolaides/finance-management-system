@@ -8,12 +8,23 @@ import SaveTransaction from "../SaveTransaction";
 const LandingPage = ({ darkTheme, themeChange }) => {
   const [data, setData] = useState([]);
 
-  const getRequests = async (id, body) => {
-    // let response = await FetchProfile(1);
-    // let response = await UpdateProfile(1, body);
-    // let response = await FetchTransactions(1);
-    let response = await SaveTransaction(1, body);
-    setData(response);
+  const getRequests = async () => {
+    let putBody = {
+      balance: 200,
+      currency: "euros",
+    };
+    let postBody = {
+      amount: 1000000,
+      description: "One million Euros!!!",
+      day: 6,
+      recurring: false,
+      recurringType: "monthly",
+      currency: "euros",
+    };
+    let getProfile = await FetchProfile(1);
+    let putProfile = await UpdateProfile(1, putBody);
+    let getTransaction = await FetchTransactions(1);
+    let postTransaction = await SaveTransaction(1, postBody);
   };
 
   useEffect(() => {
