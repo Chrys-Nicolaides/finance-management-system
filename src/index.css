@@ -1,3 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  .button-primary {
+    @apply font-body font-semibold bg-transparent rounded-md px-6 py-2.5 self-center text-white border-none shadow focus:outline-none bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700;
+  }
+  .button-secondary {
+    @apply font-body font-semibold bg-transparent rounded-md px-4 py-2 self-center text-indigo-500 focus:text-white border-2 border-indigo-500 shadow focus:outline-none hover:bg-indigo-100  focus:bg-indigo-700 focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700;
+  }
+  .display-primary {
+    @apply font-display text-6xl font-bold;
+  }
+  .display-secondary {
+    @apply font-display text-4xl font-semibold;
+  }
+  .nav-item {
+    @apply w-full py-2.5;
+  }
+  .nav-link {
+    @apply flex items-center h-14 text-gray-400 font-medium m-1.5;
+  }
+  .nav-link:hover {
+    @apply text-indigo-400 bg-gray-900 m-2;
+  }
+  .navbar svg {
+    @apply mt-0 mr-6 w-6 h-6;
+  }
+  .link-text {
+    @apply ml-4 hidden;
+  }
+  .svg-logo {
+    @apply w-4 h-4 self-center;
+  }
+  .nav-logo {
+    @apply font-bold mb-4 align-middle text-gray-400 w-full;
+  }
+  svg {
+    @apply self-center;
+  }
+}
