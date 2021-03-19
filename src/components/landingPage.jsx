@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
+import FetchProfile from "../FetchProfile";
+import UpdateProfile from "../UpdateProfile";
+import FetchTransactions from "../FetchTransactions";
+import SaveTransaction from "../SaveTransaction";
 
-const LandingPage = ({ darkTheme, themeChange, saveTransaction }) => {
+const LandingPage = ({ darkTheme, themeChange }) => {
+  const [data, setData] = useState([]);
+
+  const getRequests = async (id, body) => {
+    // let response = await FetchProfile(1);
+    // let response = await UpdateProfile(1, body);
+    // let response = await FetchTransactions(1);
+    let response = await SaveTransaction(1, body);
+    setData(response);
+  };
+
+  useEffect(() => {
+    getRequests();
+  }, []);
+
   return (
     <div className="dark:text-gray-100 text-gray-800">
       <div className="temp-navbar flex bg-gray-50 dark:bg-gray-900 h-14 justify-between">
@@ -33,7 +51,7 @@ const LandingPage = ({ darkTheme, themeChange, saveTransaction }) => {
             </button>
             <button
               className="button-secondary p-1.5 mt-24 self-start"
-              onClick={() => saveTransaction}
+              onClick={() => SaveTransaction}
             >
               Save transaction
             </button>
