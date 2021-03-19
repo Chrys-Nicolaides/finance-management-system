@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
+import {
+  getProfile,
+  getTransactions,
+  saveTransaction,
+  updateProfile,
+} from "../Requests";
 
-const LandingPage = ({ darkTheme, themeChange, saveTransaction }) => {
+const LandingPage = ({ darkTheme, themeChange }) => {
+  const [data, setData] = useState([]);
+
+  const getRequests = async () => {
+    let body = {
+      amount: 10,
+      description: "This is a awesome purchase",
+      day: 2,
+      recurring: true,
+      recurringType: "monthly",
+      currency: "euros",
+    };
+    let response = await saveTransaction(1, body);
+    setData(response);
+  };
+
+  useEffect(() => {
+    getRequests();
+  }, []);
+
   return (
     <div className="dark:text-gray-100 text-gray-800">
       <div className="temp-navbar flex bg-gray-50 dark:bg-gray-900 h-14 justify-between">
