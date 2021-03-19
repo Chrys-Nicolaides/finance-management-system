@@ -3,7 +3,7 @@
 import { request } from "./Request";
 
 const UpdateProfile = async (id, body) => {
-  request("GET", `/profile/${id}`, body)
+  request("PUT", `/profile/${id}`, body)
     .then((response) => response.json())
     .then((result) => {
       console.log("PUT result", result);
