@@ -19,10 +19,10 @@
     @apply w-full py-2.5;
   }
   .nav-link {
-    @apply flex items-center h-14 text-gray-400 font-medium m-1.5;
+    @apply flex items-center h-14 text-gray-400 font-normal m-1.5;
   }
   .nav-link:hover {
-    @apply text-indigo-400 bg-gray-900 m-2;
+    @apply text-indigo-400 bg-gray-900 m-2 rounded-sm;
   }
   .navbar svg {
     @apply mt-0 mr-6 w-6 h-6;
@@ -38,5 +38,17 @@
   }
   svg {
     @apply self-center;
+  }
+  h3 {
+    @apply font-semibold font-body text-gray-800 dark:text-gray-300 text-lg;
+  }
+  h5 {
+    @apply font-body font-medium text-sm;
+  }
+  h6 {
+    @apply font-body font-medium text-xxs;
+  }
+  .category-container {
+    @apply w-8 h-7 rounded m-4 flex justify-center items-center;
   }
 }

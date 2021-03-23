@@ -80,7 +80,7 @@
   .navbar:hover .link-text,
   .navbar:hover .logo-text {
     opacity: 1;
-    display: inline;
+    display: block;
     transition: opacity 400ms ease-out 150ms;
   }
 

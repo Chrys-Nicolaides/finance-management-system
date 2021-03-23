@@ -34,17 +34,9 @@ const LandingPage = ({ darkTheme, themeChange }) => {
       <div className="temp-navbar flex bg-gray-50 dark:bg-gray-900 h-14 justify-between">
         <div className="flex">
           <div className="w-4 h-4 rounded-lg bg-indigo-500 justify-start self-center ml-7"></div>
-          <h3 className="font-display self-center flex justify-start ml-24 font-medium">
-            Financer
-          </h3>
+          <h3 className="self-center flex justify-start ml-24">Financer</h3>
         </div>
         <div className="self-center">
-          <button
-            className="button-secondary ml-4 p-1.5"
-            onClick={() => themeChange()}
-          >
-            {darkTheme ? "dark mode" : "light mode"}
-          </button>
           <button className="button-primary justify-end mx-10">Login</button>
         </div>
       </div>
