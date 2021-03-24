@@ -5,7 +5,7 @@ import UpdateProfile from "../UpdateProfile";
 import FetchTransactions from "../FetchTransactions";
 import SaveTransaction from "../SaveTransaction";
 
-const LandingPage = ({ darkTheme, themeChange }) => {
+const LandingPage = () => {
   const getRequests = async () => {
     let putBody = {
       balance: 200,
@@ -31,7 +31,7 @@ const LandingPage = ({ darkTheme, themeChange }) => {
 
   return (
     <div className="dark:text-gray-100 text-gray-800">
-      <div className="temp-navbar flex bg-gray-50 dark:bg-gray-900 h-14 justify-between">
+      <div className="temp-navbar flex bg-gray-100 dark:bg-gray-900 h-16 justify-between">
         <div className="flex">
           <div className="w-4 h-4 rounded-lg bg-indigo-500 justify-start self-center ml-7"></div>
           <h3 className="self-center flex justify-start ml-24">Financer</h3>
@@ -42,8 +42,10 @@ const LandingPage = ({ darkTheme, themeChange }) => {
       </div>
       <div className="grid grid-cols-2 p-14 gap-2">
         <div className="ml-20">
-          <h1 className="display-primary">Manage your finances on the go.</h1>
-          <h2 className="display-secondary pb-10 pt-4">
+          <h1 className="display-primary dark:text-white">
+            Manage your finances on the go.
+          </h1>
+          <h2 className="display-secondary pb-10 pt-4 dark:text-gray-400 text-gray-500">
             Or something nice like that.
           </h2>
           <div className="flex flex-col">
