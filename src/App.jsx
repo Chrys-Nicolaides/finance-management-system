@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import LandingPage from "./components/landingPage";
+// import LandingPage from "./components/landingPage";
 import Navbar from "./components/navbar";
+import Dashboard from "./components/Dashboard";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+
 // import Requests from "./components/Requests";
 
 function App() {
@@ -22,13 +25,22 @@ function App() {
 
   return (
     <div
-      className={"App min-h-screen fixed inset-0" + (darkTheme ? " dark" : "")}
+      className={
+        "App min-h-full fixed inset-0 overflow-y-scroll" +
+        (darkTheme ? " dark" : "")
+      }
     >
-      <div className="dark:bg-gray-900 dark:text-gray-100 text-gray-800 h-full">
-        <Navbar />
-        <LandingPage themeChange={themeChange} darkTheme={darkTheme} />
-        {/* <Requests /> */}
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/">
+            <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800">
+              <Navbar themeChange={themeChange} darkTheme={darkTheme} />
+              {/* <LandingPage themeChange={themeChange} darkTheme={darkTheme} /> */}
+              <Dashboard />
+            </div>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
