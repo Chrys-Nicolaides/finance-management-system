@@ -1,5 +1,4 @@
 import React from "react";
-import { IoCaretDownCircle } from "react-icons/io5";
 import Card from "./Card";
 
 const Chart = () => {

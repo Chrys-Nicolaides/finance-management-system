@@ -5,7 +5,7 @@ import ModalForm from "./ModalForm";
 import Card from "./Card";
 
 const TransactionsRecent = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const TransactionArray = [
     {
