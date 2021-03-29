@@ -2,7 +2,8 @@ import React from "react";
 import * as ReactIcon from "react-icons/ai";
 
 const TransactionItem = ({ transaction, index }) => {
-  let firstClass = index === 0 ? "" : " divide-y divide-gray-300";
+  let firstClass =
+    index === 0 ? "" : " divide-y divide-gray-300 dark:divide-gray-700";
 
   let IconComponent = ({ input }) => {
     let categoryClass;

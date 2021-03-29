@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-// import LandingPage from "./components/landingPage";
-import Navbar from "./components/navbar";
-import Dashboard from "./components/Dashboard";
+import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
-// import Requests from "./components/Requests";
-
 function App() {
-  // const [data, setData] = useState([]);
-
-  // dark mode
   const [darkTheme, setDarkTheme] = useState(
     localStorage.darkTheme === "true" ||
       (localStorage.darkTheme === undefined &&
@@ -21,7 +15,7 @@ function App() {
     setDarkTheme(!darkTheme);
   };
 
-  // rest of code
+  console.log(process.env.REACT_APP_YOUR_DOMAIN);
 
   return (
     <div
@@ -34,9 +28,8 @@ function App() {
         <Switch>
           <Route path="/">
             <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800">
-              <Navbar themeChange={themeChange} darkTheme={darkTheme} />
-              {/* <LandingPage themeChange={themeChange} darkTheme={darkTheme} /> */}
-              <Dashboard />
+              <LandingPage />
+              <HomePage themeChange={themeChange} darkTheme={darkTheme} />
             </div>
           </Route>
         </Switch>

@@ -3,7 +3,7 @@ import CamProfile from "../images/CamProfile.png";
 
 const Header = () => {
   return (
-    <div className="self-center justify-start ml-32 h-14 pt-6">
+    <div className="self-center justify-start ml-10 h-14 pt-6">
       <div className="flex">
         <img
           src={CamProfile}

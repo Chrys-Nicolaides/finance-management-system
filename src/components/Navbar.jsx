@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton";
 import {
   RiMoonClearFill,
   // RiBarChartBoxFill,
@@ -12,10 +13,10 @@ import {
   // IoChevronBackCircleSharp,
 } from "react-icons/io5";
 
-const navbar = ({ themeChange, darkTheme }) => {
+const Navbar = ({ themeChange, darkTheme }) => {
   return (
     <div>
-      <nav className="navbar fixed bg-gray-800 h-full whitespace-nowrap">
+      <nav className="navbar fixed bg-gray-800 h-full whitespace-nowrap left-0">
         <ul className="navbar-nav list-none p-0 m-0 flex flex-col items-center text-middle h-full">
           <li className="nav-logo items-center">
             <Link
@@ -40,10 +41,10 @@ const navbar = ({ themeChange, darkTheme }) => {
               <span className="link-text">Transaction history</span>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
+          <li className="nav-item whitespace-nowrap">
+            <Link className="nav-link whitespace-nowrap" to="/">
               <GoSignOut className="svg-logo" />
-              <span className="link-text">Sign out</span>
+              <LogoutButton className="whitespace-nowrap" to="/" />
             </Link>
           </li>
           <li className="nav-item mt-auto mb-3">
@@ -60,4 +61,4 @@ const navbar = ({ themeChange, darkTheme }) => {
   );
 };
 
-export default navbar;
+export default Navbar;

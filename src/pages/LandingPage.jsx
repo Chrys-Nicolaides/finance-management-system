@@ -4,7 +4,6 @@ import FetchProfile from "../FetchProfile";
 import UpdateProfile from "../UpdateProfile";
 import FetchTransactions from "../FetchTransactions";
 import SaveTransaction from "../SaveTransaction";
-import LoginButton from "../components/LoginButton";
 
 const LandingPage = () => {
   const getRequests = async () => {
@@ -38,7 +37,7 @@ const LandingPage = () => {
           <h3 className="self-center flex justify-start ml-24">Financer</h3>
         </div>
         <div className="self-center">
-          <LoginButton className="button-primary justify-end mx-10" />
+          <button className="button-primary justify-end mx-10">Login</button>
         </div>
       </div>
       <div className="grid grid-cols-2 p-14 gap-2">
@@ -53,12 +52,12 @@ const LandingPage = () => {
             <button className="button-primary ml-0 self-start">
               Get started
             </button>
-            <button
+            {/* <button
               className="button-secondary p-1.5 mt-24 self-start"
               onClick={() => SaveTransaction}
             >
               Save transaction
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="flex justify-center rounded-lg">
