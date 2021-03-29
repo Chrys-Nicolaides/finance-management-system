@@ -16,7 +16,14 @@ module.exports = {
         "sans-serif",
         "Apple Color Emoji",
       ],
-      body: ["Source Sans Pro", "Roboto"],
+      body: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "-apple-system",
+        "Helvetica",
+        "Source Sans Pro",
+        "Roboto",
+      ],
     },
     extend: {
       fontSize: {
