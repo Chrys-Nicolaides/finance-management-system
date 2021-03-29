@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton";
 import {
   RiMoonClearFill,
   // RiBarChartBoxFill,
@@ -40,10 +41,10 @@ const Navbar = ({ themeChange, darkTheme }) => {
               <span className="link-text">Transaction history</span>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
+          <li className="nav-item whitespace-nowrap">
+            <Link className="nav-link whitespace-nowrap" to="/">
               <GoSignOut className="svg-logo" />
-              <span className="link-text">Sign out</span>
+              <LogoutButton className="whitespace-nowrap" to="/" />
             </Link>
           </li>
           <li className="nav-item mt-auto mb-3">

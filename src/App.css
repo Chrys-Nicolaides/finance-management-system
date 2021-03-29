@@ -1,3 +1,5 @@
+/* Navbar */
+
 .navbar {
   transition: width 500ms ease;
   overflow: none;
@@ -42,7 +44,7 @@
   opacity: 0;
 }
 
-/* mobile */
+/* mobile - navbar */
 
 @media only screen and (max-width: 600px) {
   .navbar {
@@ -64,7 +66,7 @@
   }
 }
 
-/* desktop */
+/* desktop - navbar */
 
 @media only screen and (min-width: 600px) {
   .navbar {
@@ -96,8 +98,8 @@
 /* toggle-switch */
 
 .toggle-circle {
-  top: -0.25rem;
-  left: -0.25rem;
+  top: -0.2rem;
+  left: -0.2rem;
   transition: all 0.3s ease-in-out;
 }
 
@@ -107,4 +109,47 @@ input:checked ~ .toggle-circle {
 }
 input:checked ~ .toggle-path {
   background-color: #a5b4fc;
+}
+
+/* recurring-type animation */
+
+.recurring-container {
+  transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+
+  perspective: 1000;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+
+  overflow: hidden;
+  transition: max-height 0.4s ease-in;
+  max-height: 0;
+}
+
+.recurring-container.active {
+  max-height: 100px;
+  transition: max-height 0.4s ease-out;
+}
+
+/* number field default spin buttons removed */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

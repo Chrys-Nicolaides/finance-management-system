@@ -15,6 +15,8 @@ function App() {
     setDarkTheme(!darkTheme);
   };
 
+  console.log(process.env.REACT_APP_YOUR_DOMAIN);
+
   return (
     <div
       className={

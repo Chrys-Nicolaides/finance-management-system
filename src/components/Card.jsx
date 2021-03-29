@@ -8,7 +8,6 @@ const Card = ({ children, fullWidth, additionalClasses }) => {
 
   if (fullWidth === true) {
     classes += " w-full";
-    console.log(fullWidth);
   }
 
   return <div className={classes}>{children}</div>;
