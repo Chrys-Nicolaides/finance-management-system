@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import ProtectedRoute from "../src/auth/ProtectedRoute";
+import Profile from "../src/components/auth-components/Profile";
+import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
+import ChartsPage from "./pages/ChartsPage";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(
@@ -22,16 +26,23 @@ function App() {
         (darkTheme ? " dark" : "")
       }
     >
-      <BrowserRouter>
+      <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800 min-h-full">
         <Switch>
-          <Route path="/">
-            <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800">
-              <LandingPage />
+          <Route path="/" exact component={LandingPage} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute
+            path="/dashboard"
+            component={() => (
               <HomePage themeChange={themeChange} darkTheme={darkTheme} />
-            </div>
-          </Route>
+            )}
+          />
+          <ProtectedRoute
+            path="/transactionshistory"
+            component={TransactionsHistoryPage}
+          />
+          <ProtectedRoute path="/charts" component={ChartsPage} />
         </Switch>
-      </BrowserRouter>
+      </div>
     </div>
   );
 }

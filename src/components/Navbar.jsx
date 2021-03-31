@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogoutButton from "../components/LogoutButton";
+import LogoutButton from "../components/auth-components/LogoutButton";
 import {
   RiMoonClearFill,
   // RiBarChartBoxFill,
   RiFileListFill,
   RiPieChartBoxFill,
 } from "react-icons/ri";
-import { GoSignOut } from "react-icons/go";
 import {
   IoChevronForwardCircleSharp,
   // IoChevronBackCircleSharp,
@@ -21,34 +20,32 @@ const Navbar = ({ themeChange, darkTheme }) => {
           <li className="nav-logo items-center">
             <Link
               className="flex items-center h-14 text-gray-400 font-medium m-1.5"
-              to="/"
+              to="/dashboard"
             >
               <IoChevronForwardCircleSharp className="svg-logo" />
-              <span className="nav-heading logo-text absolute ml-4">
-                Financer
-              </span>
+              <span className="nav-heading absolute ml-4">Financer</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/charts">
               <RiPieChartBoxFill className="svg-logo" />
               <span className="link-text">Charts</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/transactionshistory">
               <RiFileListFill className="svg-logo" />
               <span className="link-text">Transaction history</span>
             </Link>
           </li>
-          <li className="nav-item whitespace-nowrap">
-            <Link className="nav-link whitespace-nowrap" to="/">
-              <GoSignOut className="svg-logo" />
-              <LogoutButton className="whitespace-nowrap" to="/" />
-            </Link>
-          </li>
+          <LogoutButton />
+
           <li className="nav-item mt-auto mb-3">
-            <Link to="" className="nav-link" onClick={() => themeChange()}>
+            <Link
+              to="/dashboard"
+              className="nav-link"
+              onClick={() => themeChange()}
+            >
               <RiMoonClearFill className="svg-logo" />
               <span className="link-text">
                 {darkTheme ? "dark mode" : "light mode"}
