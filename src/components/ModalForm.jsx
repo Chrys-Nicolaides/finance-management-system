@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import Card from "./Card";
+import Modal from "./Modal";
 
 const ModalForm = ({ setShowModal }) => {
   const [currency, setCurrency] = useState("");
@@ -19,9 +20,9 @@ const ModalForm = ({ setShowModal }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-10 bg-black bg-opacity-50 flex items-center justify-center">
-      <Card fullWidth={false} additionalClasses={" px-14"}>
-        <form className="flex flex-col pb-6">
+    <Modal>
+      <Card fullWidth={false} additionalClasses={""}>
+        <form className="flex flex-col p-9">
           <div className="flex justify-between pb-6">
             <h3>Add new transaction</h3>
 
@@ -38,7 +39,7 @@ const ModalForm = ({ setShowModal }) => {
             <label>Amount</label>
             <div className="mt-1 relative rounded-md bg-transparent w-full">
               <div className=" absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span className=" text-gray-500 dark:text-gray-400 text-md dark:bg-transparent items-center self-center">
+                <span className=" text-gray-400 dark:text-gray-500 text-md dark:bg-transparent items-center self-center">
                   {handleCurrency(currency)}
                 </span>
               </div>
@@ -126,7 +127,7 @@ const ModalForm = ({ setShowModal }) => {
           </div>
         </form>
       </Card>
-    </div>
+    </Modal>
   );
 };
 

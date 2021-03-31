@@ -28,7 +28,7 @@
     @apply mt-0 mr-6 w-6 h-6;
   }
   .link-text {
-    @apply ml-4 hidden;
+    @apply ml-4 hidden font-body;
   }
   .svg-logo {
     @apply w-4 h-4 self-center;

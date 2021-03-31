@@ -27,7 +27,7 @@ const TransactionsRecent = () => {
       category: "Food & Groceries",
     },
     {
-      amount: 600.5,
+      amount: 600.55,
       description: "Rent",
       day: 3,
       recurring: true,
