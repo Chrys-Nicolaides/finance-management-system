@@ -1,12 +1,15 @@
 import React from "react";
-// import CamProfile from "../images/CamProfile.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
+  // if (!user) {
+  //   return ""
+  // }
+
   const { user } = useAuth0();
 
   return user ? (
-    <div className="self-center justify-start ml-10 h-14 pt-6">
+    <div className="self-center justify-start  h-14 pt-6">
       <div className="flex">
         <img
           src={user ? user.picture : ""}

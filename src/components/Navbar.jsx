@@ -35,7 +35,7 @@ const Navbar = ({ themeChange, darkTheme }) => {
           <li className="nav-item">
             <Link className="nav-link" to="/transactionshistory">
               <RiFileListFill className="svg-logo" />
-              <span className="link-text">Transaction history</span>
+              <span className="link-text">Transactions</span>
             </Link>
           </li>
           <LogoutButton />
@@ -48,7 +48,7 @@ const Navbar = ({ themeChange, darkTheme }) => {
             >
               <RiMoonClearFill className="svg-logo" />
               <span className="link-text">
-                {darkTheme ? "dark mode" : "light mode"}
+                {darkTheme ? "light mode" : "dark mode"}
               </span>
             </Link>
           </li>

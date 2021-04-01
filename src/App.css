@@ -7,7 +7,12 @@
 
 .nav-link {
   text-decoration: none;
-  filter: grayscale(100%) opacity(0.6);
+  filter: grayscale(100%) opacity(0.5);
+  transition: 500ms;
+}
+.nav-link button {
+  text-decoration: none;
+  filter: grayscale(100%) opacity(1);
   transition: 500ms;
 }
 

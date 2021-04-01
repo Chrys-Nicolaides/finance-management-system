@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoLocationSharp, IoCalendarClear } from "react-icons/io5";
 import Card from "./Card";
 import Modal from "./Modal";
 
@@ -21,51 +21,85 @@ const ModalForm = ({ setShowModal }) => {
 
   return (
     <Modal>
-      <Card fullWidth={false} additionalClasses={""}>
-        <form className="flex flex-col p-9">
-          <div className="flex justify-between pb-6">
-            <h3>Add new transaction</h3>
+      <Card fullWidth={false} additionalClasses={"flex-grow sm:max-w-sm"}>
+        <form className="flex flex-col p-2 w-full">
+          <div className="flex justify-between pb-12">
+            <h3 className="text-lg font-semibold">Add new transaction</h3>
 
             <IoClose
               onClick={() => setShowModal(false)}
               strokeWidth={6}
-              className="cursor-pointer stroke-current stroke-4 stroke text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-200 "
+              className="cursor-pointer stroke-current stroke-4 stroke text-indigo-500 hover:text-indigo-700 dark:text-gray-400 dark:hover:text-gray-200 "
             />
           </div>
-          <label className="">Transaction description</label>
-          <input className="form-input mb-6" type="text" />
-
-          <div className="flex flex-col w-full">
-            <label>Amount</label>
-            <div className="mt-1 relative rounded-md bg-transparent w-full">
-              <div className=" absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span className=" text-gray-400 dark:text-gray-500 text-md dark:bg-transparent items-center self-center">
-                  {handleCurrency(currency)}
-                </span>
+          <div>
+            <div className="location-container dark:bg-indigo-300 h-14 w-full rounded-md flex items-center">
+              <div className="category-container dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
+                <IoLocationSharp className="fill-current text-indigo-500 w-6 h-6" />
               </div>
-              <input
-                type="number"
-                name="price"
-                id="price"
-                className="pl-6 w-full text-sm items-center border-2 border-gray-300  hover:border-indigo-400 dark:border-gray-600  dark:hover:border-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-500 rounded-md bg-transparent dark:bg-transparent  outline-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-gray-400 dark:placeholder-gray-600"
-                placeholder="0.00"
-              />
-              <div className="absolute inset-y-0 right-0 flex justify-end items-center">
-                <select
-                  id="currency"
-                  name="currency"
-                  onClick={(event) => setCurrency(event.target.value)}
-                  className="focus:ring-indigo-400 focus:border-indigo-400 focus:border-2 focus:outline-none h-9 pr-8 border-transparent bg-transparent text-gray-500 dark:text-gray-400 sm:text-sm rounded-md"
-                >
-                  <option>EUR</option>
-                  <option>USD</option>
-                  <option>ZAR</option>
-                </select>
+              <div className="py-2">
+                <h6 className="font-semibold text-indigo-400">Location</h6>
+                <h5 className="font-semibold text-indigo-500">Nike</h5>
+              </div>
+            </div>
+            <div className="date-container dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-14">
+              <div className="category-container dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
+                <IoCalendarClear className="fill-current text-indigo-500 w-5 h-5" />
+              </div>
+              <div className="py-2">
+                <h6 className="font-semibold text-indigo-400">Date</h6>
+                <h5 className="font-semibold text-indigo-500">
+                  Today 01/04/2021
+                </h5>
               </div>
             </div>
           </div>
-          <label className="flex justify-between items-center cursor-pointer mt-8 mb-3 ">
-            <label className="text-sm dark:text-gray-300 text-gray-800">
+          <label className="">Description</label>
+          <input className="form-input mb-6 text-sm" type="text" />
+
+          <div className="flex flex-row w-full">
+            <div className="justify-start w-2/4 ">
+              <label>Amount</label>
+              <div className="mt-1 relative rounded-md bg-transparent bg-gray-700 h-12">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className=" text-gray-400 dark:text-gray-500 text-md dark:bg-transparent items-center self-center">
+                    {handleCurrency(currency)}
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  className="align-text-bottom h-12 pl-7 w-full text-sm items-center border-0  hover:border-indigo-400 dark:border-gray-600  dark:hover:border-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-500 rounded-md bg-transparent dark:bg-transparent  outline-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-gray-400 dark:placeholder-gray-500"
+                  placeholder="0.00"
+                />
+              </div>
+              <div className="justify-end w-1/4 ">
+                <div className="absolute inset-y-0 right-0 justify-end items-center justify-end w-1/3">
+                  <label>Currency</label>
+                  <div className="mt-1 relative rounded-md bg-transparentbg-gray-700 h-12 ">
+                    <select
+                      id="currency"
+                      name="currency"
+                      onClick={(event) => setCurrency(event.target.value)}
+                      className="content-center focus:ring-indigo-400 focus:border-indigo-400 focus:border-2 focus:outline-none h-12 pr-8 border-transparent bg-transparent text-gray-500 dark:text-gray-400 sm:text-sm rounded-md"
+                    >
+                      <option>EUR</option>
+                      <option>USD</option>
+                      <option>ZAR</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <label className="bg-gray-700 h-12 rounded-md flex justify-between items-center cursor-pointer mt-8 mb-3 px-3">
+            <label
+              className={
+                (isRecurring ? " dark:text-indigo-300 " : "") +
+                "toggle-text text-sm dark:text-gray-400 text-gray-800"
+              }
+            >
               Recurring
             </label>
             <div className="relative mr-1.5">
@@ -116,12 +150,14 @@ const ModalForm = ({ setShowModal }) => {
           </div>
           <label className="pt-4">Category</label>
           <input type="text" className="form-input mb-10" />
-          <div
-            className="flex justify-between"
-            onClick={() => setShowModal(false)}
-          >
-            <button className="button-secondary">Cancel</button>
-            <button type="submit" className="button-primary ml-8 self-end">
+          <div className="flex flex-row" onClick={() => setShowModal(false)}>
+            <button className="button-secondary text-sm w-1/2 mr-2 p-0 h-10">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
+            >
               Save transaction
             </button>
           </div>

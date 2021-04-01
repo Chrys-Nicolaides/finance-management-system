@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const Balance = () => {
   return (
-    <div className="flex justify-end w-full -mt-8 pr-6 mb-6">
+    <div className="flex justify-end w-full -mt-8 mb-6">
       <div className="text-center bg-gradient-to-b from-indigo-500 to-indigo-800  w-72 rounded-xl pt-6 shadow-md">
         <h3 className="font-display font-medium text-indigo-200 text-base">
           Current Balance

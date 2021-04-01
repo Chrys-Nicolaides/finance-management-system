@@ -56,10 +56,10 @@ const TransactionsRecent = () => {
   ];
 
   return (
-    <Card fullWidth={true}>
+    <Card fullWidth={true} additionalClasses={"mr-6"}>
       {showModal ? <ModalForm setShowModal={setShowModal} /> : ""}
       <div className=""></div>
-      <h3 className="pb-6">Recent transactions</h3>
+      <h3 className="pb-8">Recent transactions</h3>
       <div className="flex justify-between text-gray-400 ml-14">
         <h6>Description</h6>
         <h6>Amount</h6>
