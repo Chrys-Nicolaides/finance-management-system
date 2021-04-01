@@ -6,11 +6,11 @@ const LogoutButton = () => {
   const { logout } = useAuth0();
 
   return (
-    <li className="nav-item">
+    <li className="nav-item w-full">
       <div className="nav-link">
         <button
-          className="nav-link focus:outline-none outline-none"
-          onClick={() => logout({ returnTo: "http://localhost:3000" })}
+          className="nav-link focus:outline-none outline-none w-full"
+          onClick={() => logout({ returnTo: "http://localhost:3000/logout" })}
           // onClick={() => logout({ returnTo: window.location.origin })}
         >
           <GoSignOut className="svg-logo" />

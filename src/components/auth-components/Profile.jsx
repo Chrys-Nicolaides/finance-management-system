@@ -7,7 +7,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = process.env.REACT_APP_YOUR_DOMAIN;
+      // const domain = process.env.REACT_APP_YOUR_DOMAIN;
 
       try {
         const accessToken = await getAccessTokenSilently({
@@ -15,6 +15,7 @@ const Profile = () => {
           scope: "read:current_user",
         });
 
+        console.log(accessToken);
         const userDetailsByIdUrl = `https://finanzer.normans.co.za/profile/1`;
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {

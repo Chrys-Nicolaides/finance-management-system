@@ -29,6 +29,7 @@ function App() {
       <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800 min-h-full">
         <Switch>
           <Route path="/" exact component={LandingPage} />
+          <Route path="/logout" exact component={LandingPage} />
           <ProtectedRoute path="/profile" component={Profile} />
           <ProtectedRoute
             path="/dashboard"
