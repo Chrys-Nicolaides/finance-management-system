@@ -1,13 +1,12 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     fontFamily: {
       display: [
         "-apple-system",
-        // "system-ui",
         "BlinkMacSystemFont",
         "-apple-system",
         "Helvetica",

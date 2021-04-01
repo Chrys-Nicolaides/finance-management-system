@@ -11,8 +11,8 @@ const UserProfile = () => {
     const getUserData = async () => {
       const auth0 = await createAuthClient({
 
-        domain = process.env.REACT_APP_YOUR_DOMAIN,
-        clientID = process.env.REACT_APP_YOUR_CLIENT_ID,
+        domain = import.meta.env.REACT_APP_YOUR_DOMAIN,
+        clientID = import.meta.env.REACT_APP_YOUR_CLIENT_ID,
         redirectUri = window.location.origin,
       })
       setAuthClient(auth0)
