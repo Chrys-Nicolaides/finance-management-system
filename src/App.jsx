@@ -6,6 +6,7 @@ import ProtectedRoute from "../src/auth/ProtectedRoute";
 import Profile from "../src/components/auth-components/Profile";
 import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
 import ChartsPage from "./pages/ChartsPage";
+import LogoutPage from "./pages/LogoutPage"
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(
@@ -23,7 +24,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/logout" exact component={LandingPage} />
+        <Route path="/logout" exact component={LogoutPage} />
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute
           path="/dashboard"
