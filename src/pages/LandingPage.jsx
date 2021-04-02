@@ -1,42 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router"
 
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
-import FetchProfile from "../FetchProfile";
-import UpdateProfile from "../UpdateProfile";
-import FetchTransactions from "../FetchTransactions";
 import LoginButton from "../components/auth-components/LoginButton";
 import SignUpButton from "../components/auth-components/SignUpButton";
 
 const LandingPage = () => {
-  // const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
+  const [loading, setLoading] = useState(true)
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   getAccessTokenSilently({
-  //     audience: `https://finanzer.normans.co.za`,
-  //     scope: "read:current_user",
-  //   }).then((accessToken) => {
-  //     const getRequests = (accessToken) => {
-  //       let putBody = {
-  //         balance: 200,
-  //         currency: "euros",
-  //       };
-  //       // let postBody = {
-  //       //   amount: 1000000,
-  //       //   description: "One million Euros!!!",
-  //       //   day: 6,
-  //       //   recurring: false,
-  //       //   recurringType: "monthly",
-  //       //   currency: "euros",
-  //       // };
-  //       FetchProfile(1, accessToken);
-  //       UpdateProfile(1, putBody);
-  //       FetchTransactions(1);
-  //       // await SaveTransaction(1, postBody);
-  //     };
-  //   });
+  useEffect(() => {
+    const checkUserLoggedIn = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: process.env.REACT_APP_AUDIENCE,
+          scopes: ["read:profile"]
+        });
+        if (accessToken) {
+          history.push("/dashboard")
+        }
+      } catch (e) {
+        setLoading(false)
+      }
+    }
 
-  //   // getRequests();
-  // }, [getAccessTokenSilently]);
+    checkUserLoggedIn()
+  }, [getAccessTokenSilently, history]);
+
+  if (loading) {
+    return ("Loading...")
+  }
 
   return (
     <div className="dark:text-gray-100 text-gray-800">
