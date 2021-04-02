@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
 import LoginButton from "../components/auth-components/LoginButton";
 import SignUpButton from "../components/auth-components/SignUpButton";
+import Modal from "../components/Modal";
 
 const LandingPage = () => {
   const { getAccessTokenSilently, logout } = useAuth0();
@@ -30,13 +31,10 @@ const LandingPage = () => {
     checkUserLoggedIn();
   }, [getAccessTokenSilently, history]);
 
-  if (loading) {
-    return "Loading...";
-  }
-
   return (
     <div className="dark:text-gray-100 text-gray-800">
       <div className="temp-navbar flex bg-gray-100 dark:bg-gray-900 justify-between shadow-md h-10 md:h-16 xl:h-24">
+        {loading ? <Modal>Loading...</Modal> : ""}
         <div className="flex">
           <div className="w-4 h-4 rounded-lg bg-indigo-500 justify-start self-center mx-16"></div>
           <h3 className="self-center flex justify-start">Finanzer</h3>

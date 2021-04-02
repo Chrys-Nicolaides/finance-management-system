@@ -8,6 +8,7 @@ import Balance from "../components/Balance";
 import TransactionsRecent from "../components/TransactionsRecent";
 import Chart from "../components/Chart";
 import { DefaultLayout } from "./Layouts";
+import Modal from "../components/Modal";
 
 const HomePage = ({ themeChange, darkTheme }) => {
   const { getAccessTokenSilently } = useAuth0();
@@ -30,12 +31,10 @@ const HomePage = ({ themeChange, darkTheme }) => {
     getProfile();
   }, [history]);
 
-  if (loading) {
-    return "Loading...";
-  }
-
   return (
-    <DefaultLayout>
+    <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
+      {loading ? <Modal>Loading...</Modal> : ""}
+
       <Header />
       <Balance profile={profile} />
       <div className="flex flex-col md:flex-row pb-6 mt-32">

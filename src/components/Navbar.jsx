@@ -12,7 +12,30 @@ import {
   // IoChevronBackCircleSharp,
 } from "react-icons/io5";
 
-const Navbar = ({ themeChange, darkTheme }) => {
+const Navbar = () => {
+  const [darkTheme, setDarkTheme] = React.useState(
+    localStorage.darkTheme === "true" ||
+      (localStorage.darkTheme === undefined &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+
+  const themeChange = (darkTheme) => {
+    console.log("I am here");
+    if (darkTheme) {
+      console.log("I am dark");
+      document.body.classList.add("dark");
+      setDarkTheme(true);
+    } else {
+      console.log("I am light");
+      document.body.classList.remove("dark");
+      setDarkTheme(false);
+    }
+  };
+
+  React.useEffect(() => {
+    themeChange();
+  }, []);
+
   return (
     <div>
       <nav className="navbar fixed bg-gray-800 h-full whitespace-nowrap left-0">
@@ -41,16 +64,15 @@ const Navbar = ({ themeChange, darkTheme }) => {
           <LogoutButton />
 
           <li className="nav-item mt-auto mb-3">
-            <Link
-              to="/dashboard"
+            <button
               className="nav-link"
-              onClick={() => themeChange()}
+              onClick={() => themeChange(!darkTheme)}
             >
               <RiMoonClearFill className="svg-logo" />
               <span className="link-text">
                 {darkTheme ? "light mode" : "dark mode"}
               </span>
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
