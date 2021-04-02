@@ -1,45 +1,45 @@
-import React, { useEffect } from "react";
-import Dashboard from "../components/Dashboard";
-import Navbar from "../components/Navbar";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import FetchProfile from "../FetchProfile";
-import UpdateProfile from "../UpdateProfile";
-import FetchTransactions from "../FetchTransactions";
+
+import Navbar from "../components/Navbar";
+import { FetchProfile } from "../services/api/Profile";
+import Header from "../components/Header";
+import Balance from "../components/Balance";
+import TransactionsRecent from "../components/TransactionsRecent";
+import Chart from "../components/Chart";
 
 const HomePage = ({ themeChange, darkTheme }) => {
   const { getAccessTokenSilently } = useAuth0();
+  const [profile, setProfile] = useState({})
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getAccessTokenSilently({
-      audience: `https://finanzer.normans.co.za`,
-      scope: "read:current_user",
-    }).then((accessToken) => {
-      const getRequests = (accessToken) => {
-        let putBody = {
-          balance: 200,
-          currency: "euros",
-        };
-        // let postBody = {
-        //   amount: 1000000,
-        //   description: "One million Euros!!!",
-        //   day: 6,
-        //   recurring: false,
-        //   recurringType: "monthly",
-        //   currency: "euros",
-        // };
-        FetchProfile(1, accessToken);
-        UpdateProfile(1, putBody);
-        FetchTransactions(1);
-        // await SaveTransaction(1, postBody);
-      };
-    });
+    const getProfile = async () => {
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.REACT_APP_AUDIENCE,
+        scopes: ["read:profile"]
+      });
+      const profileResponse = await FetchProfile(1, accessToken)
+      setProfile(profileResponse)
+      setLoading(false)
+    }
 
-    // getRequests();
+    getProfile()
   }, [getAccessTokenSilently]);
+
+  if (loading) {
+    return ("Loading...")
+  }
+
   return (
     <div className="pl-24 mx-6">
       <Navbar themeChange={themeChange} darkTheme={darkTheme} />
-      <Dashboard />
+      <Header />
+      <Balance profile={profile}/>
+      <div className="flex flex-col md:flex-row pb-6 mt-32">
+        <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
+        <Chart className="md:flex-row md:w-full" />
+      </div>
     </div>
   );
 };

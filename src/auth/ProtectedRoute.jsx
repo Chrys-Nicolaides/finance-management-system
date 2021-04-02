@@ -4,7 +4,6 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { ReactComponent as Loading } from "../images/loading.svg";
 
 const ProtectedRoute = (props) => {
-  console.log(props);
   return (
     <Route
       component={withAuthenticationRequired(props.component, {
