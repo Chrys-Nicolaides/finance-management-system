@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import Navbar from "../components/Navbar";
 import { FetchProfile } from "../services/api/Profile";
 import Header from "../components/Header";
 import Balance from "../components/Balance";
 import TransactionsRecent from "../components/TransactionsRecent";
 import Chart from "../components/Chart";
+import { DefaultLayout } from "./Layouts"
 
 const HomePage = ({ themeChange, darkTheme }) => {
   const { getAccessTokenSilently } = useAuth0();
@@ -32,15 +32,14 @@ const HomePage = ({ themeChange, darkTheme }) => {
   }
 
   return (
-    <div className="pl-24 mx-6">
-      <Navbar themeChange={themeChange} darkTheme={darkTheme} />
+    <DefaultLayout>
       <Header />
       <Balance profile={profile}/>
       <div className="flex flex-col md:flex-row pb-6 mt-32">
         <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
         <Chart className="md:flex-row md:w-full" />
       </div>
-    </div>
+    </DefaultLayout>
   );
 };
 
