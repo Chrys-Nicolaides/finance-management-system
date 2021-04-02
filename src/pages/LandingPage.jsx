@@ -8,7 +8,7 @@ import SignUpButton from "../components/auth-components/SignUpButton";
 import Modal from "../components/Modal";
 
 const LandingPage = () => {
-  const { getAccessTokenSilently, logout } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const [loading, setLoading] = useState(true);
   const history = useHistory();
 

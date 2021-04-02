@@ -33,22 +33,28 @@ const ModalForm = ({ setShowModal }) => {
             />
           </div>
           <div>
-            <div className="location-container dark:bg-indigo-300 h-14 w-full rounded-md flex items-center">
-              <div className="category-container dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
-                <IoLocationSharp className="fill-current text-indigo-500 w-6 h-6" />
+            <div className="location-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center">
+              <div className="category-container bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
+                <IoLocationSharp className="fill-current text-indigo-400 dark:text-indigo-500 w-6 h-6" />
               </div>
               <div className="py-2">
-                <h6 className="font-semibold text-indigo-400">Location</h6>
-                <h5 className="font-semibold text-indigo-500">Nike</h5>
+                <h6 className="font-semibold text-indigo-300 dark:text-indigo-400">
+                  Location
+                </h6>
+                <h5 className="font-semibold text-indigo-400 dark:text-indigo-500">
+                  Nike
+                </h5>
               </div>
             </div>
-            <div className="date-container dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-14">
-              <div className="category-container dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
-                <IoCalendarClear className="fill-current text-indigo-500 w-5 h-5" />
+            <div className="date-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-14">
+              <div className="category-container bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
+                <IoCalendarClear className="fill-current text-indigo-400 dark:text-indigo-500 w-5 h-5" />
               </div>
               <div className="py-2">
-                <h6 className="font-semibold text-indigo-400">Date</h6>
-                <h5 className="font-semibold text-indigo-500">
+                <h6 className="font-semibold text-indigo-300 dark:text-indigo-400">
+                  Date
+                </h6>
+                <h5 className="font-semibold text-indigo-400 dark:text-indigo-500">
                   Today 01/04/2021
                 </h5>
               </div>
@@ -58,9 +64,9 @@ const ModalForm = ({ setShowModal }) => {
           <input className="form-input mb-6 text-sm" type="text" />
 
           <div className="flex flex-row w-full">
-            <div className="justify-start w-2/4 ">
+            <div className=" amount-div justify-start w-3/5 mr-6">
               <label>Amount</label>
-              <div className="mt-1 relative rounded-md bg-transparent bg-gray-700 h-12">
+              <div className="mt-1 relative rounded-md bg-gray-100 dark:bg-gray-700 h-12">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <span className=" text-gray-400 dark:text-gray-500 text-md dark:bg-transparent items-center self-center">
                     {handleCurrency(currency)}
@@ -74,30 +80,32 @@ const ModalForm = ({ setShowModal }) => {
                   placeholder="0.00"
                 />
               </div>
-              <div className="justify-end w-1/4 ">
-                <div className="absolute inset-y-0 right-0 justify-end items-center justify-end w-1/3">
-                  <label>Currency</label>
-                  <div className="mt-1 relative rounded-md bg-transparentbg-gray-700 h-12 ">
-                    <select
-                      id="currency"
-                      name="currency"
-                      onClick={(event) => setCurrency(event.target.value)}
-                      className="content-center focus:ring-indigo-400 focus:border-indigo-400 focus:border-2 focus:outline-none h-12 pr-8 border-transparent bg-transparent text-gray-500 dark:text-gray-400 sm:text-sm rounded-md"
-                    >
-                      <option>EUR</option>
-                      <option>USD</option>
-                      <option>ZAR</option>
-                    </select>
-                  </div>
+            </div>
+            <div className="currency-div justify-end w-2/5">
+              <div className="">
+                <label>Currency</label>
+                <div className="mt-1 rounded-md bg-gray-100 dark:bg-gray-700 h-12">
+                  <select
+                    id="currency"
+                    name="currency"
+                    onClick={(event) => setCurrency(event.target.value)}
+                    className="content-center w-full focus:ring-indigo-400 focus:border-indigo-400 focus:border-2 focus:outline-none pr-8 border-transparent  bg-gray-100 dark:bg-gray-700 h-12 text-gray-500 dark:text-gray-400 sm:text-sm rounded-md"
+                  >
+                    <option>EUR</option>
+                    <option>USD</option>
+                    <option>ZAR</option>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
-          <label className="bg-gray-700 h-12 rounded-md flex justify-between items-center cursor-pointer mt-8 mb-3 px-3">
+          <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-8 mb-3 px-3">
             <label
               className={
-                (isRecurring ? " dark:text-indigo-300 " : "") +
-                "toggle-text text-sm dark:text-gray-400 text-gray-800"
+                (isRecurring
+                  ? " dark:text-indigo-400 text-indigo-600 font-semibold"
+                  : "dark:text-gray-300 text-gray-500") +
+                " toggle-text text-sm "
               }
             >
               Recurring

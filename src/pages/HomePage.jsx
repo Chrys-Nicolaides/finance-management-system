@@ -31,6 +31,13 @@ const HomePage = ({ themeChange, darkTheme }) => {
     getProfile();
   }, [history]);
 
+  console.log(window.navigator.platform);
+
+  if (!window.navigator.platform.toLowerCase().includes("mac")) {
+    console.log("i'm not mac");
+    import("../Font.css");
+  }
+
   return (
     <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
       {loading ? <Modal>Loading...</Modal> : ""}
