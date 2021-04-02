@@ -9,9 +9,9 @@ import { Auth0Provider } from "@auth0/auth0-react";
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain={process.env.REACT_APP_YOUR_DOMAIN}
-      clientId={process.env.REACT_APP_CLIENT_ID}
-      audience={process.env.REACT_APP_AUDIENCE}
+      domain={import.meta.env.VITE_YOUR_DOMAIN}
+      clientId={import.meta.env.VITE_CLIENT_ID}
+      audience={import.meta.env.VITE_AUDIENCE}
       redirectUri={`${window.location.origin}/dashboard`}
     >
       <App />

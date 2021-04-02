@@ -7,7 +7,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      // const domain = process.env.REACT_APP_YOUR_DOMAIN;
+      // const domain = import.meta.env.REACT_APP_YOUR_DOMAIN;
 
       try {
         const accessToken = await getAccessTokenSilently({
@@ -34,6 +34,8 @@ const Profile = () => {
 
     getUserMetadata();
   }, [getAccessTokenSilently]);
+
+  console.log(user);
 
   return isAuthenticated ? (
     <div>

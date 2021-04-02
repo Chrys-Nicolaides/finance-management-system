@@ -8,6 +8,8 @@ const Header = () => {
 
   const { user } = useAuth0();
 
+  console.log(user);
+
   return user ? (
     <div className="self-center justify-start  h-14 pt-6">
       <div className="flex">

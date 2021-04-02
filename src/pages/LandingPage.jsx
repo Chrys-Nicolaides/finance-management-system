@@ -16,7 +16,7 @@ const LandingPage = () => {
       try {
         console.log("hello cam");
         const accessToken = await getAccessTokenSilently({
-          audience: process.env.REACT_APP_AUDIENCE,
+          audience: import.meta.env.VITE_AUDIENCE,
           scopes: ["read:profile"],
         });
         if (accessToken) {

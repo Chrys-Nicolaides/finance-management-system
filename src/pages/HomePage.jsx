@@ -18,7 +18,7 @@ const HomePage = ({ themeChange, darkTheme }) => {
   useEffect(() => {
     const getProfile = async () => {
       const accessToken = await getAccessTokenSilently({
-        audience: process.env.REACT_APP_AUDIENCE,
+        audience: import.meta.env.VITE_AUDIENCE,
         scopes: ["read:profile"],
       });
 
