@@ -2,7 +2,7 @@ export const request = async (method, path, body, headers) => {
   headers.set("Content-Type", "application/json");
 
   const baseUrl = "https://finanzer.normans.co.za";
-  let fetchOptions = {}
+  let fetchOptions = {};
 
   if (method === "GET") {
     fetchOptions = { method, headers };
@@ -11,7 +11,13 @@ export const request = async (method, path, body, headers) => {
   }
 
   const url = `${baseUrl}${path}`;
-  const response = await fetch(url, fetchOptions);
+  let response;
+
+  try {
+    response = await fetch(url, fetchOptions);
+  } catch (error) {
+    window.location.href = "/502";
+  }
 
   const validStatuses = [200, 204, 304];
   const invalidStatuses = [400, 404];

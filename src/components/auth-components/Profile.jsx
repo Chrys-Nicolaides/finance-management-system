@@ -11,8 +11,8 @@ const Profile = () => {
 
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: `https://finanzer.normans.co.za`,
-          scope: "read:current_user",
+          audience: process.env.REACT_APP_AUDIENCE,
+          scopes: ["read:profile"],
         });
 
         console.log(accessToken);
