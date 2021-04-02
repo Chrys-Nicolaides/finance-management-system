@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router"
+import { useHistory } from "react-router";
 
 import { ReactComponent as HeroImage } from "../images/hero-image.svg";
 import LoginButton from "../components/auth-components/LoginButton";
 import SignUpButton from "../components/auth-components/SignUpButton";
 
 const LandingPage = () => {
-  const { getAccessTokenSilently } = useAuth0();
-  const [loading, setLoading] = useState(true)
+  const { getAccessTokenSilently, logout } = useAuth0();
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
+        console.log("hello cam");
         const accessToken = await getAccessTokenSilently({
           audience: process.env.REACT_APP_AUDIENCE,
-          scopes: ["read:profile"]
+          scopes: ["read:profile"],
         });
         if (accessToken) {
-          history.push("/dashboard")
+          history.push("/dashboard");
         }
       } catch (e) {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    checkUserLoggedIn()
+    checkUserLoggedIn();
   }, [getAccessTokenSilently, history]);
 
   if (loading) {
-    return ("Loading...")
+    return "Loading...";
   }
 
   return (

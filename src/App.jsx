@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
@@ -6,7 +7,8 @@ import ProtectedRoute from "../src/auth/ProtectedRoute";
 import Profile from "../src/components/auth-components/Profile";
 import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
 import ChartsPage from "./pages/ChartsPage";
-import LogoutPage from "./pages/LogoutPage"
+import LogoutPage from "./pages/LogoutPage";
+import { BadGatewayPage } from "./pages/ErrorPages";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(
@@ -23,6 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/502" exact component={BadGatewayPage} />
         <Route path="/" exact component={LandingPage} />
         <Route path="/logout" exact component={LogoutPage} />
         <ProtectedRoute path="/profile" component={Profile} />
