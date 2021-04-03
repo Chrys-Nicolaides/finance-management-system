@@ -7,7 +7,12 @@
 
 .nav-link {
   text-decoration: none;
-  filter: grayscale(100%) opacity(0.6);
+  filter: grayscale(100%) opacity(0.5);
+  transition: 500ms;
+}
+.nav-link button {
+  text-decoration: none;
+  filter: grayscale(100%) opacity(1);
   transition: 500ms;
 }
 
@@ -31,7 +36,8 @@
   transform: rotate(-180deg);
 }
 
-.logo-text {
+.nav-heading,
+.link-text a {
   transition: 500ms;
 }
 
@@ -39,7 +45,8 @@
   transform: rotate(-180deg);
 }
 
-.nav-heading {
+.nav-heading,
+.link-text {
   transition: opacity 250ms ease-in 50ms;
   opacity: 0;
 }
@@ -77,10 +84,11 @@
 
   .navbar:hover {
     width: 16rem;
+    overflow: none;
   }
 
   .navbar:hover .link-text,
-  .navbar:hover .logo-text {
+  .navbar:hover .nav-heading {
     opacity: 1;
     display: block;
     transition: opacity 400ms ease-out 150ms;
@@ -90,7 +98,7 @@
     margin-left: 13rem;
   }
 
-  .navbar:hover .logo-text {
+  .navbar:hover .nav-heading {
     left: 10px;
   }
 }
@@ -152,4 +160,13 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.spinner > svg {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

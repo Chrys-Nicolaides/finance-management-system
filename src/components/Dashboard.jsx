@@ -9,9 +9,9 @@ const Dashboard = () => {
     <div>
       <Header />
       <Balance />
-      <div className="flex flex-col md:flex-row pb-6">
-        <TransactionsRecent />
-        <Chart />
+      <div className="flex flex-col md:flex-row pb-6 mt-32">
+        <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
+        <Chart className="md:flex-row md:w-full" />
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
 import React from "react";
-import CamProfile from "../images/CamProfile.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
-  return (
-    <div className="self-center justify-start ml-10 h-14 pt-6">
+  const { user } = useAuth0();
+
+  // console.log(user);
+
+  return user ? (
+    <div className="self-center justify-start  h-14 pt-6">
       <div className="flex">
         <img
-          src={CamProfile}
+          src={user ? user.picture : ""}
           alt=""
           className="border-gray-300 border-2 rounded-lg w-16 h-16"
         />
@@ -14,10 +18,12 @@ const Header = () => {
           <h3 className=" text-gray-400 dark:text-gray-400 text-xs">
             Welcome back,
           </h3>
-          <h3 className="text-lg">Cameron Norman!</h3>
+          <h3 className="text-lg">{user ? user.name : ""}!</h3>
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

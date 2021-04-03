@@ -1,13 +1,23 @@
-// headers
-
-export const request = async (method, path, body) => {
-  const headers = new Headers({});
+export const request = async (method, path, body, headers) => {
   headers.set("Content-Type", "application/json");
 
   const baseUrl = "https://finanzer.normans.co.za";
-  const fetchOptions = { method, headers, body: JSON.stringify(body) };
+  let fetchOptions = {};
+
+  if (method === "GET") {
+    fetchOptions = { method, headers };
+  } else {
+    fetchOptions = { method, headers, body: JSON.stringify(body) };
+  }
+
   const url = `${baseUrl}${path}`;
-  const response = await fetch(url, fetchOptions);
+  let response;
+
+  try {
+    response = await fetch(url, fetchOptions);
+  } catch (error) {
+    window.location.href = "/502";
+  }
 
   const validStatuses = [200, 204, 304];
   const invalidStatuses = [400, 404];

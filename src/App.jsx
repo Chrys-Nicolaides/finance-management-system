@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import ProtectedRoute from "../src/auth/ProtectedRoute";
+import Profile from "../src/components/auth-components/Profile";
+import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
+import ChartsPage from "./pages/ChartsPage";
+import LogoutPage from "./pages/LogoutPage";
+import { BadGatewayPage } from "./pages/ErrorPages";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(
@@ -16,23 +23,25 @@ function App() {
   };
 
   return (
-    <div
-      className={
-        "App min-h-full fixed inset-0 overflow-y-scroll" +
-        (darkTheme ? " dark" : "")
-      }
-    >
-      <BrowserRouter>
-        <Switch>
-          <Route path="/">
-            <div className="bg-gray-100 dark:bg-gray-900  dark:text-gray-100 text-gray-800">
-              <LandingPage />
-              <HomePage themeChange={themeChange} darkTheme={darkTheme} />
-            </div>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/502" exact component={BadGatewayPage} />
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/logout" exact component={LogoutPage} />
+        <ProtectedRoute path="/profile" component={Profile} />
+        <ProtectedRoute
+          path="/dashboard"
+          component={() => (
+            <HomePage themeChange={themeChange} darkTheme={darkTheme} />
+          )}
+        />
+        <ProtectedRoute
+          path="/transactionshistory"
+          component={TransactionsHistoryPage}
+        />
+        <ProtectedRoute path="/charts" component={ChartsPage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
