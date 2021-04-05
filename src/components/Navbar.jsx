@@ -65,7 +65,7 @@ const Navbar = () => {
 
           <li className="nav-item mt-auto mb-3">
             <button
-              className="nav-link"
+              className="nav-link w-[244px] hover:w-[240px]"
               onClick={() => themeChange(!darkTheme)}
             >
               <RiMoonClearFill className="svg-logo" />

@@ -35,6 +35,7 @@ module.exports = {
       colors: {
         teal: colors.teal,
         orange: colors.orange,
+        indigo: { bright: "#99AAFF" },
       },
     },
   },
