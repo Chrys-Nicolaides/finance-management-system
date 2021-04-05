@@ -1,10 +1,10 @@
 import React from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import { currencyHelper } from '../helpers'
+import { currencyHelper } from "../helpers";
 
-const Balance = ({profile}) => {
-  const currency = currencyHelper(profile.currency)
+const Balance = ({ profile }) => {
+  const currency = currencyHelper(profile.currency);
 
   return (
     <div className="flex justify-end w-full -mt-8 mb-6">
@@ -12,14 +12,14 @@ const Balance = ({profile}) => {
         <h3 className="font-display font-medium text-indigo-200 text-base">
           Current Balance
         </h3>
-        <h3 className="font-display font-semibold text-white text-5xl py-4">
-          {`${currency} ${profile.balance}`}
+        <h3 className="font-display font-semibold text-white text-5xl py-4 h-[3.75rem]">
+          {profile.currency ? `${currency} ${profile.balance}` : ""}
         </h3>
         <h3 className="font-display font-medium text-indigo-200 text-base">
           Net Balance
         </h3>
-        <h3 className="font-display font-semibold text-white text-5xl py-4">
-          {`${currency} ${profile.balance}`}
+        <h3 className="font-display font-semibold text-white text-5xl py-4 h-[3.75rem]">
+          {profile.currency ? `${currency} ${profile.balance}` : ""}
         </h3>
         <div className="flex justify-between p-5">
           <div className="text-left flex justify-center items-center">

@@ -103,9 +103,9 @@ const ModalForm = ({ setShowModal }) => {
             <label
               className={
                 (isRecurring
-                  ? " dark:text-indigo-400 text-indigo-600 font-semibold"
-                  : "dark:text-gray-300 text-gray-500") +
-                " toggle-text text-sm "
+                  ? " dark:text-indigo-bright text-indigo-500 font-semibold"
+                  : "dark:text-gray-500 text-gray-400 font-normal dark:font-normal ") +
+                " toggle-text text-sm  "
               }
             >
               Recurring

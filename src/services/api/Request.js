@@ -1,4 +1,4 @@
-export const request = async (method, path, body, headers) => {
+export const request = async (method, path, body, headers, email) => {
   headers.set("Content-Type", "application/json");
 
   const baseUrl = "https://finanzer.normans.co.za";
@@ -7,7 +7,13 @@ export const request = async (method, path, body, headers) => {
   if (method === "GET") {
     fetchOptions = { method, headers };
   } else {
-    fetchOptions = { method, headers, body: JSON.stringify(body) };
+    fetchOptions = {
+      method,
+      headers,
+      body: JSON.stringify(body),
+      // email: JSON.stringify(email),
+      email: toString(email),
+    };
   }
 
   const url = `${baseUrl}${path}`;
