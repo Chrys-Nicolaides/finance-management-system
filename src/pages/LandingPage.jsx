@@ -15,7 +15,6 @@ const LandingPage = () => {
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
-        console.log("hello cam");
         const accessToken = await getAccessTokenSilently({
           audience: import.meta.env.VITE_AUDIENCE,
           scopes: ["read:profile"],

@@ -125,7 +125,7 @@ const ModalForm = ({ setShowModal }) => {
           >
             <div className="recurring-animation">
               <label>Recurring type</label>
-              <select className="bg-transparent dark:text-gray-400 dark:focus:text-gray-300 text-gray-600 focus:text-gray-800 form-input border-2 dark:border-400 font-base w-full">
+              <select className="form-input bg-transparent dark:text-gray-400 dark:focus:text-gray-300 text-gray-600 focus:text-gray-800 font-base w-full">
                 <option className="hidden" value="">
                   Please select
                 </option>

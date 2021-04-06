@@ -19,7 +19,7 @@ const Balance = ({ profile }) => {
           Net Balance
         </h3>
         <h3 className="font-display font-semibold text-white text-5xl py-4 h-[3.75rem]">
-          {profile.currency ? `${currency} ${profile.balance}` : ""}
+          {/* {profile.currency ? `${currency} ${profile.balance}` : ""} */}
         </h3>
         <div className="flex justify-between p-5">
           <div className="text-left flex justify-center items-center">
