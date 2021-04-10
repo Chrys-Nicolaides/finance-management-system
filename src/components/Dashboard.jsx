@@ -8,8 +8,6 @@ import { FetchProfileEmail } from "../services/api/Profile";
 
 
 const Dashboard = () => {
-
-  console.log('Shit')
   React.useEffect=(() => {
     const test = await FetchProfile(1)
     console.log(test)
@@ -18,9 +16,6 @@ const Dashboard = () => {
   return (
     <div>
       <Header />
-      <h1 className="text-9xl">
-        Fuck
-        </h1>
       <Balance />
       <div className="flex flex-col md:flex-row pb-6 mt-32">
         <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
