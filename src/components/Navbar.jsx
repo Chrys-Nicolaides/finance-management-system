@@ -20,7 +20,6 @@ const Navbar = () => {
   );
 
   const themeChange = (darkTheme) => {
-    console.log("I am here");
     if (darkTheme) {
       console.log("I am dark");
       document.body.classList.add("dark");
@@ -65,7 +64,7 @@ const Navbar = () => {
 
           <li className="nav-item mt-auto mb-3">
             <button
-              className="nav-link w-[244px] hover:w-[240px]"
+              className="nav-link w-[244px] hover:w-[240px] outline-none focus:outline-none"
               onClick={() => themeChange(!darkTheme)}
             >
               <RiMoonClearFill className="svg-logo" />

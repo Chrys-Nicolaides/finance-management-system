@@ -22,11 +22,30 @@ export const UpdateProfile = async (id, body) => {
     .catch((error) => console.log("PUT profile error:", error));
 };
 
-export const FetchProfileEmail = async (email) => {
-  request("GET", `/profile/by_email/{email}`)
+export const FetchProfileEmail = async (email, accessToken) => {
+  const headers = new Headers();
+
+  headers.set("Authorization", `Bearer ${accessToken}`);
+  return request("GET", `/profile/by_email/${email}`, "", headers)
     .then((response) => response.json())
     .then((result) => {
-      console.log("GET profile email result:", result);
+      return result;
     })
-    .catch((error) => console.log("GET profile email error:", error));
+    .catch((error) => {
+      let body = {
+        email: `${email}`,
+      };
+      return CreateProfile(body, accessToken);
+    });
+};
+
+export const CreateProfile = async (body, accessToken) => {
+  const headers = new Headers();
+  headers.set("Authorization", `Bearer ${accessToken}`);
+  return request("POST", `/profile`, body, headers)
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => console.log("POST profile error:", error));
 };

@@ -1,5 +1,5 @@
-export const request = async (method, path, body, headers, email) => {
-  headers.set("Content-Type", "application/json");
+export const request = async (method, path, body, headers) => {
+  headers?.set("Content-Type", "application/json");
 
   const baseUrl = "https://finanzer.normans.co.za";
   let fetchOptions = {};
@@ -11,19 +11,13 @@ export const request = async (method, path, body, headers, email) => {
       method,
       headers,
       body: JSON.stringify(body),
-      // email: JSON.stringify(email),
-      email: toString(email),
     };
   }
 
   const url = `${baseUrl}${path}`;
   let response;
 
-  try {
-    response = await fetch(url, fetchOptions);
-  } catch (error) {
-    window.location.href = "/502";
-  }
+  response = await fetch(url, fetchOptions);
 
   const validStatuses = [200, 204, 304];
   const invalidStatuses = [400, 404];
@@ -32,6 +26,9 @@ export const request = async (method, path, body, headers, email) => {
     return response;
   } else if (invalidStatuses.includes(response.status)) {
     // throw new error
+    if (response.status === 404) {
+      throw "not found";
+    }
     console.log(
       `Error fetching ${url}: ${response.status} (${response.statusCode}) ${response.body}`
     );

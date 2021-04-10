@@ -3,8 +3,16 @@ import Header from "./Header";
 import Balance from "./Balance";
 import TransactionsRecent from "./TransactionsRecent";
 import Chart from "./Chart";
+import { FetchProfile } from "../services/api/Profile";
+import { FetchProfileEmail } from "../services/api/Profile";
+
 
 const Dashboard = () => {
+  React.useEffect=(() => {
+    const test = await FetchProfile(1)
+    console.log(test)
+  }, [])
+
   return (
     <div>
       <Header />
