@@ -14,13 +14,13 @@ const TransactionItem = ({ transaction, index }) => {
         categoryClass = " bg-indigo-400 text-indigo-800";
         icon = "AiOutlineHome";
         break;
-      case "Water & Electricity":
-        categoryClass = " bg-indigo-600";
+      case "Utilities":
+        categoryClass = " bg-indigo-200 text-indigo-600";
         icon = "AiOutlineThunderbolt";
         // icon = "AiOutlinePoweroff";
         break;
       case "Internet":
-        categoryClass = " bg-indigo-200";
+        categoryClass = " bg-indigo-100 text-indigo-400";
         icon = "AiOutlineWifi";
         break;
       case "Food & Groceries":
