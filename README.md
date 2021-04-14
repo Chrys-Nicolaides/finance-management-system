@@ -1,3 +1,22 @@
+Finanzer 💰💰💰
+
+A user-friendly interface to track all your finances in one place while on the go.
+
+Client brief 📝
+
+- Client never knows what his monthly allowings are due various debit orders going off at different times per month. Net Balance to reflect these upcoming known expenses ahead of time
+- View income vs Expenses
+- Updated Net balance per month
+- Responsive design, mobile focused
+- Responsive tables
+
+End points ✔️
+
+- List transactions from API
+- Create new transactions
+- Edit/update transactions
+- Delete transactions
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

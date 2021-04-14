@@ -33,8 +33,6 @@ const HomePage = ({ themeChange, darkTheme }) => {
     getProfile();
   }, [history]);
 
-  // console.log(window.navigator.platform);
-
   if (!window.navigator.platform.toLowerCase().includes("mac")) {
     import("../Font.css");
   }
@@ -49,7 +47,7 @@ const HomePage = ({ themeChange, darkTheme }) => {
 
       <Header />
       <Balance profile={profile} />
-      <div className="flex flex-col md:flex-row pb-6 mt-32">
+      <div className="flex flex-col md:flex-row flex-grow h-full pb-6 mt-32">
         <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
         <Chart className="md:flex-row md:w-full" />
       </div>

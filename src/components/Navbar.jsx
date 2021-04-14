@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../components/auth-components/LogoutButton";
 import {
@@ -13,7 +13,7 @@ import {
 } from "react-icons/io5";
 
 const Navbar = () => {
-  const [darkTheme, setDarkTheme] = React.useState(
+  const [darkTheme, setDarkTheme] = useState(
     localStorage.darkTheme === "true" ||
       (localStorage.darkTheme === undefined &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
@@ -21,23 +21,21 @@ const Navbar = () => {
 
   const themeChange = (darkTheme) => {
     if (darkTheme) {
-      console.log("I am dark");
       document.body.classList.add("dark");
       setDarkTheme(true);
     } else {
-      console.log("I am light");
       document.body.classList.remove("dark");
       setDarkTheme(false);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     themeChange();
   }, []);
 
   return (
     <div>
-      <nav className="navbar fixed bg-gray-800 h-full whitespace-nowrap left-0">
+      <nav className="navbar fixed bg-gray-800 whitespace-nowrap left-0 z-10">
         <ul className="navbar-nav list-none p-0 m-0 flex flex-col items-center text-middle h-full">
           <li className="nav-logo items-center">
             <Link
@@ -62,9 +60,9 @@ const Navbar = () => {
           </li>
           <LogoutButton />
 
-          <li className="nav-item mt-auto mb-3">
+          <li className="nav-item sm:mt-auto mt-0 sm:mb-3 mb-0 sm:hover:w-full hover:w-auto ">
             <button
-              className="nav-link w-[244px] hover:w-[240px] outline-none focus:outline-none"
+              className="nav-link sm:w-[244px] w-[auto] sm:hover:w-[240px] hover:w-[auto] outline-none focus:outline-none sm:hover:px-0 hover:px-0"
               onClick={() => themeChange(!darkTheme)}
             >
               <RiMoonClearFill className="svg-logo" />
