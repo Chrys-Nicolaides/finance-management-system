@@ -54,17 +54,17 @@ const MyTable = ({ data, columns, index }) => {
 
   return (
     <Table className="p-2">
-      <Thead className="t-head">
-        <Tr className="text-left h-20 py-6">
+      <Thead className="t-head  hidden lg:table-header-group ">
+        <Tr className="text-left h-20">
           {columns.map((column, columnIndex) => {
             if (column === "category") {
-              return <Td className="block"></Td>;
+              return <Td className="hidden"></Td>;
             }
             if (column === "amount") {
               return <Th className="text-right font-normal pr-8">{column}</Th>;
             } else {
               return (
-                <Th key={columnIndex} className="font-normal first:pl-12 ">
+                <Th key={columnIndex} className="font-normal pl-8">
                   {column}
                 </Th>
               );
@@ -75,13 +75,13 @@ const MyTable = ({ data, columns, index }) => {
       <Tbody className="divide-y divide-gray-300 dark:divide-gray-700">
         {data.map((transaction, transactionIndex, transactionArray) => {
           return (
-            <Tr key={transactionIndex} className="t-row">
+            <Tr key={transactionIndex} className="t-row smmx-6">
               {columns.map((column, columnIndex, columnArray) => {
                 if (column === "amount") {
                   return (
                     <Td
                       key={columnIndex}
-                      className="font-medium text-gray-700 dark:text-gray-400 text-right pr-8"
+                      className="font-medium text-gray-700 dark:text-gray-400 text-right pr-4 md:text-lg text-xs"
                     >
                       € {transaction[column]}
                     </Td>
@@ -90,16 +90,13 @@ const MyTable = ({ data, columns, index }) => {
                 if (column === "description") {
                   return (
                     <Td key={columnIndex}>
-                      <div className="flex sm:justify-start sm:items-center lg:py-3 pb-2">
-                        <IconComponent
-                          input={transaction.category}
-                          className=""
-                        />
+                      <div className="flex sm:justify-start sm:items-center lg:py-3 pb-2 pl-4">
+                        <IconComponent input={transaction.category} />
                         <div className="flex flex-col lg:gap-y-1 lg:py-2 pl-2.5">
-                          <div className="sm:text-lg text-sm font-medium text-gray-700 dark:text-gray-400">
+                          <div className="md:text-lg text-base font-medium text-gray-700 dark:text-gray-400">
                             {transaction.description}
                           </div>
-                          <div className="sm:text-sm text-xs font-normal">
+                          <div className="md:text-sm text-xs font-normal">
                             {transaction.category}
                           </div>
                         </div>
@@ -107,12 +104,12 @@ const MyTable = ({ data, columns, index }) => {
                     </Td>
                   );
                 } else if (column === "category") {
-                  return <Td></Td>;
+                  return <Td className="hidden-td"></Td>;
                 } else {
                   return (
                     <Td
                       key={columnIndex}
-                      className="font-normal text-gray-400 dark:text-gray-500"
+                      className="font-normal text-gray-400 dark:text-gray-500 place-items-center py-8 md:text-lg text-xs"
                     >
                       {transaction[column]}
                     </Td>

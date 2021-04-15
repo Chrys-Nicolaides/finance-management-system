@@ -25,7 +25,7 @@
     @apply text-indigo-200 bg-indigo-600 m-2 rounded-lg sm:px-0 px-0;
   }
   .navbar svg {
-    @apply mt-0 mr-6 w-6 h-6;
+    @apply mt-0 mr-6 md:w-6 md:h-6 w-5 h-5;
   }
   .link-text {
     @apply ml-2.5 hidden font-body;

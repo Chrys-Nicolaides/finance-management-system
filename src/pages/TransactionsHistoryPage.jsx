@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { DefaultLayout } from "../pages/Layouts";
 import Card from "../components/Card";
 import MyTable from "../components/Table";
-import { HiArrowLeft, HiCalendar } from "react-icons/hi";
+import { HiArrowLeft } from "react-icons/hi";
 import DatePicker from "../components/DatePicker";
 
 const data = [
@@ -123,16 +123,17 @@ const columns = ["category", "description", "created", "amount"];
 const TransactionsHistoryPage = ({ themeChange, darkTheme }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  // const [loading, setLoading] = useState(true);
 
   return (
-    <DefaultLayout themeChange={themeChange} darkTheme={darkTheme} className="">
+    <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
       <div className="bg-gray-100 dark:bg-gray-900">
         <Link
-          className="flex items-center pt-6 pb-0.5 text-gray-500 pl-2"
+          className="flex items-center pt-6 sm:pb-0.5 pb-4 text-gray-500 pl-4"
           to="/dashboard"
         >
           <HiArrowLeft />
-          <h5 className="items-center pl-5 text-base">Back</h5>
+          <h5 className="items-center pl-2.5 text-base">Back</h5>
         </Link>
         <Card
           fullWidth={false}
@@ -140,24 +141,26 @@ const TransactionsHistoryPage = ({ themeChange, darkTheme }) => {
             "lg:p-16 p-0 lg:m-10 m-0 text-gray-800 dark:text-gray-300"
           }
         >
-          <div className="flex justify-between sm:flex-row flex-col sm:pb-20 pb-4 sm:pt-2 pt-0 ">
-            <h3 className="items-center lg:text-2xl text-lg lg:pl-0 pl-7 lg:py-0 py-6">
+          <div className="flex lg:justify-between lg:flex-row flex-col w-full pb-8 sm:pt-2 pt-0 ">
+            <h3 className="items-center md:text-2xl text-lg lg:pl-0 pl-4 lg:pt-0 pt-6">
               Transaction history
             </h3>
-            <div className="flex lg:flex-row flex-col lg:pt-0 pt-6 ">
+            <div className="flex xl:flex-row flex-col lg:pt-0 pt-4 px-4 md:px-0">
               <DatePicker
                 setInputValue={setStartDate}
                 inputValue={startDate}
                 placeholder="Start date"
+                darkTheme={darkTheme}
               />
               <DatePicker
                 setInputValue={setEndDate}
                 inputValue={endDate}
                 placeholder="End date"
+                darkTheme={darkTheme}
               />
-              {/* <HiCalendar className="ml-16 fill-current" />/ */}
             </div>
           </div>
+          {/* {loading ? <Modal>Loading...</Modal> : ""} */}
           <MyTable data={data} columns={columns} />{" "}
         </Card>
       </div>

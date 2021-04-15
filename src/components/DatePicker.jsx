@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { HiCalendar } from "react-icons/hi";
+
 import { useLilius } from "use-lilius";
 
 import {
@@ -91,25 +93,33 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
   }, [selected]);
 
   return (
-    <div className="App flex ml-5 lg:mb-0 mb-2 ">
-      <div className="relative text-gray-600">
-        <span className="absolute top-0 right-0 flex items-center pl-2">
+    <div className="App flex ml-0 xl:ml-5 xl:mb-0 mb-2 md:justify-end w-full">
+      {isOpen ? (
+        <div
+          className="h-screen w-screen fixed inset-0"
+          onClick={() => setIsOpen(!isOpen)}
+        ></div>
+      ) : (
+        ""
+      )}
+      <div className="relative text-gray-600 w-full z-20">
+        <span className="absolute top-0 right-0 flex items-center">
           <button
-            className="bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 text-white px-4 py-2 rounded-l-none rounded-lg focus:outline-none shadow "
+            className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-3 rounded-l-none rounded-lg focus:outline-none shadow "
             onClick={() => setIsOpen(!isOpen)}
           >
-            Open
+            <HiCalendar className="fill-current dark:bg-text-100" />
           </button>
         </span>
         <input
-          className="bg-gray-100 placeholder-gray-600 font-medium outline-none bg-opacity-90 px-4 py-2 rounded-lg shadow w-72"
+          className=" placeholder-gray-500 dark:placeholder-gray-300 bg-gray-50 dark:bg-gray-700 font-medium outline-none bg-opacity-90 pl-4 py-2 rounded-lg shadow w-full min-w-[18rem]"
           onBlur={() => onInputBlur()}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder={placeholder}
           value={inputValue}
         />
         {isOpen ? (
-          <div className="bg-gray-400 absolute rounded-lg shadow-lg mt-0.5 w-full">
+          <div className="bg-gray-400 absolute rounded-lg shadow-lg mt-0.5 w-full z-10">
             <div className="flex justify-between text-white bg-indigo-500 rounded-t-lg pt-2 px-4 pb-2">
               <button
                 className="px-2 py-1 -ml-2 focus:outline-none rounded hover:bg-indigo-700"
@@ -124,26 +134,26 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
                 Tomorrow
               </button>
             </div>
-            <div className="flex justify-between items-center bg-gray-50 px-2 py-2">
+            <div className="flex justify-between items-center bg-gray-50 dark:bg-gray-700 px-2 py-2">
               <button
-                className="hover:bg-gray-200 rounded px-2 pt-1 pb-2 focus:outline-none font-black text-gray-500 text-lg"
+                className="hover:bg-gray-200 dark:hover:bg-gray-600 rounded px-2 pt-1 pb-2 focus:outline-none font-black text-gray-500 dark:text-gray-400 dark:hover:text-gray-300 text-lg"
                 aria-label="Previous Month"
                 onClick={viewPreviousMonth}
               >
                 {"<"}
               </button>
-              <h6 className="font-semibold text-lg">
+              <h6 className="font-semibold text-lg text-gray-500 dark:text-gray-200">
                 {format(viewing, "MMMM yyyy")}
               </h6>
               <button
-                className="hover:bg-gray-200 rounded px-2 pt-1 pb-2 focus:outline-none font-black text-gray-500"
+                className="hover:bg-gray-200 dark:hover:bg-gray-600 rounded px-2 pt-1 pb-2 focus:outline-none font-black text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
                 aria-label="Next Month"
                 onClick={viewNextMonth}
               >
                 {">"}
               </button>
             </div>
-            <div className="flex justify-between px-4 pt-2 pb-1 bg-indigo-200 text-indigo-800 font-semibold">
+            <div className="flex justify-between px-4 pt-2 pb-1 bg-indigo-200 text-indigo-800 dark:bg-gray-600 dark:text-gray-400 font-semibold dark:font-medium">
               {calendar.length > 0 &&
                 calendar[0].map((day) => (
                   <div key={`${day}`} className="">
@@ -155,7 +165,7 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
                   </div>
                 ))}
             </div>
-            <div className="px-3 pb-2.5 pt-1.5 bg-indigo-50 ">
+            <div className="px-3 pb-2.5 pt-1.5 bg-indigo-50 dark:bg-gray-700">
               {calendar.map((week) => (
                 <div
                   className="flex justify-between mx-0 "
@@ -166,17 +176,18 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
                     if (
                       !inRange(day, startOfMonth(viewing), endOfMonth(viewing))
                     ) {
-                      classes += " text-gray-400 hover:text-gray-600";
+                      classes +=
+                        " text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-50";
                     }
                     if (isToday(day)) {
-                      classes += " font-bold";
+                      classes += " font-bold dark:font-bold dark:text-gray-50";
                     }
                     if (isSelected(day)) {
                       classes +=
-                        " hover:bg-indigo-600 hover:text-white bg-indigo-600 text-white";
+                        " hover:bg-indigo-600 hover:text-white bg-indigo-600 text-white dark:hover:bg-indigo-500 dark:hover:text-gray-50 ";
                     } else {
                       classes +=
-                        " hover:bg-indigo-200 hover:text-indigo-700 hover:font-semibold";
+                        " hover:bg-indigo-200 hover:text-indigo-700 hover:font-semibold dark:hover:bg-indigo-500 dark:hover:text-gray-50 dark:text-gray-200 dark:font-light";
                     }
                     return (
                       <div

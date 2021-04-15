@@ -7,7 +7,11 @@
   display: none;
 }
 
-@media screen and (max-width: 1024px) {
+.responsiveTable .hidden-td.pivoted {
+  display: none;
+}
+
+@media screen and (max-width: 1px) {
   /*
     Force table elements to not behave like tables anymore
     Hide table headers (but not display: none;, for accessibility)
@@ -17,27 +21,23 @@
   .responsiveTable thead,
   .responsiveTable tbody,
   .responsiveTable th,
-  .responsiveTable td,
-  .responsiveTable tr {
+  .responsiveTable td {
     display: block;
   }
 
   .responsiveTable thead tr {
     position: absolute;
-    top: -9999px;
-    left: -9999px;
-    /* border-bottom: 2px solid #333; */
   }
 
   .responsiveTable tbody tr {
     padding: 1rem;
+    height: auto;
   }
 
   .responsiveTable td.pivoted {
     /* Behave like a "row" */
     border: none;
     position: relative;
-    padding-left: calc(50% + 10px);
     text-align: left;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -46,9 +46,7 @@
   .responsiveTable td .tdBefore {
     /* Now like a table header */
     position: absolute;
-    display: block;
     font-weight: 500;
-    color: #6b7280;
     text-transform: capitalize;
 
     /* Top/left values mimic padding */
