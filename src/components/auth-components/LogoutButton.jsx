@@ -10,8 +10,10 @@ const LogoutButton = () => {
       <div className="nav-link sm:hover:px-0 hover:px-0">
         <button
           className="nav-link focus:outline-none outline-none "
-          onClick={() => logout({ returnTo: "http://localhost:3000/logout" })}
-          // onClick={() => logout({ returnTo: window.location.origin })}
+          // onClick={() => logout({ returnTo: "http://localhost:3000/logout" })}
+          onClick={() =>
+            logout({ returnTo: `${window.location.origin}/logout` })
+          }
         >
           <GoSignOut className="svg-logo" />
           <span className="link-text">Log out</span>
