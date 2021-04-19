@@ -98,8 +98,7 @@ function App() {
         />
         <ProtectedRoute
           path="/charts"
-          component={ChartsPage}
-          accessToken={accessToken}
+          component={() => <ChartsPage accessToken={accessToken} />}
         />
       </Switch>
     </BrowserRouter>
