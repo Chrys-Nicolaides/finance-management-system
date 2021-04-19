@@ -4,7 +4,7 @@ import { CreateTransaction } from "../services/api/Transaction";
 import Card from "./Card";
 import Modal from "./Modal";
 
-const ModalForm = ({ setShowModal, accessToken }) => {
+const ModalForm = ({ setShowModal, accessToken, profile }) => {
   const [currency, setCurrency] = useState("");
   const [isRecurring, setIsRecurring] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -16,7 +16,10 @@ const ModalForm = ({ setShowModal, accessToken }) => {
     currency: "EUR",
     recurring: false,
     recurringType: "Weekly",
-    category: "",
+    category: {
+      id: "1",
+      name: "",
+    },
   });
 
   const handleCurrency = (input) => {
@@ -46,10 +49,10 @@ const ModalForm = ({ setShowModal, accessToken }) => {
   };
 
   const postNewTransaction = async () => {
-    CreateTransaction(2, values, accessToken);
+    CreateTransaction(profile.id, values, accessToken);
   };
 
-  console.log();
+  console.log(profile.id);
 
   return (
     <Modal>
@@ -188,7 +191,6 @@ const ModalForm = ({ setShowModal, accessToken }) => {
           >
             <div className="recurring-animation">
               <label>Recurring type</label>
-              {/* <div className="relative"> */}
               <select
                 id="recurringType"
                 name="recurringType"
@@ -226,7 +228,6 @@ const ModalForm = ({ setShowModal, accessToken }) => {
                   Annually
                 </option>
               </select>
-              {/* </div> */}
             </div>
           </div>
           <label className="mb-1">Category</label>
@@ -234,7 +235,7 @@ const ModalForm = ({ setShowModal, accessToken }) => {
             <select
               id="category"
               name="category"
-              value={values.category}
+              value={values.category.id}
               onChange={() => handleChange(event, "category")}
               onClick={(event) => setCurrency(event.target.value)}
               className="form-input appearance-none content-center w-full pr-8 
@@ -244,7 +245,7 @@ const ModalForm = ({ setShowModal, accessToken }) => {
                 Select category
               </option>
               <option value="Rent">Rent</option>
-              <option value="Water">Utilities</option>
+              <option value="Utilities">Utilities</option>
               <option value="Internet">Internet</option>
               <option value="Food">Food & Groceries</option>
               <option value="Subscriptions">Subscriptions</option>
