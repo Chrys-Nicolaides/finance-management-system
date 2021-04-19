@@ -4,7 +4,7 @@ import ModalForm from "./ModalForm";
 import Card from "./Card";
 import MyTable from "./Table";
 
-const TransactionsRecent = ({ accessToken, transactions }) => {
+const TransactionsRecent = ({ accessToken, transactions, profile }) => {
   const [showModal, setShowModal] = useState(false);
 
   const columns = ["category", "description", "created", "amount"];
@@ -12,13 +12,17 @@ const TransactionsRecent = ({ accessToken, transactions }) => {
   return (
     <Card fullWidth={true} additionalClasses={"mr-6"}>
       {showModal ? (
-        <ModalForm setShowModal={setShowModal} accessToken={accessToken} />
+        <ModalForm
+          setShowModal={setShowModal}
+          accessToken={accessToken}
+          profile={profile}
+        />
       ) : (
         ""
       )}
       <div className=""></div>
       <h3 className="pb-8">Recent transactions</h3>
-      <MyTable data={transactions} columns={columns} />
+      <MyTable data={transactions} columns={columns} profile={profile} />
       <div className="flex justify-end mt-auto">
         <button
           className="button-primary flex"

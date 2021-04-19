@@ -20,7 +20,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const res = await FetchTransactions(profile.id, accessToken, 1, 23);
+      const res = await FetchTransactions(profile.id, accessToken, 1, 37);
       setTransactions(res);
       setLoading(false);
       console.log(res);
@@ -77,6 +77,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
         <TransactionsRecent
           accessToken={accessToken}
           transactions={transactions}
+          profile={profile}
           className="md:flex-row md:w-full md:order-1"
         />
         <Chart className="md:flex-row md:w-full" />
