@@ -12,7 +12,7 @@ const LandingPage = (props) => {
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
-      if (props.accessToken !== "") {
+      if (props.accessToken) {
         history.push("/dashboard");
       }
     };
