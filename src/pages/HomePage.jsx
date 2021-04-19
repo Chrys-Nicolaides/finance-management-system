@@ -1,54 +1,84 @@
 import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router";
 
-import { CreateProfile, FetchProfile } from "../services/api/Profile";
+// import { CreateProfile, FetchProfile } from "../services/api/Profile";
 import Header from "../components/Header";
 import Balance from "../components/Balance";
 import TransactionsRecent from "../components/TransactionsRecent";
 import Chart from "../components/Chart";
 import { DefaultLayout } from "./Layouts";
 import Modal from "../components/Modal";
-import { FetchProfileEmail } from "../services/api/Profile";
+import { ReactComponent as Loading } from "../images/loading.svg";
 
-const HomePage = ({ themeChange, darkTheme }) => {
-  const { getAccessTokenSilently, user } = useAuth0();
-  const [profile, setProfile] = useState({});
+import {
+  FetchTransactions,
+  CreateTransaction,
+} from "../services/api/Transaction";
+
+const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
+  const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
-
-  let accessToken;
 
   useEffect(() => {
-    const getProfile = async () => {
-      accessToken = await getAccessTokenSilently({
-        audience: import.meta.env.VITE_AUDIENCE,
-        scopes: ["read:profile"],
-      });
-
-      const profileResponse = await FetchProfileEmail(user.email, accessToken);
-      setProfile(profileResponse);
+    const getTransactions = async () => {
+      const res = await FetchTransactions(profile.id, accessToken, 1, 23);
+      setTransactions(res);
       setLoading(false);
+      console.log(res);
     };
-    getProfile();
-  }, [history]);
+    if (profile?.id) {
+      getTransactions();
+    }
+  }, []);
 
   if (!window.navigator.platform.toLowerCase().includes("mac")) {
     import("../Font.css");
   }
 
+  // const postme = async () => {
+  //   CreateTransaction(
+  //     2,
+  //     {
+  //       amount: 10,
+  //       description: "This is a awesome purchase",
+  //       day: 2,
+  //       recurring: true,
+  //       recurringType: "monthly",
+  //       currency: "EUR",
+  //       categoryId: 1,
+  //       profile: {
+  //         id: 6,
+  //         email: "cool_kid@looserville.com",
+  //         balance: 20.59,
+  //         currency: "EUR",
+  //       },
+  //       category: {
+  //         id: 1,
+  //         name: "Category 1",
+  //       },
+  //     },
+  //     accessToken
+  //   );
+  // };
+
   return (
-    <DefaultLayout
-      themeChange={themeChange}
-      darkTheme={darkTheme}
-      accessToken={accessToken}
-    >
-      {loading ? <Modal>Loading...</Modal> : ""}
+    <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
+      {loading ? (
+        <Modal>
+          <Loading />
+        </Modal>
+      ) : (
+        ""
+      )}
 
       <Header />
       <Balance profile={profile} />
       <div className="flex flex-col md:flex-row flex-grow h-full pb-6 mt-32">
-        <TransactionsRecent className="md:flex-row md:w-full md:order-1" />
+        {/* <button onClick={() => postme()}>here</button> */}
+        <TransactionsRecent
+          accessToken={accessToken}
+          transactions={transactions}
+          className="md:flex-row md:w-full md:order-1"
+        />
         <Chart className="md:flex-row md:w-full" />
       </div>
     </DefaultLayout>

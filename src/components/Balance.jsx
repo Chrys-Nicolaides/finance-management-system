@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { currencyHelper } from "../helpers";
 
 const Balance = ({ profile }) => {
-  const currency = currencyHelper(profile.currency);
+  const currency = currencyHelper(profile?.currency);
 
   return (
     <div className="flex justify-end w-full -mt-8 mb-6">
@@ -13,7 +13,7 @@ const Balance = ({ profile }) => {
           Current Balance
         </h3>
         <h3 className="font-display font-semibold text-white text-5xl py-4 h-[3.75rem]">
-          {profile.currency ? `${currency} ${profile.balance}` : ""}
+          {profile?.currency ? `${currency} ${profile.balance}` : ""}
         </h3>
         <h3 className="font-display font-medium text-indigo-200 text-base">
           Net Balance
