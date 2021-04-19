@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ children, fullWidth, additionalClasses }) => {
   let classes =
-    "font-body rounded-xl bg-white dark:bg-gray-800 p-6 shadow-md flex flex-col";
+    "font-body sm:rounded-xl rounded-none bg-white dark:bg-gray-800 sm:p-6 p-0 shadow-md flex flex-col";
 
   classes += additionalClasses ? " " + additionalClasses : "";
 

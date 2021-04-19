@@ -40,7 +40,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      textColor: ["odd", "even"],
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };
