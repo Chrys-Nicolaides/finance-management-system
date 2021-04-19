@@ -1,151 +1,24 @@
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
-import TransactionItem from "./TransactionItem";
 import ModalForm from "./ModalForm";
 import Card from "./Card";
 import MyTable from "./Table";
 
-const TransactionsRecent = () => {
+const TransactionsRecent = ({ accessToken, transactions }) => {
   const [showModal, setShowModal] = useState(false);
-
-  // const TransactionArray = [
-  //   {
-  //     amount: 110.05,
-  //     description: "IKEA",
-  //     day: 2,
-  //     recurring: false,
-  //     recurringType: "",
-  //     currency: "euros",
-  //     category: "Other",
-  //   },
-  //   {
-  //     amount: 5.55,
-  //     description: "UberEats",
-  //     day: 3,
-  //     recurring: false,
-  //     recurringType: "",
-  //     currency: "euros",
-  //     category: "Food & Groceries",
-  //   },
-  //   {
-  //     amount: 600.55,
-  //     description: "Rent",
-  //     day: 3,
-  //     recurring: true,
-  //     recurringType: "monthly",
-  //     currency: "euros",
-  //     category: "Rent",
-  //   },
-  //   {
-  //     amount: 10.05,
-  //     description: "Netflix",
-  //     day: 2,
-  //     recurring: true,
-  //     recurringType: "monthly",
-  //     currency: "euros",
-  //     category: "Subscriptions",
-  //   },
-  //   {
-  //     amount: 250.05,
-  //     description: "New Bike",
-  //     day: 2,
-  //     recurring: false,
-  //     recurringType: "",
-  //     currency: "euros",
-  //     category: "Other",
-  //   },
-  // ];
-
-  const data = [
-    {
-      id: 0,
-      description: "IKEA",
-      amount: 110.05,
-      recurring: false,
-      recurringType: "string",
-      day: 0,
-      currency: "euros",
-      created: "27 Jan 2021",
-      updated: "string",
-      category: "Other",
-    },
-    {
-      id: 0,
-      description: "Cake",
-      amount: 22.55,
-      recurring: false,
-      recurringType: "string",
-      day: 0,
-      currency: "string",
-      created: "28 Jan 2021",
-      updated: "string",
-      category: "Food & Groceries",
-    },
-    {
-      id: 0,
-      description: "Metcons",
-      amount: 150.05,
-      recurring: false,
-      recurringType: "string",
-      day: 0,
-      currency: "string",
-      created: "14 Feb 2021",
-      updated: "string",
-      category: "Other",
-    },
-    {
-      id: 0,
-      description: "Rent",
-      amount: 600.55,
-      recurring: true,
-      recurringType: "monthly",
-      day: 0,
-      currency: "string",
-      created: "25 Feb 2021",
-      updated: "string",
-      category: "Rent",
-    },
-    {
-      id: 0,
-      description: "Netflix",
-      amount: 10.55,
-      recurring: true,
-      recurringType: "monthly",
-      day: 0,
-      currency: "string",
-      created: "28 Feb 2021",
-      updated: "string",
-      category: "Subscriptions",
-    },
-    {
-      id: 0,
-      description: "Data",
-      amount: 60.45,
-      recurring: false,
-      recurringType: "string",
-      day: 0,
-      currency: "string",
-      created: "28 Feb 2021",
-      updated: "string",
-      category: "Internet",
-    },
-  ];
 
   const columns = ["category", "description", "created", "amount"];
 
   return (
     <Card fullWidth={true} additionalClasses={"mr-6"}>
-      {showModal ? <ModalForm setShowModal={setShowModal} /> : ""}
+      {showModal ? (
+        <ModalForm setShowModal={setShowModal} accessToken={accessToken} />
+      ) : (
+        ""
+      )}
       <div className=""></div>
       <h3 className="pb-8">Recent transactions</h3>
-      {/* <div className="flex justify-between text-gray-400 ml-14">
-        <h6>Description</h6>
-        <h6>Amount</h6>
-      </div> */}
-      {/* {TransactionArray.map((transaction, index) => (
-        <TransactionItem transaction={transaction} key={index} index={index} />
-      ))} */}
-      <MyTable data={data} columns={columns} />
+      <MyTable data={transactions} columns={columns} />
       <div className="flex justify-end mt-auto">
         <button
           className="button-primary flex"

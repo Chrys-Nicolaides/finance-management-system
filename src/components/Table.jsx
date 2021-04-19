@@ -58,10 +58,14 @@ const MyTable = ({ data, columns, index }) => {
         <Tr className="text-left h-20">
           {columns.map((column, columnIndex) => {
             if (column === "category") {
-              return <Td className="hidden"></Td>;
+              return <Td key={columnIndex} className="hidden"></Td>;
             }
             if (column === "amount") {
-              return <Th className="text-right font-normal pr-8">{column}</Th>;
+              return (
+                <Th key={columnIndex} className="text-right font-normal pr-8">
+                  {column}
+                </Th>
+              );
             } else {
               return (
                 <Th key={columnIndex} className="font-normal pl-8">
@@ -104,7 +108,7 @@ const MyTable = ({ data, columns, index }) => {
                     </Td>
                   );
                 } else if (column === "category") {
-                  return <Td className="hidden-td"></Td>;
+                  return <Td key={columnIndex} className="hidden-td"></Td>;
                 } else {
                   return (
                     <Td

@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { IoClose, IoLocationSharp, IoCalendarClear } from "react-icons/io5";
+import { CreateTransaction } from "../services/api/Transaction";
 import Card from "./Card";
 import Modal from "./Modal";
 
-const ModalForm = ({ setShowModal }) => {
+const ModalForm = ({ setShowModal, accessToken }) => {
   const [currency, setCurrency] = useState("");
   const [isRecurring, setIsRecurring] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [valid, setValid] = useState(false);
+  const [values, setValues] = useState({
+    description: "",
+    day: "1",
+    amount: "",
+    currency: "EUR",
+    recurring: false,
+    recurringType: "Weekly",
+    category: "",
+  });
 
   const handleCurrency = (input) => {
     switch (input) {
@@ -19,14 +31,39 @@ const ModalForm = ({ setShowModal }) => {
     }
   };
 
+  const handleChange = (event, field) => {
+    event.preventDefault();
+    const tempValues = { ...values };
+    tempValues[field] = event.target.value;
+    setValues(tempValues);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (values.description && values.amount) {
+      setValid(true);
+    }
+    setSubmitted(true);
+  };
+
+  const postNewTransaction = async () => {
+    CreateTransaction(2, values, accessToken);
+  };
+
+  console.log();
+
   return (
     <Modal>
       <Card fullWidth={false} additionalClasses={"flex-grow sm:max-w-sm"}>
-        <form className="flex flex-col p-2 w-full">
+        <form
+          className="flex flex-col p-2 w-full"
+          onSubmit={handleSubmit}
+          method="post"
+        >
           <div className="flex justify-between pb-12">
             <h3 className="text-lg font-semibold">Add new transaction</h3>
 
             <IoClose
+              type="button"
               onClick={() => setShowModal(false)}
               strokeWidth={6}
               className="cursor-pointer stroke-current stroke-4 stroke text-indigo-500 hover:text-indigo-700 dark:text-gray-400 dark:hover:text-gray-200 "
@@ -64,6 +101,10 @@ const ModalForm = ({ setShowModal }) => {
           <input
             className="form-input mb-6 text-sm focus:text-gray-700 text-gray-600 dark:text-gray-200 dark:focus:text-gray-100"
             type="text"
+            id="description"
+            name="description"
+            value={values.description}
+            onChange={() => handleChange(event, "description")}
           />
 
           <div className="flex flex-row w-full">
@@ -80,8 +121,10 @@ const ModalForm = ({ setShowModal }) => {
                 </div>
                 <input
                   type="number"
-                  name="price"
-                  id="price"
+                  id="amount"
+                  name="amount"
+                  value={values.amount}
+                  onChange={() => handleChange(event, "amount")}
                   className="absolute pl-7 h-full w-full text-sm rounded-md 
                   bg-transparent dark:bg-transparent outline-none focus:outline-none 
                   placeholder-gray-400 dark:placeholder-gray-500 
@@ -98,6 +141,8 @@ const ModalForm = ({ setShowModal }) => {
                   <select
                     id="currency"
                     name="currency"
+                    value={values.currency}
+                    onChange={() => handleChange(event, "currency")}
                     onClick={(event) => setCurrency(event.target.value)}
                     className="form-input content-center w-full pr-8 rounded-md
                     bg-gray-100 dark:bg-gray-700 
@@ -128,6 +173,10 @@ const ModalForm = ({ setShowModal }) => {
               <input
                 className="toggle-switch hidden"
                 type="checkbox"
+                id="recurring"
+                name="recurring"
+                value={values.recurring}
+                onChange={() => handleChange(event, "recurring")}
                 onClick={() => setIsRecurring(!isRecurring)}
               />
               <div className="toggle-path w-6 h-2.5 bg-gray-400 rounded-full shadow-inner"></div>
@@ -141,6 +190,10 @@ const ModalForm = ({ setShowModal }) => {
               <label>Recurring type</label>
               {/* <div className="relative"> */}
               <select
+                id="recurringType"
+                name="recurringType"
+                value={values.recurringType}
+                onChange={() => handleChange(event, "recurringType")}
                 className="form-input w-full dark:bg-gray-700 bg-gray-100 border-2 border-transparent dark:border-transparent 
                 dark:text-gray-400 dark:focus:text-gray-300 text-gray-400 focus:text-gray-600 text-sm
                 outline-none focus:outline-none mb-10"
@@ -179,8 +232,10 @@ const ModalForm = ({ setShowModal }) => {
           <label className="mb-1">Category</label>
           <div className="mb-10">
             <select
-              id="currency"
-              name="currency"
+              id="category"
+              name="category"
+              value={values.category}
+              onChange={() => handleChange(event, "category")}
               onClick={(event) => setCurrency(event.target.value)}
               className="form-input appearance-none content-center w-full pr-8 
               bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-400 text-sm rounded-md"
@@ -197,17 +252,22 @@ const ModalForm = ({ setShowModal }) => {
             </select>
           </div>
           <div className="flex flex-row" onClick={() => setShowModal(false)}>
-            <button className="button-secondary text-sm w-1/2 mr-2 p-0 h-10">
+            <button
+              type="button"
+              className="button-secondary text-sm w-1/2 mr-2 p-0 h-10"
+            >
               Cancel
             </button>
             <button
               type="submit"
               className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
+              onClick={() => postNewTransaction()}
             >
               Save transaction
             </button>
           </div>
         </form>
+        {submitted ? <div>New transaction created!</div> : ""}
       </Card>
     </Modal>
   );
