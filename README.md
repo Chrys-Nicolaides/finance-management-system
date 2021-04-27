@@ -41,4 +41,10 @@ Project's dashboard displays summary of user's net balance, current income vs ex
 - Built using React & Tailwind CSS
 
 
+### Progress screenshots
+
 ![](./src/images/Transactions.png)
+![](./src/images/FormLight.png)
+![](./src/images/FormDark.png)
+![](./src/images/DatePickerLight.png)
+![](./src/images/DatePickerDark.png)
