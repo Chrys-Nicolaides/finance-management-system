@@ -29,7 +29,7 @@ Project's dashboard displays summary of user's net balance, current income vs ex
 - Display net balance
 - Display expense chart & graph
 
-### End points ✔️
+### End points ☑️
 
 - Fetch transactions from API
 - Create new transactions
