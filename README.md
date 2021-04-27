@@ -39,3 +39,6 @@ Project's dashboard displays summary of user's net balance, current income vs ex
 ### Tech stack 📚
 
 - Built using React & Tailwind CSS
+
+
+![](./src/images/Transactions.png)
