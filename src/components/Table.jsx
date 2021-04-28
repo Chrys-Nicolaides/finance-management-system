@@ -4,7 +4,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 import * as ReactIcon from "react-icons/ai";
 
-const MyTable = ({ data, columns, index }) => {
+const MyTable = ({ data, columns, index, categories, values }) => {
   let firstClass =
     index === 0 ? "" : " divide-y divide-gray-300 dark:divide-gray-700";
 
@@ -95,13 +95,16 @@ const MyTable = ({ data, columns, index }) => {
                   return (
                     <Td key={columnIndex}>
                       <div className="flex sm:justify-start sm:items-center lg:py-3 pb-2 pl-4">
-                        <IconComponent input={transaction.category} />
+                        <IconComponent
+                        // input={categoryId ? isCategories(categories) : "hey"}
+                        />
                         <div className="flex flex-col lg:gap-y-1 lg:py-2 pl-2.5">
                           <div className="md:text-lg text-base font-medium text-gray-700 dark:text-gray-400">
                             {transaction.description}
                           </div>
                           <div className="md:text-sm text-xs font-normal">
-                            {transaction.category}
+                            {/* {values.categoryId} */}
+                            {/* {isCategories(values.category?.id)} */}
                           </div>
                         </div>
                       </div>

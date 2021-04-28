@@ -9,11 +9,15 @@ export const FetchCategories = async (id) => {
     .catch((error) => console.log("GET categories error:", error));
 };
 
-export const CreateCategories = async (id, body) => {
-  request("POST", `/profile/${id}/categories`, body)
+export const CreateCategories = async (id, body, accessToken) => {
+  const headers = new Headers();
+
+  headers.set("Authorization", `Bearer ${accessToken}`);
+  return request("POST", `/profile/${id}/categories`, body, headers)
     .then((response) => response.json())
     .then((result) => {
       console.log("POST create category result:", result);
+      return result;
     })
     .catch((error) => console.log("POST create category error:", error));
 };

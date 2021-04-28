@@ -1,13 +1,24 @@
 import { request } from "./Request";
 
-export const FetchTransactions = async (id, accessToken, page, perPage) => {
+export const FetchTransactions = async (
+  id,
+  accessToken,
+  page,
+  perPage,
+  start_date,
+  end_date
+) => {
   const headers = new Headers();
 
   headers.set("Authorization", `Bearer ${accessToken}`);
 
   return request(
     "GET",
-    `/profile/${id}/transactions?page=${page || 0}&per_page=${perPage || 5}`,
+    `/profile/${id}/transactions?page=${page || 0}&per_page=${perPage || 5}${
+      start_date && end_date
+        ? `&start_date=${start_date}&end_date=${end_date}`
+        : ""
+    }`,
     {},
     headers
   )
@@ -23,10 +34,11 @@ export const CreateTransaction = async (id, body, accessToken) => {
   const headers = new Headers();
 
   headers.set("Authorization", `Bearer ${accessToken}`);
-  request("POST", `/profile/${id}/transactions`, body, headers)
+  return request("POST", `/profile/${id}/transactions`, body, headers)
     .then((response) => response.json())
     .then((result) => {
       console.log("POST transactions result:", result);
+      return result;
     })
     .catch((error) => console.log("POST transactions error:", error));
 };

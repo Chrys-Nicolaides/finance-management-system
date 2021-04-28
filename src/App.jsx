@@ -47,11 +47,8 @@ function App() {
     getAccessToken();
   }, []);
 
-  // fetch profile
-
   useEffect(() => {
     const getProfile = async () => {
-      console.log("object");
       const profileResponse = await FetchProfileEmail(user.email, accessToken);
       setProfile(profileResponse);
     };
@@ -60,7 +57,6 @@ function App() {
       getProfile();
     }
   }, [accessToken]);
-  console.log(profile);
   return (
     <BrowserRouter>
       <Switch>
@@ -68,9 +64,9 @@ function App() {
         <Route
           path="/"
           exact
-          component={LandingPage}
-          accessToken={accessToken}
-          loading={loading}
+          component={() => (
+            <LandingPage accessToken={accessToken} loading={loading} />
+          )}
         />
         <Route path="/logout" exact component={LogoutPage} />
         <ProtectedRoute path="/profile" component={Profile} />
@@ -91,8 +87,8 @@ function App() {
           component={() => (
             <TransactionsHistoryPage
               accessToken={accessToken}
-              setLoading={setLoading}
               profile={profile}
+              loading={loading}
             />
           )}
         />

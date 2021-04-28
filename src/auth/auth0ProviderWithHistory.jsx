@@ -6,9 +6,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const domain = import.meta.env.VITE_YOUR_DOMAIN;
   const clientId = import.meta.env.VITE_CLIENT_ID;
 
-  console.log(domain);
-  console.log(clientId);
-
   const history = useHistory();
 
   const onRedirectCallback = (appState) => {

@@ -1,37 +1,69 @@
 import React, { useState } from "react";
+
 import { IoClose, IoLocationSharp, IoCalendarClear } from "react-icons/io5";
 import { CreateTransaction } from "../services/api/Transaction";
+import { CreateCategories } from "../services/api/Categories";
 import Card from "./Card";
 import Modal from "./Modal";
+import Dropdown from "./Dropdown";
+import * as yup from "yup";
 
-const ModalForm = ({ setShowModal, accessToken, profile }) => {
-  const [currency, setCurrency] = useState("");
+const ModalForm = ({
+  setShowModal,
+  accessToken,
+  profile,
+  getTransactions,
+  // categories,
+  values,
+  setValues,
+}) => {
+  const [currency, setCurrency] = useState("EUR");
+  const [recurring, setRecurring] = useState("Please select");
+  const [category, setCategory] = useState("Please select");
   const [isRecurring, setIsRecurring] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
-  const [values, setValues] = useState({
-    description: "",
-    day: "1",
-    amount: "",
-    currency: "EUR",
-    recurring: false,
-    recurringType: "Weekly",
-    category: {
-      id: "1",
-      name: "",
-    },
-  });
 
-  const handleCurrency = (input) => {
-    switch (input) {
-      case "ZAR":
-        return "R";
-      case "USD":
-        return "$";
-      case "EUR":
-      default:
-        return "€";
-    }
+  const currencyList = [
+    {
+      name: "euro",
+      code: "EUR",
+      symbol: "€",
+    },
+    {
+      name: "rand",
+      code: "ZAR",
+      symbol: "R",
+    },
+    {
+      name: "dollar",
+      code: "USD",
+      symbol: "$",
+    },
+  ];
+
+  const recurringTypeList = [
+    { code: "Weekly" },
+    { code: "Monthly" },
+    { code: "Quarterly" },
+    { code: "Annually" },
+  ];
+
+  const categoryList = [
+    { code: "Rent", id: 1 },
+    { code: "Utilities", id: 2 },
+    { code: "Internet", id: 3 },
+    { code: "Food & Groceries", id: 4 },
+    { code: "Subscriptions", id: 5 },
+    { code: "Other", id: 6 },
+  ];
+
+  let currencySymbol = [...currencyList].filter(
+    (item) => item.code == currency
+  )[0].symbol;
+
+  const handleListChange = (input, setter) => {
+    event.preventDefault();
+    setter(input);
   };
 
   const handleChange = (event, field) => {
@@ -40,29 +72,32 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
     tempValues[field] = event.target.value;
     setValues(tempValues);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (values.description && values.amount) {
-      setValid(true);
-    }
-    setSubmitted(true);
-  };
+
+  const schema = yup.object().shape({
+    description: yup
+      .string()
+      .required()
+      .min(2, "Please enter a valid description"),
+    amount: yup.string().required("Please enter a valid amount"),
+  });
 
   const postNewTransaction = async () => {
-    CreateTransaction(profile.id, values, accessToken);
+    event.preventDefault();
+    let valid = await schema
+      .validate(values, { abortEarly: false })
+      .catch((e) => console.error(e.errors));
+    if (valid) {
+      CreateTransaction(profile?.id, values, accessToken);
+      getTransactions();
+      setShowModal(false);
+    }
   };
-
-  console.log(profile.id);
 
   return (
     <Modal>
       <Card fullWidth={false} additionalClasses={"flex-grow sm:max-w-sm"}>
-        <form
-          className="flex flex-col p-2 w-full"
-          onSubmit={handleSubmit}
-          method="post"
-        >
-          <div className="flex justify-between pb-12">
+        <form className="flex flex-col p-2 w-full">
+          <div className="flex justify-between pb-6">
             <h3 className="text-lg font-semibold">Add new transaction</h3>
 
             <IoClose
@@ -86,7 +121,7 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
                 </h5>
               </div>
             </div>
-            <div className="date-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-14">
+            <div className="date-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-6">
               <div className="category-container bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
                 <IoCalendarClear className="fill-current text-indigo-400 dark:text-indigo-500 w-5 h-5" />
               </div>
@@ -118,8 +153,8 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
                             hover:border-indigo-400"
               >
                 <div className="absolute left-0 pl-3 flex items-center pointer-events-none h-12 mt-0 mb-0 ">
-                  <span className="text-gray-400 dark:text-gray-500 text-sm dark:bg-transparent ">
-                    {handleCurrency(currency)}
+                  <span className="text-gray-400 dark:text-gray-500 text-sm dark:bg-transparent">
+                    {currencySymbol}
                   </span>
                 </div>
                 <input
@@ -139,29 +174,17 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
             </div>
             <div className="currency-div justify-end w-2/5">
               <div className="inline-block w-full">
-                <label>Currency</label>
-                <div className="mt-1 rounded-md bg-gray-100 dark:bg-gray-700 h-12 text-gray-400 ">
-                  <select
-                    id="currency"
-                    name="currency"
-                    value={values.currency}
-                    onChange={() => handleChange(event, "currency")}
-                    onClick={(event) => setCurrency(event.target.value)}
-                    className="form-input content-center w-full pr-8 rounded-md
-                    bg-gray-100 dark:bg-gray-700 
-                    text-gray-400 focus:text-gray-700 dark:text-gray-400 text-sm"
-                  >
-                    <option className="appearance-none text-gray-500 bg-gray-100 outline-none py-2 hover:bg-indigo-100">
-                      EUR
-                    </option>
-                    <option>USD</option>
-                    <option>ZAR</option>
-                  </select>
-                </div>
+                <Dropdown
+                  label={"Currency"}
+                  setter={setCurrency}
+                  handleListChange={handleListChange}
+                  list={currencyList}
+                  value={currency}
+                />
               </div>
             </div>
           </div>
-          <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-8 mb-6 px-3  hover:border-indigo-400 hover:border-2 border-2 border-transparent ">
+          <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-6 px-3  hover:border-indigo-400 hover:border-2 border-2 border-transparent ">
             <label
               className={
                 (isRecurring
@@ -172,13 +195,13 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
             >
               Recurring
             </label>
-            <div className="relative mr-1.5">
+            <div className="relative mr-1.5 z-0">
               <input
-                className="toggle-switch hidden"
+                className="hidden"
                 type="checkbox"
                 id="recurring"
                 name="recurring"
-                value={values.recurring}
+                value={recurring}
                 onChange={() => handleChange(event, "recurring")}
                 onClick={() => setIsRecurring(!isRecurring)}
               />
@@ -187,80 +210,39 @@ const ModalForm = ({ setShowModal, accessToken, profile }) => {
             </div>
           </label>
           <div
-            className={"recurring-container " + (isRecurring ? " active" : "")}
+            className={
+              "recurring-container " + (isRecurring ? " active mt-6" : "")
+            }
           >
             <div className="recurring-animation">
-              <label>Recurring type</label>
-              <select
-                id="recurringType"
-                name="recurringType"
-                value={values.recurringType}
-                onChange={() => handleChange(event, "recurringType")}
-                className="form-input w-full dark:bg-gray-700 bg-gray-100 border-2 border-transparent dark:border-transparent 
-                dark:text-gray-400 dark:focus:text-gray-300 text-gray-400 focus:text-gray-600 text-sm
-                outline-none focus:outline-none mb-10"
-              >
-                <option className="hidden" value="">
-                  Select type
-                </option>
-                <option
-                  className=" dark:bg-gray-800 dark:text-gray-300 text-gray-500 font-medium text-xs hover:bg-indigo-100 hover:text-indigo-500"
-                  value="weekly"
-                >
-                  Weekly
-                </option>
-                <option
-                  className="dark:bg-gray-800 dark:text-gray-300 text-gray-500 font-medium text-xs hover:bg-indigo-100 hover:text-indigo-500"
-                  value="monthly"
-                >
-                  Monthly
-                </option>
-                <option
-                  className="dark:bg-gray-800 dark:text-gray-300 text-gray-500 font-medium text-xs hover:bg-indigo-100 hover:text-indigo-500"
-                  value="quarterly"
-                >
-                  Quarterly
-                </option>
-                <option
-                  className="dark:bg-gray-800 dark:text-gray-300 text-indigo-500 font-medium text-xs hover:bg-indigo-100 hover:text-indigo-500"
-                  value="annually"
-                >
-                  Annually
-                </option>
-              </select>
+              <Dropdown
+                label={"Recurring type"}
+                setter={setRecurring}
+                handleListChange={handleListChange}
+                list={recurringTypeList}
+                value={recurring}
+              />
             </div>
           </div>
-          <label className="mb-1">Category</label>
-          <div className="mb-10">
-            <select
-              id="category"
-              name="category"
-              value={values.category.id}
-              onChange={() => handleChange(event, "category")}
-              onClick={(event) => setCurrency(event.target.value)}
-              className="form-input appearance-none content-center w-full pr-8 
-              bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-400 text-sm rounded-md"
-            >
-              <option value="" className="hidden">
-                Select category
-              </option>
-              <option value="Rent">Rent</option>
-              <option value="Utilities">Utilities</option>
-              <option value="Internet">Internet</option>
-              <option value="Food">Food & Groceries</option>
-              <option value="Subscriptions">Subscriptions</option>
-              <option value="Other">Other</option>
-            </select>
+          <div className="mb-7 mt-6 z-0 relative">
+            <Dropdown
+              label={"Category"}
+              setter={setCategory}
+              handleListChange={handleListChange}
+              list={categoryList}
+              value={category}
+            />
           </div>
-          <div className="flex flex-row" onClick={() => setShowModal(false)}>
+          <div className="flex flex-row">
             <button
               type="button"
               className="button-secondary text-sm w-1/2 mr-2 p-0 h-10"
+              onClick={() => setShowModal(false)}
             >
               Cancel
             </button>
             <button
-              type="submit"
+              // type="submit"
               className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
               onClick={() => postNewTransaction()}
             >
