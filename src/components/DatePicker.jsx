@@ -76,19 +76,19 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
       }`;
     }
 
-    const parsed = parse(parts.join("/"), "MM/dd/yyyy", new Date());
+    const parsed = parse(parts.join("/"), "dd/MM/yyyy", new Date());
 
     if (isValid(parsed)) {
       select(parsed, true);
     } else if (selected.length > 0) {
-      setInputValue(format(selected[0], "MM/dd/yyyy"));
+      setInputValue(format(selected[0], "dd/MM/yyyy"));
     } else {
       setInputValue("");
     }
   };
 
   useEffect(() => {
-    setInputValue(selected.length > 0 ? format(selected[0], "MM/dd/yyyy") : "");
+    setInputValue(selected.length > 0 ? format(selected[0], "dd/MM/yyyy") : "");
     setViewing(selected.length > 0 ? selected[0] : new Date());
   }, [selected]);
 
@@ -112,14 +112,14 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
           </button>
         </span>
         <input
-          className=" placeholder-gray-500 dark:placeholder-gray-300 bg-gray-50 dark:bg-gray-700 font-medium outline-none bg-opacity-90 pl-4 py-2 rounded-lg shadow w-full min-w-[18rem]"
+          className="dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-200 bg-gray-50 dark:bg-gray-700 font-medium outline-none bg-opacity-90 pl-4 py-2 rounded-lg shadow w-full min-w-[18rem]"
           onBlur={() => onInputBlur()}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder={placeholder}
           value={inputValue}
         />
         {isOpen ? (
-          <div className="bg-gray-400 absolute rounded-lg shadow-lg mt-0.5 w-full z-10">
+          <div className="bg-gray-400 absolute rounded-lg shadow-lg mt-0.5 w-full z-40">
             <div className="flex justify-between text-white bg-indigo-500 rounded-t-lg pt-2 px-4 pb-2">
               <button
                 className="px-2 py-1 -ml-2 focus:outline-none rounded hover:bg-indigo-700"
@@ -203,6 +203,7 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
                         data-today={isToday(day)}
                         key={`${day}`}
                         onClick={() => {
+                          setIsOpen(false);
                           toggle(day, true);
                         }}
                       >
