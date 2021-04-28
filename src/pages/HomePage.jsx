@@ -20,45 +20,24 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const res = await FetchTransactions(profile.id, accessToken, 1, 37);
+      const res = await FetchTransactions(profile.id, accessToken, 35, 99);
       setTransactions(res);
       setLoading(false);
-      console.log(res);
     };
     if (profile?.id) {
       getTransactions();
     }
   }, []);
 
+  const getTransactions = async () => {
+    const res = await FetchTransactions(profile.id, accessToken, 35, 99);
+    setTransactions(res);
+    setLoading(false);
+  };
+
   if (!window.navigator.platform.toLowerCase().includes("mac")) {
     import("../Font.css");
   }
-
-  // const postme = async () => {
-  //   CreateTransaction(
-  //     2,
-  //     {
-  //       amount: 10,
-  //       description: "This is a awesome purchase",
-  //       day: 2,
-  //       recurring: true,
-  //       recurringType: "monthly",
-  //       currency: "EUR",
-  //       categoryId: 1,
-  //       profile: {
-  //         id: 6,
-  //         email: "cool_kid@looserville.com",
-  //         balance: 20.59,
-  //         currency: "EUR",
-  //       },
-  //       category: {
-  //         id: 1,
-  //         name: "Category 1",
-  //       },
-  //     },
-  //     accessToken
-  //   );
-  // };
 
   return (
     <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
@@ -73,11 +52,11 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
       <Header />
       <Balance profile={profile} />
       <div className="flex flex-col md:flex-row flex-grow h-full pb-6 mt-32">
-        {/* <button onClick={() => postme()}>here</button> */}
         <TransactionsRecent
           accessToken={accessToken}
           transactions={transactions}
           profile={profile}
+          getTransactions={getTransactions}
           className="md:flex-row md:w-full md:order-1"
         />
         <Chart className="md:flex-row md:w-full" />

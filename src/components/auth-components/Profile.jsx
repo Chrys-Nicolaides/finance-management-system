@@ -13,7 +13,6 @@ const Profile = () => {
           scopes: ["read:profile"],
         });
 
-        console.log(accessToken);
         const userDetailsByIdUrl = `https://finanzer.normans.co.za/profile/1`;
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {
@@ -33,7 +32,6 @@ const Profile = () => {
     getUserMetadata();
   }, [getAccessTokenSilently]);
 
-  console.log(user);
   return isAuthenticated ? (
     <div>
       <img src={user.picture} alt={user.name} />
