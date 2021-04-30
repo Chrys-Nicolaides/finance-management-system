@@ -103,22 +103,6 @@
   }
 }
 
-/* toggle-switch */
-
-.toggle-circle {
-  top: -0.2rem;
-  left: -0.2rem;
-  transition: all 0.3s ease-in-out;
-}
-
-input:checked ~ .toggle-circle {
-  transform: translateX(100%);
-  background-color: #6366f1;
-}
-input:checked ~ .toggle-path {
-  background-color: #a5b4fc;
-}
-
 /* recurring-type animation */
 
 .recurring-container {
@@ -139,14 +123,14 @@ input:checked ~ .toggle-path {
   -ms-perspective: 1000;
 
   overflow: hidden;
-  transition: max-height 0.4s ease-in;
+  transition: max-height 0.3s ease-in;
   max-height: 0;
 }
 
 .recurring-container.active {
   overflow: visible;
   max-height: 100px;
-  transition: max-height 0.4s ease-out;
+  transition: max-height 0.3s ease-out;
 }
 
 /* number field default spin buttons removed */

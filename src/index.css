@@ -73,4 +73,10 @@
   .t-row {
     @apply font-medium sm:text-gray-500 text-gray-700 sm:dark:text-gray-500 dark:text-gray-400 sm:text-lg text-sm;
   }
+  .toggle-path {
+    @apply w-6 h-2 rounded-full shadow-inner;
+  }
+  .toggle-circle {
+    @apply absolute w-4 h-4 rounded-full shadow-sm -top-1 ease-in-out duration-300 -left-1;
+  }
 }
