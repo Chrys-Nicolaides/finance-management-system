@@ -30,13 +30,13 @@ const Navbar = () => {
     <div>
       <nav className="navbar fixed bg-indigo-300 dark:bg-gray-800 whitespace-nowrap left-0 z-10">
         <ul className="navbar-nav list-none p-0 m-0 flex flex-col items-center text-middle h-full">
-          <li className="nav-logo items-center">
+          <li className="nav-logo items-center pt-3">
             <Link
               className="flex items-center h-14 text-gray-400 font-medium m-1.5"
               to="/dashboard"
             >
               <IoChevronForwardCircleSharp className="svg-logo " />
-              <span className="nav-heading absolute ml-4 text-indigo-800 dark:text-gray-400 text-xl font-semibold">
+              <span className="nav-heading absolute ml-4 text-indigo-700 dark:text-gray-400 text-xl font-semibold">
                 Finanzer
               </span>
             </Link>
