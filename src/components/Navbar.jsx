@@ -5,27 +5,7 @@ import { RiMoonClearLine } from "react-icons/ri";
 import { IoChevronForwardCircleSharp } from "react-icons/io5";
 import { HiOutlineChartPie, HiOutlineClipboardList } from "react-icons/hi";
 
-const Navbar = () => {
-  const [darkTheme, setDarkTheme] = useState(
-    localStorage.darkTheme === "true" ||
-      (localStorage.darkTheme === undefined &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
-
-  const themeChange = (darkTheme) => {
-    if (darkTheme) {
-      document.body.classList.add("dark");
-      setDarkTheme(true);
-    } else {
-      document.body.classList.remove("dark");
-      setDarkTheme(false);
-    }
-  };
-
-  useEffect(() => {
-    themeChange();
-  }, []);
-
+const Navbar = ({ darkTheme, themeChange }) => {
   return (
     <div>
       <nav className="navbar fixed bg-indigo-300 dark:bg-gray-800 whitespace-nowrap left-0 z-10">

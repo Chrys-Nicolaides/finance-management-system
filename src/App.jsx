@@ -21,9 +21,22 @@ function App() {
         window.matchMedia("(prefers-color-scheme: dark)").matches)
   );
 
+  useEffect(() => {
+    if (darkTheme) {
+      document.body.classList.add("dark");
+    }
+  }, [darkTheme]);
+
   const themeChange = () => {
-    localStorage.darkTheme = !darkTheme;
-    setDarkTheme(!darkTheme);
+    if (darkTheme) {
+      document.body.classList.remove("dark");
+      localStorage.darkTheme = "false";
+      setDarkTheme(false);
+    } else {
+      document.body.classList.add("dark");
+      localStorage.darkTheme = "true";
+      setDarkTheme(true);
+    }
   };
 
   const [accessToken, setAccessToken] = useState(undefined);
