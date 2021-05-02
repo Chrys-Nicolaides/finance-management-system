@@ -16,12 +16,15 @@ const ModalForm = ({
   // categories,
   values,
   setValues,
+  additionalClasses,
+  dropdownPosition,
 }) => {
   const [currency, setCurrency] = useState("EUR");
   const [recurring, setRecurring] = useState("Please select");
   const [category, setCategory] = useState("Please select");
   const [isRecurring, setIsRecurring] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const currencyList = [
     {
@@ -85,11 +88,13 @@ const ModalForm = ({
     event.preventDefault();
     let valid = await schema
       .validate(values, { abortEarly: false })
-      .catch((e) => console.error(e.errors));
+      .catch((e) => console.error(e.errors, "ehhhh"));
+    setIsValid(!isValid);
     if (valid) {
       CreateTransaction(profile?.id, values, accessToken);
       getTransactions();
       setShowModal(false);
+      setIsValid(isValid);
     }
   };
 
@@ -144,12 +149,12 @@ const ModalForm = ({
             value={values.description}
             onChange={() => handleChange(event, "description")}
           />
-
+          {/* {!isValid ? alert("Danger! Danger!") : ""} */}
           <div className="flex flex-row w-full">
             <div className=" amount-div justify-start w-3/5 mr-6">
               <label>Amount</label>
               <div
-                className=" mb-2 mt-1.5 relative rounded-md bg-gray-100 dark:bg-gray-700 h-12 
+                className="mb-2 mt-1.5 relative rounded-md bg-gray-100 dark:bg-gray-700 h-12 
                             hover:border-indigo-400"
               >
                 <div className="absolute left-0 pl-3 flex items-center pointer-events-none h-12 mt-0 mb-0 ">
@@ -173,18 +178,19 @@ const ModalForm = ({
               </div>
             </div>
             <div className="currency-div justify-end w-2/5">
-              <div className="inline-block w-full">
+              <div className=" w-full z-50">
                 <Dropdown
                   label={"Currency"}
                   setter={setCurrency}
                   handleListChange={handleListChange}
                   list={currencyList}
                   value={currency}
+                  dropdownPosition={true}
                 />
               </div>
             </div>
           </div>
-          <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-6 px-3  hover:border-indigo-400 hover:border-2 border-2 border-transparent ">
+          <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-6 px-3  hover:border-indigo-400 hover:border-2 border-2 border-transparent mb-6">
             <label
               className={
                 (isRecurring
@@ -195,9 +201,9 @@ const ModalForm = ({
             >
               Recurring
             </label>
-            <div className="relative mr-1.5 z-0">
+            <div className="relative mr-1.5 ">
               <input
-                className="hidden"
+                className="hidden "
                 type="checkbox"
                 id="recurring"
                 name="recurring"
@@ -205,32 +211,48 @@ const ModalForm = ({
                 onChange={() => handleChange(event, "recurring")}
                 onClick={() => setIsRecurring(!isRecurring)}
               />
-              <div className="toggle-path w-6 h-2.5 bg-gray-400 rounded-full shadow-inner"></div>
-              <div className="toggle-circle absolute w-4 h-4 bg-gray-300 rounded-full shadow-sm inset-y-0 left-0"></div>
+
+              <div
+                className={
+                  isRecurring
+                    ? "toggle-path bg-indigo-400 "
+                    : "toggle-path bg-gray-400 "
+                }
+              ></div>
+              <div
+                className={
+                  isRecurring
+                    ? "toggle-circle bg-indigo-600  transform translate-x-full"
+                    : "toggle-circle bg-gray-300 "
+                }
+              ></div>
             </div>
           </label>
           <div
             className={
-              "recurring-container " + (isRecurring ? " active mt-6" : "")
+              "recurring-container " + (isRecurring ? " active z-50" : "")
             }
           >
-            <div className="recurring-animation">
+            <div className="recurring-animation mb-6 ">
               <Dropdown
                 label={"Recurring type"}
                 setter={setRecurring}
                 handleListChange={handleListChange}
                 list={recurringTypeList}
                 value={recurring}
+                dropdownPosition={true}
               />
             </div>
           </div>
-          <div className="mb-7 mt-6 z-0 relative">
+          <div className="mb-7">
             <Dropdown
               label={"Category"}
               setter={setCategory}
               handleListChange={handleListChange}
               list={categoryList}
               value={category}
+              dropdownPosition={false}
+              additionalClasses={" -top-60 inset-y-0"}
             />
           </div>
           <div className="flex flex-row">
@@ -246,11 +268,11 @@ const ModalForm = ({
               className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
               onClick={() => postNewTransaction()}
             >
+              {/* {!isValid ? alert("Danger! Danger!") : ""} */}
               Save transaction
             </button>
           </div>
         </form>
-        {submitted ? <div>New transaction created!</div> : ""}
       </Card>
     </Modal>
   );
