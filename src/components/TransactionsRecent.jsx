@@ -63,7 +63,6 @@ const TransactionsRecent = ({
         ""
       )}
       <div className=""></div>
-      <h3 className="pb-8">Recent transactions</h3>
       <MyTable
         data={transactions}
         columns={columns}

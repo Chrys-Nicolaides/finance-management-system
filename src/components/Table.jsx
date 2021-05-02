@@ -62,13 +62,13 @@ const MyTable = ({ data, columns, index, categories, values }) => {
             }
             if (column === "amount") {
               return (
-                <Th key={columnIndex} className="text-right font-normal pr-8">
+                <Th key={columnIndex} className="text-right font-medium pr-8">
                   {column}
                 </Th>
               );
             } else {
               return (
-                <Th key={columnIndex} className="font-normal pl-8">
+                <Th key={columnIndex} className="font-medium pl-5">
                   {column}
                 </Th>
               );

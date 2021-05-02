@@ -20,7 +20,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const res = await FetchTransactions(profile.id, accessToken, 35, 99);
+      const res = await FetchTransactions(profile.id, accessToken, 1, 4);
       setTransactions(res);
       setLoading(false);
     };
@@ -30,7 +30,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
   }, []);
 
   const getTransactions = async () => {
-    const res = await FetchTransactions(profile.id, accessToken, 35, 99);
+    const res = await FetchTransactions(profile.id, accessToken, 1, 4);
     setTransactions(res);
     setLoading(false);
   };
@@ -50,16 +50,22 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
       )}
 
       <Header />
-      <Balance profile={profile} />
-      <div className="flex flex-col md:flex-row flex-grow h-full pb-6 mt-32">
-        <TransactionsRecent
-          accessToken={accessToken}
-          transactions={transactions}
-          profile={profile}
-          getTransactions={getTransactions}
-          className="md:flex-row md:w-full md:order-1"
-        />
-        <Chart className="md:flex-row md:w-full" />
+
+      <div className="flex w-full gap-8">
+        <div className="flex flex-col justify-start w-2/3 pb-8 mt-6 h-full gap-4">
+          <Chart className="md:flex-row md:w-full flex-grow" />
+          <h3 className="pb-4 pt-2">Recent transactions</h3>
+          <TransactionsRecent
+            accessToken={accessToken}
+            transactions={transactions}
+            profile={profile}
+            getTransactions={getTransactions}
+            className="md:flex-row md:w-full md:order-1 flex-grow"
+          />
+        </div>
+        <div className="flex w-1/3 justify-end mt-6 mb-8">
+          <Balance profile={profile} />
+        </div>
       </div>
     </DefaultLayout>
   );
