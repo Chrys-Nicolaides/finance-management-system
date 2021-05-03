@@ -102,6 +102,7 @@ function App() {
               accessToken={accessToken}
               profile={profile}
               loading={loading}
+              themeChange={themeChange}
             />
           )}
         />

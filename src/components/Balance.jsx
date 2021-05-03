@@ -15,7 +15,7 @@ const Balance = ({ profile }) => {
         </h3>
       </div>
       <div className="flex flex-col place-content-between h-full px-6">
-        <div className="text-center bg-gradient-to-b from-indigo-400 to-indigo-500  mt-12 rounded-xl pt-8 shadow-md w-full">
+        <div className="text-center bg-gradient-to-b from-indigo-400 to-indigo-500 mt-12 rounded-xl pt-8 shadow-md w-full">
           <div className="flex flex-col items-center mx-6">
             <div className="bg-indigo-500 bg-opacity-80 w-16 h-16 rounded-xl flex justify-center items-center">
               <IoCardOutline className="text-indigo-700 w-10 h-10" />
@@ -35,7 +35,7 @@ const Balance = ({ profile }) => {
           </div>
         </div>
         <div className="w-full flex flex-row gap-x-8 content-end ">
-          <div className="flex justify-between p-5 bg-white dark:bg-gray-700 shadow-md rounded-xl w-1/2">
+          <div className="flex justify-between p-5 bg-white dark:bg-gray-700 dark:bg-opacity-70 shadow-md rounded-xl w-1/2">
             <div className="flex flex-col items-center w-full">
               <h2 className="text-lg text-gray-500 dark:text-gray-400 font-medium ">
                 Income
@@ -51,7 +51,7 @@ const Balance = ({ profile }) => {
               </div>
             </div>
           </div>
-          <div className="flex  justify-between p-5 bg-white dark:bg-gray-700 shadow-md rounded-xl w-1/2">
+          <div className="flex  justify-between p-5 bg-white dark:bg-gray-700 dark:bg-opacity-70 shadow-md rounded-xl w-1/2">
             <div className="flex flex-col items-center w-full">
               <h2 className="text-lg text-gray-500 dark:text-gray-400 font-medium">
                 Expenses

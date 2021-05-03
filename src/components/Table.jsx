@@ -4,7 +4,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 import * as ReactIcon from "react-icons/ai";
 
-const MyTable = ({ data, columns, index, categories, values }) => {
+const MyTable = ({ data, columns, index, categories, values, dateFormat }) => {
   let firstClass =
     index === 0 ? "" : " divide-y divide-gray-300 dark:divide-gray-700";
 
@@ -103,7 +103,7 @@ const MyTable = ({ data, columns, index, categories, values }) => {
                             {transaction.description}
                           </div>
                           <div className="md:text-sm text-xs font-normal">
-                            {/* {values.categoryId} */}
+                            {/* {values.categoryId ? category.name : "test"} */}
                             {/* {isCategories(values.category?.id)} */}
                           </div>
                         </div>
