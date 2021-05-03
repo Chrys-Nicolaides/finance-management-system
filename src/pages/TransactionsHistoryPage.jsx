@@ -19,14 +19,14 @@ const TransactionsHistoryPage = ({
   themeChange,
   darkTheme,
   accessToken,
-  // loading,
   profile,
 }) => {
   const [startDate, setStartDate] = useState(
-    dayjs().subtract(1, "month").format("DD/MM/YYYY")
+    dayjs().subtract(1, "month").format("DD.MM.YYYY")
   );
-  const [endDate, setEndDate] = useState(dayjs().format("DD/MM/YYYY"));
+  const [endDate, setEndDate] = useState(dayjs().format("DD.MM.YYYY"));
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTransactions = async () => {
@@ -39,7 +39,7 @@ const TransactionsHistoryPage = ({
         dateFormat(endDate)
       );
       setTransactions(res);
-      // setLoading(false);
+      setLoading(false);
     };
     if (profile?.id) {
       getTransactions();
@@ -49,19 +49,19 @@ const TransactionsHistoryPage = ({
   dayjs.extend(customParseFormat);
 
   const dateFormat = (input) => {
-    return dayjs(input, "DD/MM/YYYY").format("YYYY-MM-DD");
+    return dayjs(input, "DD.MM.YYYY").format("YYYY-MM-DD");
   };
 
   return (
     <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
-      {/* {loading ? (
+      {loading ? (
         <Modal>
           <Loading />
         </Modal>
       ) : (
         ""
-      )} */}
-      <div className="bg-gray-100 dark:bg-gray-900 h-screen">
+      )}
+      <div className="bg-gray-100 dark:bg-gray-900 ">
         <Link
           className="flex items-center pt-6 sm:pb-0.5 pb-4 text-gray-500 pl-4"
           to="/dashboard"
@@ -94,7 +94,7 @@ const TransactionsHistoryPage = ({
               />
             </div>
           </div>
-          <MyTable data={transactions} columns={columns} profile={profile} />{" "}
+          <MyTable data={transactions} columns={columns} profile={profile} />
         </Card>
       </div>
     </DefaultLayout>

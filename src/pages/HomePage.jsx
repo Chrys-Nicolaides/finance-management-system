@@ -20,7 +20,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const res = await FetchTransactions(profile.id, accessToken, 35, 99);
+      const res = await FetchTransactions(profile.id, accessToken, 1, 3);
       setTransactions(res);
       setLoading(false);
     };
@@ -28,12 +28,6 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
       getTransactions();
     }
   }, []);
-
-  const getTransactions = async () => {
-    const res = await FetchTransactions(profile.id, accessToken, 35, 99);
-    setTransactions(res);
-    setLoading(false);
-  };
 
   if (!window.navigator.platform.toLowerCase().includes("mac")) {
     import("../Font.css");
@@ -50,16 +44,26 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
       )}
 
       <Header />
-      <Balance profile={profile} />
-      <div className="flex flex-col md:flex-row flex-grow h-full pb-6 mt-32">
-        <TransactionsRecent
-          accessToken={accessToken}
-          transactions={transactions}
-          profile={profile}
-          getTransactions={getTransactions}
-          className="md:flex-row md:w-full md:order-1"
-        />
-        <Chart className="md:flex-row md:w-full" />
+
+      <div className="flex flex-col md:flex-row-reverse mt-6 min-h-full gap-8 mb-8 md:mb-0">
+        <div className="md:mb-8 md:w-1/3 flex-grow ">
+          <Balance profile={profile} />
+        </div>
+
+        <div className="flex flex-col-reverse md:flex-col md:w-2/3 mx-4 md:mx-0">
+          <div className="md:mb-8   ">
+            <Chart className="flex-grow" />
+          </div>
+          <div className="mb-8">
+            <h3 className="pb-6 pt-4">Recent transactions</h3>
+            <TransactionsRecent
+              accessToken={accessToken}
+              transactions={transactions}
+              profile={profile}
+              className="md:flex-row md:w-full flex-grow"
+            />
+          </div>
+        </div>
       </div>
     </DefaultLayout>
   );

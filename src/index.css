@@ -16,25 +16,28 @@
     @apply font-display font-semibold text-2xl md:text-4xl xl:text-6xl;
   }
   .nav-item {
-    @apply w-full py-2.5;
+    @apply w-full py-2;
   }
   .nav-link {
-    @apply flex items-center h-14 text-gray-400 font-normal m-1.5;
+    @apply flex items-center h-14 text-indigo-600 dark:text-gray-400 font-medium m-7 py-8 bg-indigo-400 dark:bg-gray-700 bg-opacity-40 rounded-lg;
   }
   .nav-link:hover {
-    @apply text-indigo-200 bg-indigo-600 m-2 rounded-lg sm:px-0 px-0;
+    @apply text-indigo-700 dark:text-gray-400 dark:hover:text-indigo-200 bg-indigo-400  dark:bg-indigo-300 dark:bg-opacity-40 bg-opacity-75 m-6 rounded-lg sm:px-0 px-0;
+  }
+  .nav-link:hover svg {
+    @apply text-indigo-600 dark:text-indigo-200;
   }
   .navbar svg {
-    @apply mt-0 mr-6 md:w-6 md:h-6 w-5 h-5;
+    @apply mt-0 md:w-6 md:h-6 w-5 h-5 text-indigo-500 dark:text-gray-400 items-center hover:text-indigo-600 dark:hover:text-indigo-300;
   }
   .link-text {
-    @apply ml-2.5 hidden font-body;
+    @apply ml-2.5 hidden font-body font-medium text-lg hover:text-indigo-700 dark:hover:text-indigo-200;
   }
   .svg-logo {
-    @apply w-4 h-4 self-center;
+    @apply w-4 h-4 self-center text-red-500;
   }
   .nav-logo {
-    @apply font-bold mb-4 align-middle text-gray-400 w-full;
+    @apply font-bold mb-4 align-middle text-indigo-600 w-full ml-5;
   }
   .category-container {
     @apply w-8 h-7 rounded lg:mt-4 mr-2 lg:mr-4 lg:mb-4 flex justify-center items-center;
@@ -68,9 +71,15 @@
     border-transparent      ring-opacity-0      hover:border-indigo-400      focus:ring-indigo-200 active:border-indigo-400 focus:border-indigo-400;
   }
   .t-head {
-    @apply text-gray-400 dark:text-gray-400 text-lg font-thin capitalize tracking-wider bg-gray-50 dark:bg-gray-700 dark:bg-opacity-70 shadow-sm rounded-xl;
+    @apply text-gray-500 dark:text-gray-400 text-lg font-medium capitalize tracking-wider dark:bg-opacity-70 rounded-xl border-b border-gray-500 pl-0 pr-0 w-full;
   }
   .t-row {
     @apply font-medium sm:text-gray-500 text-gray-700 sm:dark:text-gray-500 dark:text-gray-400 sm:text-lg text-sm;
+  }
+  .toggle-path {
+    @apply w-6 h-2 rounded-full shadow-inner;
+  }
+  .toggle-circle {
+    @apply absolute w-4 h-4 rounded-full shadow-sm -top-1 ease-in-out duration-300 -left-1;
   }
 }

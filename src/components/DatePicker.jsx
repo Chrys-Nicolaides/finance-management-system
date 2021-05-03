@@ -33,11 +33,9 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
     viewing,
     viewNextMonth,
     viewPreviousMonth,
-    viewToday,
-  } = useLilius();
+  } = useLilius({ selected: parse(inputValue, "dd.MM.yyyy", new Date()) });
 
   const [isOpen, setIsOpen] = useState(false);
-  // const [inputValue, setInputValue] = useState("");
 
   const onInputChange = (input) => {
     setInputValue(input.trim().replace(/[^\d/]+/g, ""));
@@ -49,7 +47,8 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
       return;
     }
 
-    const parts = inputValue.split("/");
+    const parts = inputValue.split(".");
+
     const partsAsNumber = parts.map((p) => parseInt(p, 10));
 
     if (parts.length < 1) {
@@ -76,19 +75,23 @@ const DatePicker = ({ inputValue, setInputValue, placeholder }) => {
       }`;
     }
 
-    const parsed = parse(parts.join("/"), "dd/MM/yyyy", new Date());
+    const parsed = parse(parts.join("."), "dd.MM.yyyy", new Date());
 
     if (isValid(parsed)) {
       select(parsed, true);
     } else if (selected.length > 0) {
-      setInputValue(format(selected[0], "dd/MM/yyyy"));
+      setInputValue(format(selected[0], "dd.MM.yyyy"));
     } else {
       setInputValue("");
     }
   };
 
   useEffect(() => {
-    setInputValue(selected.length > 0 ? format(selected[0], "dd/MM/yyyy") : "");
+    select(parse(inputValue, "dd.MM.yyyy", new Date()), true);
+  }, []);
+
+  useEffect(() => {
+    setInputValue(selected.length > 0 ? format(selected[0], "dd.MM.yyyy") : "");
     setViewing(selected.length > 0 ? selected[0] : new Date());
   }, [selected]);
 
