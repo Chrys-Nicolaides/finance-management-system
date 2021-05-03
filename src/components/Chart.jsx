@@ -6,15 +6,18 @@ const Chart = () => {
   const [sortBy, setSortBy] = useState("sort by");
 
   const sortByList = [
-    { code: "Weekly" },
-    { code: "Monthly" },
-    { code: "Quarterly" },
-    { code: "Annually" },
+    { name: "Weekly" },
+    { name: "Monthly" },
+    { name: "Quarterly" },
+    { name: "Annually" },
   ];
 
-  const handleListChange = (input, setter) => {
+  const handleChange = (input, setter, field) => {
     event.preventDefault();
     setter(input);
+    const tempValues = { ...values };
+    tempValues[field] = input;
+    setValues(tempValues);
   };
 
   return (
@@ -29,10 +32,11 @@ const Chart = () => {
         <div className="justify-end flex w-28">
           <div className=" w-full">
             <Dropdown
-              setter={setSortBy}
-              handleListChange={handleListChange}
-              list={sortByList}
+              field="sortBy"
               value={sortBy}
+              setter={setSortBy}
+              handleChange={handleChange}
+              data={sortByList}
               dropdownPosition={true}
             />
           </div>
