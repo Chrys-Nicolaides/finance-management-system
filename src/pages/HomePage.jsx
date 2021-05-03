@@ -29,12 +29,6 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
     }
   }, []);
 
-  const getTransactions = async () => {
-    const res = await FetchTransactions(profile.id, accessToken, 1, 3);
-    setTransactions(res);
-    setLoading(false);
-  };
-
   if (!window.navigator.platform.toLowerCase().includes("mac")) {
     import("../Font.css");
   }
@@ -59,7 +53,6 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
             accessToken={accessToken}
             transactions={transactions}
             profile={profile}
-            getTransactions={getTransactions}
             className="md:flex-row md:w-full md:order-1 flex-grow"
           />
         </div>

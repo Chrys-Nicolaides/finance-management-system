@@ -1,50 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { GoPlus } from "react-icons/go";
 import ModalForm from "./ModalForm";
 import Card from "./Card";
 import MyTable from "./Table";
+import { FetchCategories } from "../services/api/Categories";
 
-const TransactionsRecent = ({
-  accessToken,
-  transactions,
-  profile,
-  getTransactions,
-}) => {
+const TransactionsRecent = ({ accessToken, transactions, profile }) => {
   const [showModal, setShowModal] = useState(false);
-  const [values, setValues] = useState({
-    description: "",
-    day: "1",
-    amount: "",
-    currency: "EUR",
-    recurring: false,
-    recurringType: "Weekly",
-    categoryId: "",
-  });
+  const [categories, setCategories] = useState([]);
 
   const columns = ["category", "description", "created", "amount"];
 
-  const categories = [
-    { name: "Rent", id: 1 },
-    { name: "Utilities", id: 2 },
-    { name: "Internet", id: 3 },
-    { name: "Food & Groceries", id: 4 },
-    { name: "Subscriptions", id: 5 },
-    { name: "Other", id: 6 },
-  ];
-
-  const isCategories = (categoryId) => {
-    // event.preventDefault();
-    let tempCategories = { ...values };
-
-    categories.find((category) => {
-      if (categoryId === category.id) {
-        tempCategories = { name: category.name, id: category.id };
-      }
-    });
-
-    setValues({ ...values, categories: tempCategories });
-  };
+  useEffect(() => {
+    const getCategories = async () => {
+      const res = await FetchCategories(profile.id, accessToken);
+      console.log(res);
+      setCategories(res);
+    };
+    if (profile?.id) {
+      getCategories();
+    }
+  }, []);
 
   return (
     <Card fullWidth={true} additionalClasses={"mr-6"}>
@@ -53,11 +30,7 @@ const TransactionsRecent = ({
           setShowModal={setShowModal}
           accessToken={accessToken}
           profile={profile}
-          getTransactions={getTransactions}
-          categories={categories}
-          values={values}
-          setValues={setValues}
-          // handleCategoryChange={handleCategoryChange}
+          categoryList={categories}
         />
       ) : (
         ""
@@ -67,10 +40,7 @@ const TransactionsRecent = ({
         data={transactions}
         columns={columns}
         profile={profile}
-        categories={categories}
-        values={values}
-        setValues={setValues}
-        isCategories={isCategories}
+        categoryList={categories}
       />
       <div className="flex justify-end mt-auto">
         <button

@@ -8,71 +8,81 @@ import Modal from "./Modal";
 import Dropdown from "./Dropdown";
 import * as yup from "yup";
 
-const ModalForm = ({
-  setShowModal,
-  accessToken,
-  profile,
-  getTransactions,
-  // categories,
-  values,
-  setValues,
-  additionalClasses,
-  dropdownPosition,
-}) => {
+const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
+  const [values, setValues] = useState({
+    description: "",
+    day: "1",
+    amount: "",
+    currency: "EUR",
+    recurring: false,
+    recurringType: "Weekly",
+    categoryId: "",
+  });
   const [currency, setCurrency] = useState("EUR");
+  const [isRecurring, setIsRecurring] = useState(false);
   const [recurring, setRecurring] = useState("Please select");
   const [category, setCategory] = useState("Please select");
-  const [isRecurring, setIsRecurring] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
   const currencyList = [
     {
-      name: "euro",
-      code: "EUR",
+      prettyName: "euro",
+      name: "EUR",
       symbol: "€",
     },
     {
-      name: "rand",
-      code: "ZAR",
+      prettyName: "rand",
+      name: "ZAR",
       symbol: "R",
     },
     {
-      name: "dollar",
-      code: "USD",
+      prettyName: "dollar",
+      name: "USD",
       symbol: "$",
     },
   ];
 
   const recurringTypeList = [
-    { code: "Weekly" },
-    { code: "Monthly" },
-    { code: "Quarterly" },
-    { code: "Annually" },
-  ];
-
-  const categoryList = [
-    { code: "Rent", id: 1 },
-    { code: "Utilities", id: 2 },
-    { code: "Internet", id: 3 },
-    { code: "Food & Groceries", id: 4 },
-    { code: "Subscriptions", id: 5 },
-    { code: "Other", id: 6 },
+    { name: "Weekly" },
+    { name: "Monthly" },
+    { name: "Quarterly" },
+    { name: "Annually" },
   ];
 
   let currencySymbol = [...currencyList].filter(
-    (item) => item.code == currency
+    (item) => item.name == currency
   )[0].symbol;
 
-  const handleListChange = (input, setter) => {
-    event.preventDefault();
-    setter(input);
+  const getTransactions = async () => {
+    const res = await FetchTransactions(profile.id, accessToken, 1, 10);
+    setTransactions(res);
+    setLoading(false);
   };
 
-  const handleChange = (event, field) => {
+  const handleChange = (input, setter, field) => {
+    event.preventDefault();
+    setter(input);
+    const tempValues = { ...values };
+    tempValues[field] = input;
+    setValues(tempValues);
+  };
+
+  /////// CATEGORY IS  DOWN BELOW
+
+  const handleCategoryChange = (input, setter) => {
+    event.preventDefault();
+    setter(input);
+    let tempValues = { ...values };
+    tempValues.categoryId = categoryList.find(
+      (category) => category.name == input
+    )?.id;
+    setValues(tempValues);
+  };
+
+  const handleInputChange = (input, field) => {
     event.preventDefault();
     const tempValues = { ...values };
-    tempValues[field] = event.target.value;
+    tempValues[field] = input;
     setValues(tempValues);
   };
 
@@ -140,6 +150,9 @@ const ModalForm = ({
               </div>
             </div>
           </div>
+
+          {/* Here is where the description starts */}
+
           <label className="">Description</label>
           <input
             className="form-input mb-6 text-sm focus:text-gray-700 text-gray-600 dark:text-gray-200 dark:focus:text-gray-100"
@@ -147,9 +160,14 @@ const ModalForm = ({
             id="description"
             name="description"
             value={values.description}
-            onChange={() => handleChange(event, "description")}
+            onChange={() =>
+              handleInputChange(event.target.value, "description")
+            }
           />
           {/* {!isValid ? alert("Danger! Danger!") : ""} */}
+
+          {/* Here is where the Amount starts */}
+
           <div className="flex flex-row w-full">
             <div className=" amount-div justify-start w-3/5 mr-6">
               <label>Amount</label>
@@ -167,7 +185,9 @@ const ModalForm = ({
                   id="amount"
                   name="amount"
                   value={values.amount}
-                  onChange={() => handleChange(event, "amount")}
+                  onChange={() =>
+                    handleInputChange(event.target.value, "amount")
+                  }
                   className="absolute pl-7 h-full w-full text-sm rounded-md 
                   bg-transparent dark:bg-transparent outline-none focus:outline-none 
                   placeholder-gray-400 dark:placeholder-gray-500 
@@ -177,19 +197,26 @@ const ModalForm = ({
                 />
               </div>
             </div>
+
+            {/* Here is where the currency starts */}
+
             <div className="currency-div justify-end w-2/5">
               <div className=" w-full z-50">
                 <Dropdown
                   label={"Currency"}
-                  setter={setCurrency}
-                  handleListChange={handleListChange}
-                  list={currencyList}
+                  field="currency"
                   value={currency}
+                  setter={setCurrency}
+                  handleChange={handleChange}
+                  data={currencyList}
                   dropdownPosition={true}
                 />
               </div>
             </div>
           </div>
+
+          {/* Here is where the recurring switch starts */}
+
           <label className="dark:bg-gray-700 bg-gray-100 h-12 rounded-md flex justify-between items-center cursor-pointer mt-6 px-3  hover:border-indigo-400 hover:border-2 border-2 border-transparent mb-6">
             <label
               className={
@@ -208,8 +235,13 @@ const ModalForm = ({
                 id="recurring"
                 name="recurring"
                 value={recurring}
-                onChange={() => handleChange(event, "recurring")}
-                onClick={() => setIsRecurring(!isRecurring)}
+                // onChange={() =>
+                //   handleInputChange(event.target.checked, "recurring")
+                // }
+                onClick={() => {
+                  handleInputChange(!isRecurring, "recurring");
+                  setIsRecurring(!isRecurring);
+                }}
               />
 
               <div
@@ -228,6 +260,9 @@ const ModalForm = ({
               ></div>
             </div>
           </label>
+
+          {/* Here is where the recurring dropdown starts */}
+
           <div
             className={
               "recurring-container " + (isRecurring ? " active z-50" : "")
@@ -235,26 +270,34 @@ const ModalForm = ({
           >
             <div className="recurring-animation mb-6 ">
               <Dropdown
-                label={"Recurring type"}
-                setter={setRecurring}
-                handleListChange={handleListChange}
-                list={recurringTypeList}
+                label="Recurring type"
+                field="recurringType"
                 value={recurring}
+                setter={setRecurring}
+                handleChange={handleChange}
+                data={recurringTypeList}
                 dropdownPosition={true}
               />
             </div>
           </div>
+
+          {/* Here is where the category dropdown starts */}
+
           <div className="mb-7">
             <Dropdown
+              field="category"
               label={"Category"}
-              setter={setCategory}
-              handleListChange={handleListChange}
-              list={categoryList}
               value={category}
+              setter={setCategory}
+              handleChange={handleCategoryChange}
+              data={categoryList}
               dropdownPosition={false}
-              additionalClasses={" -top-60 inset-y-0"}
+              additionalClasses={" -top-72 inset-y-0"}
             />
           </div>
+
+          {/* Here is where the buttons start */}
+
           <div className="flex flex-row">
             <button
               type="button"
