@@ -109,9 +109,14 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
   };
 
   return (
-    <Modal>
-      <Card fullWidth={false} additionalClasses={"flex-grow sm:max-w-sm"}>
-        <form className="flex flex-col p-2 w-full">
+    <Modal className="">
+      <Card
+        fullWidth={false}
+        additionalClasses={
+          "flex-grow sm:max-w-sm h-screen sm:h-auto pb-20 sm:pb-8 pt-4 sm:pt-6 sm:rounded-xl rounded-none"
+        }
+      >
+        <form className="flex flex-col p-2 w-full ">
           <div className="flex justify-between pb-6">
             <h3 className="text-lg font-semibold">Add new transaction</h3>
 
@@ -164,7 +169,6 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
               handleInputChange(event.target.value, "description")
             }
           />
-          {/* {!isValid ? alert("Danger! Danger!") : ""} */}
 
           {/* Here is where the Amount starts */}
 
@@ -235,9 +239,6 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
                 id="recurring"
                 name="recurring"
                 value={recurring}
-                // onChange={() =>
-                //   handleInputChange(event.target.checked, "recurring")
-                // }
                 onClick={() => {
                   handleInputChange(!isRecurring, "recurring");
                   setIsRecurring(!isRecurring);
@@ -307,11 +308,9 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
               Cancel
             </button>
             <button
-              // type="submit"
               className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
               onClick={() => postNewTransaction()}
             >
-              {/* {!isValid ? alert("Danger! Danger!") : ""} */}
               Save transaction
             </button>
           </div>

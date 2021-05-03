@@ -21,12 +21,12 @@ const Chart = () => {
   };
 
   return (
-    <Card fullWidth={true}>
+    <Card fullWidth={true} additionalClasses={"mb-16"}>
       <div className="flex justify-between items-center border-b border-gray-500 pt-6 pl-6 pb-2">
-        <h3 className="text-gray-500 dark:text-gray-400 text-lg font-medium">
+        <h3 className="text-gray-500 dark:text-gray-400 text-sm md:text-lg font-medium">
           Expenses by category
         </h3>
-        <h3 className="text-gray-500 dark:text-gray-400 text-lg font-medium">
+        <h3 className="text-gray-500 dark:text-gray-400 text-sm md:text-lg font-medium">
           Expenses overview
         </h3>
         <div className="justify-end flex w-28">

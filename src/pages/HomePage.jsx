@@ -45,19 +45,24 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
       <Header />
 
-      <div className="flex w-full gap-8">
-        <div className="flex flex-col justify-start w-2/3 mb-6 mt-6 h-full gap-4">
-          <Chart className="md:flex-row md:w-full flex-grow" />
-          <h3 className="pb-3 pt-8">Recent transactions</h3>
-          <TransactionsRecent
-            accessToken={accessToken}
-            transactions={transactions}
-            profile={profile}
-            className="md:flex-row md:w-full md:order-1 flex-grow"
-          />
-        </div>
-        <div className="flex w-1/3 justify-end mt-6 mb-6">
+      <div className="flex flex-col md:flex-row-reverse mt-6 min-h-full gap-8 mb-8 md:mb-0">
+        <div className="md:mb-8 md:w-1/3 flex-grow ">
           <Balance profile={profile} />
+        </div>
+
+        <div className="flex flex-col-reverse md:flex-col md:w-2/3 mx-4 md:mx-0">
+          <div className="md:mb-8   ">
+            <Chart className="flex-grow" />
+          </div>
+          <div className="mb-8">
+            <h3 className="pb-6 pt-4">Recent transactions</h3>
+            <TransactionsRecent
+              accessToken={accessToken}
+              transactions={transactions}
+              profile={profile}
+              className="md:flex-row md:w-full flex-grow"
+            />
+          </div>
         </div>
       </div>
     </DefaultLayout>

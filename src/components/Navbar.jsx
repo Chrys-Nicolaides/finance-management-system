@@ -35,7 +35,7 @@ const Navbar = ({ darkTheme, themeChange }) => {
           </li>
           <LogoutButton />
 
-          <li className="nav-item sm:hover:w-full hover:w-auto my-auto mb-0">
+          <li className="nav-item sm:hover:w-full hover:w-auto md:my-auto my-0 mb-0">
             <div className="nav-link sm:hover:px-0 hover:px-0">
               <button
                 className="focus:outline-none outline-none flex"
