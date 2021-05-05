@@ -8,7 +8,7 @@ import { HiOutlineChartPie, HiOutlineClipboardList } from "react-icons/hi";
 const Navbar = ({ darkTheme, themeChange }) => {
   return (
     <div>
-      <nav className="navbar fixed bg-indigo-300 dark:bg-gray-800 whitespace-nowrap left-0 z-10">
+      <nav className="navbar fixed bg-indigo-300 dark:bg-gray-800 whitespace-nowrap left-0 z-10 sm:px-0 px-0">
         <ul className="navbar-nav list-none p-0 m-0 flex flex-col items-center text-middle h-full">
           <li className="nav-logo items-center pt-3">
             <Link
@@ -35,7 +35,7 @@ const Navbar = ({ darkTheme, themeChange }) => {
           </li>
           <LogoutButton />
 
-          <li className="nav-item sm:hover:w-full hover:w-auto md:my-auto my-0 mb-0">
+          <li className="nav-item sm:hover:w-full hover:w-auto sm:my-auto my-0 mb-0 sm:-mb-2">
             <div className="nav-link sm:hover:px-0 hover:px-0">
               <button
                 className="focus:outline-none outline-none flex"

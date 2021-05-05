@@ -51,15 +51,24 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
         </div>
 
         <div className="flex flex-col-reverse md:flex-col md:w-2/3 mx-4 md:mx-0">
-          <div className="md:mb-8   ">
-            <Chart className="flex-grow" />
+          <div className="mb-1 sm:-mb-6">
+            <h3 className="pb-6 pt-4 flex sm:hidden">Expenses Overview</h3>
+            <Chart
+              accessToken={accessToken}
+              profile={profile}
+              darkTheme={darkTheme}
+              loading={loading}
+              themeChange={themeChange}
+              className="flex-grow"
+            />
           </div>
-          <div className="mb-8">
+          <div className="mb-8 sm:mb-8">
             <h3 className="pb-6 pt-4">Recent transactions</h3>
             <TransactionsRecent
               accessToken={accessToken}
               transactions={transactions}
               profile={profile}
+              darkTheme={darkTheme}
               className="md:flex-row md:w-full flex-grow"
             />
           </div>

@@ -8,11 +8,8 @@ const Balance = ({ profile }) => {
   const currency = currencyHelper(profile?.currency);
 
   return (
-    <Card
-      fullWidth={false}
-      additionalClasses={"h-full mx-4 md:mx-0 p-0 md:p-4"}
-    >
-      <div className="flex justify-between items-center border-b border-gray-500 pt-9 p-5 pb-5">
+    <Card fullWidth={false} additionalClasses={"h-full mx-4 md:mx-0 "}>
+      <div className="flex justify-between items-center border-b border-gray-500 pt-9 pl-6 pb-5">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm md:text-lg font-medium">
           Savings Account
         </h3>
@@ -37,7 +34,7 @@ const Balance = ({ profile }) => {
             </h3>
           </div>
         </div>
-        <div className="w-full  flex-row gap-x-8 content-end sm:flex hidden">
+        {/* <div className="w-full  flex-row gap-x-8 content-end sm:flex hidden">
           <div className="flex justify-between p-5 bg-white dark:bg-gray-700 dark:bg-opacity-70 shadow-md rounded-xl w-1/2">
             <div className="flex flex-col items-center w-full">
               <h2 className="text-lg text-gray-500 dark:text-gray-400 font-medium ">
@@ -70,7 +67,7 @@ const Balance = ({ profile }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Card>
   );
