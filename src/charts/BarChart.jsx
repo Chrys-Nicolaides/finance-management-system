@@ -33,8 +33,8 @@ function BarChart({ data, width, height }) {
       options: {
         layout: {
           padding: {
-            top: 12,
-            bottom: 16,
+            //   top: 12,
+            //   bottom: 16,
             left: 20,
             right: 20,
           },
@@ -45,6 +45,7 @@ function BarChart({ data, width, height }) {
               drawBorder: false,
             },
             ticks: {
+              beginAtZero: true,
               maxTicksLimit: 5,
               callback: (value) => formatValue(value),
             },
@@ -74,14 +75,14 @@ function BarChart({ data, width, height }) {
               borderRadius: 100,
               color: [theme.colors.gray[500]],
               font: {
-                size: 16,
+                // size: 16,
                 weight: "bold",
               },
             },
           },
           tooltip: {
             callbacks: {
-              title: () => false, // Disable tooltip title
+              title: () => false,
               label: (context) => formatValue(context.parsed.y),
             },
           },
@@ -93,29 +94,12 @@ function BarChart({ data, width, height }) {
         animation: {
           duration: 500,
         },
-        maintainAspectRatio: true,
+        responsive: false,
+        maintainAspectRatio: false,
       },
     });
     return () => chart.destroy();
   }, []);
-
-  //
-
-  const hexToRGB = (h) => {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    if (h.length === 4) {
-      r = `0x${h[1]}${h[1]}`;
-      g = `0x${h[2]}${h[2]}`;
-      b = `0x${h[3]}${h[3]}`;
-    } else if (h.length === 7) {
-      r = `0x${h[1]}${h[2]}`;
-      g = `0x${h[3]}${h[4]}`;
-      b = `0x${h[5]}${h[6]}`;
-    }
-    return `${+r},${+g},${+b}`;
-  };
 
   const formatValue = (value) =>
     Intl.NumberFormat("de-DE", {
@@ -128,14 +112,12 @@ function BarChart({ data, width, height }) {
   //
 
   return (
-    <React.Fragment>
-      <div className="px-5 py-3">
-        <ul ref={legend} className=""></ul>
-      </div>
-      <div className="">
-        <canvas ref={canvas} width={width} height={height}></canvas>
-      </div>
-    </React.Fragment>
+    <div className="bar-child relative flex flex-grow flex-wrap m-auto w-full h-auto">
+      {/* <ul ref={legend} className=""></ul> */}
+      {/* <div className=""> */}
+      <canvas ref={canvas} width={width} height={height}></canvas>
+      {/* </div> */}
+    </div>
   );
 }
 

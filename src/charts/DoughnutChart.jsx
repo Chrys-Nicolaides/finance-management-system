@@ -21,24 +21,33 @@ function DoughnutChart({ data, width, height }) {
     const chart = new Chart(ctx, {
       type: "doughnut",
       data: data,
+
       options: {
         cutout: "75%",
         layout: {
-          padding: 12,
+          padding: 50,
         },
         plugins: {
           legend: {
             display: true,
             position: "left",
+            padding: 0,
             labels: {
-              boxWidth: 15,
-              boxHeight: 15,
-              borderRadius: 50,
+              boxWidth: 10,
+              boxHeight: 10,
+              padding: 10,
               color: [theme.colors.gray[500]],
               font: {
-                borderRadius: 50,
-                size: 16,
+                size: 12,
                 weight: "bold",
+              },
+            },
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (item) {
+                return item.label + " " + item.parsed + "%";
               },
             },
           },
@@ -50,32 +59,17 @@ function DoughnutChart({ data, width, height }) {
         animation: {
           duration: 500,
         },
+        responsive: false,
         maintainAspectRatio: false,
-      },
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItem, data) {
-            return (
-              Chart.defaults.global.tooltips.callbacks.label(
-                tooltipItem,
-                data
-              ) + "%"
-            );
-          },
-        },
       },
     });
     return () => chart.destroy();
-  }, []);
+  }, [data]);
 
   return (
-    <div className="flex flex-col justify-center">
-      <div>
-        <canvas ref={canvas} width={width} height={height}></canvas>
-      </div>
-      <div>
-        <ul ref={legend} className="flex flex-wrap justify-center mr-10"></ul>
-      </div>
+    <div className="doughnut-child relative flex flex-grow flex-wrap m-auto w-full h-auto">
+      <canvas ref={canvas} width={width} height={height}></canvas>
+      <ul ref={legend} className=""></ul>
     </div>
   );
 }

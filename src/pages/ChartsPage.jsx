@@ -7,8 +7,26 @@ import Card from "../components/Card";
 import Modal from "../components/Modal";
 import { HiArrowLeft } from "react-icons/hi";
 
-const ChartsPage = (themeChange, darkTheme, accessToken, profile) => {
+const ChartsPage = (
+  themeChange,
+  darkTheme,
+  accessToken,
+  profile,
+  transactions
+) => {
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const res = await FetchCategories(profile.id, accessToken);
+      console.log(res);
+      setCategories(res);
+    };
+    if (profile?.id) {
+      getCategories();
+    }
+  }, []);
 
   return (
     <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>

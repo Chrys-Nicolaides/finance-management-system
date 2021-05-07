@@ -1,7 +1,6 @@
 import React from "react";
 import BarChart from "../charts/BarChart";
 import theme from "../../tailwindConfig";
-import { AiTwotoneCopyright } from "react-icons/ai";
 
 const BarChartPage = () => {
   const chartData = {
@@ -38,13 +37,12 @@ const BarChartPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <header className="px-5 py-4">
-        <h2 className=""></h2>
-      </header>
-      {/* Chart built with Chart.js 3 */}
-      {/* Change the height attribute to adjust the chart height */}
-      <BarChart data={chartData} width={595} height={260} />
+    <div className="bar-parent">
+      {/* <header>
+        <h2>Income vs Exepenses</h2>
+      </header> */}
+      {/* <BarChart data={chartData} width={595} height={260} /> */}
+      <BarChart data={chartData} />
     </div>
   );
 };
