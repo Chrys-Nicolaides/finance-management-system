@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "chartjs-adapter-moment";
+import "chartjs-adapter-date-fns";
 
 Chart.register(
   BarController,

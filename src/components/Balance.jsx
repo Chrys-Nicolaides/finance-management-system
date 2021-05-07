@@ -14,7 +14,7 @@ const Balance = ({ profile }) => {
           Savings Account
         </h3>
       </div>
-      <div className="flex flex-col place-content-between h-full px-6 md:pb-6 pb-8">
+      <div className="flex flex-col h-full px-6 md:pb-6 pb-8">
         <div className="text-center bg-gradient-to-b from-indigo-400 to-indigo-500 mt-12 rounded-xl pt-8 shadow-md ">
           <div className="flex flex-col items-center mx-6">
             <div className="bg-indigo-500 bg-opacity-80 w-16 h-16 rounded-xl flex justify-center items-center">
@@ -34,6 +34,26 @@ const Balance = ({ profile }) => {
             </h3>
           </div>
         </div>
+
+        {/* Progress bar  */}
+
+        <div className="progress-bar w-full pt-10">
+          <div>
+            <div className="flex justify-between mr-2">
+              <label className="text-sm">Days until pay day</label>
+              <label className="text-xxs self-end">{} days</label>
+            </div>
+            <progress
+              min="0"
+              max="100"
+              value="60"
+              className="w-full rounded-full mt-3"
+            ></progress>
+          </div>
+        </div>
+
+        {/* Income vs Expenses summary */}
+
         {/* <div className="w-full  flex-row gap-x-8 content-end sm:flex hidden">
           <div className="flex justify-between p-5 bg-white dark:bg-gray-700 dark:bg-opacity-70 shadow-md rounded-xl w-1/2">
             <div className="flex flex-col items-center w-full">

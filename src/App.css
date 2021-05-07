@@ -168,3 +168,32 @@ input[type="number"] {
   justify-content: center;
   align-items: center;
 }
+
+progress {
+  height: 18px;
+}
+progress::-webkit-progress-bar {
+  background-color: rgba(209, 213, 219, 100%);
+  border-radius: 10px;
+}
+.dark progress::-webkit-progress-bar {
+  background-color: #374151;
+  border-radius: 10px;
+}
+progress::-webkit-progress-value {
+  background-image: -webkit-linear-gradient(
+    right,
+    rgba(99, 102, 241, 100%),
+    rgba(79, 70, 229, 100%)
+  );
+  border-radius: 10px;
+}
+progress::-moz-progress-bar {
+  background-color: rgba(209, 213, 219, 100%);
+  border-radius: 10px;
+  background-image: -webkit-linear-gradient(
+    right,
+    rgba(99, 102, 241, 100%),
+    rgba(79, 70, 229, 100%)
+  );
+}
