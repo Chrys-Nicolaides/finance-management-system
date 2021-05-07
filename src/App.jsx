@@ -5,7 +5,6 @@ import ProtectedRoute from "../src/auth/ProtectedRoute";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 import { FetchProfileEmail } from "./services/api/Profile";
-import Profile from "../src/components/auth-components/Profile";
 
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
@@ -82,7 +81,6 @@ function App() {
           )}
         />
         <Route path="/logout" exact component={LogoutPage} />
-        <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute
           path="/dashboard"
           component={() => (

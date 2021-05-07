@@ -12,6 +12,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import DatePicker from "../components/DatePicker";
 
 import { FetchTransactions } from "../services/api/Transaction";
+import { FetchCategories } from "../services/api/Categories";
 
 const columns = ["category", "description", "created", "amount"];
 
@@ -26,6 +27,8 @@ const TransactionsHistoryPage = ({
   );
   const [endDate, setEndDate] = useState(dayjs().format("DD.MM.YYYY"));
   const [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -51,6 +54,19 @@ const TransactionsHistoryPage = ({
   const dateFormat = (input) => {
     return dayjs(input, "DD.MM.YYYY").format("YYYY-MM-DD");
   };
+
+  console.log(dayjs(endDate).add(1, "day").format("YYYY-MM-DD"));
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const res = await FetchCategories(profile.id, accessToken);
+      console.log(res);
+      setCategories(res);
+    };
+    if (profile?.id) {
+      getCategories();
+    }
+  }, []);
 
   return (
     <DefaultLayout themeChange={themeChange} darkTheme={darkTheme}>
@@ -94,7 +110,13 @@ const TransactionsHistoryPage = ({
               />
             </div>
           </div>
-          <MyTable data={transactions} columns={columns} profile={profile} />
+          <MyTable
+            data={transactions}
+            columns={columns}
+            profile={profile}
+            accessToken={accessToken}
+            categoryList={categories}
+          />
         </Card>
       </div>
     </DefaultLayout>
