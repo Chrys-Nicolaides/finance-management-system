@@ -34,7 +34,7 @@ const LandingPage = (props) => {
       </div>
       <div className="flex flex-col md:flex-row xl:flex-row p-14 items-center content-center w-full max-h-full">
         <div className="flex-first md:justify-start md:ml-20 md:w-1/2">
-          <h1 className="display-primary dark:text-white">
+          <h1 className="display-secondary dark:text-gray-600 text-gray-700">
             Manage your finances on the go.
           </h1>
           <h2 className="display-secondary pb-14 pt-4 dark:text-gray-400 text-gray-500">

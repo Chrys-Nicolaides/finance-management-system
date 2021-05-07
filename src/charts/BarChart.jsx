@@ -53,7 +53,7 @@ function BarChart({ data, width, height }) {
           x: {
             type: "time",
             time: {
-              parser: "MM-DD-YYYY",
+              parser: "MM-dd-yyyy",
               unit: "month",
               displayFormats: {
                 month: "MMM",
