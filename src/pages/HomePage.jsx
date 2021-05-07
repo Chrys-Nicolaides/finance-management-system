@@ -17,7 +17,7 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const res = await FetchTransactions(profile.id, accessToken, 1, 10);
+      const res = await FetchTransactions(profile.id, accessToken, 1, 3);
       setTransactions(res);
       setLoading(false);
     };
