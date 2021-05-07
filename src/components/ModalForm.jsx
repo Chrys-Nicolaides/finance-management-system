@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import { IoClose, IoLocationSharp, IoCalendarClear } from "react-icons/io5";
-
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
+import {
+  FetchTransactions,
+  CreateTransaction,
+} from "../services/api/Transaction";
 import Card from "./Card";
 import Modal from "./Modal";
 import Dropdown from "./Dropdown";
@@ -30,16 +35,6 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
   const [isRecurring, setIsRecurring] = useState(false);
   const [recurring, setRecurring] = useState("Please select");
   const [category, setCategory] = useState("Please select");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onBlur",
-  });
-  const onSubmit = (data) => console.log(data);
 
   const currencyList = [
     {
@@ -101,8 +96,33 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
     setValues(tempValues);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
+
+  // Post transaction
+
+  const onSubmit = async (data) => {
+    event.preventDefault();
+    const tempObject = { ...values };
+    tempObject.description = data.description;
+    tempObject.amount = data.amount;
+    CreateTransaction(profile?.id, tempObject, accessToken);
+    getTransactions();
+    setShowModal(false);
+  };
+
+  // Date format
+  dayjs.extend(customParseFormat);
+  const today = dayjs().format("DD.MM.YYYY");
+
   return (
-    <Modal className="">
+    <Modal className="overflow-y-hidden">
       <Card
         fullWidth={false}
         additionalClasses={
@@ -124,35 +144,27 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
             />
           </div>
           <div>
-            <div className="location-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center">
-              <div className="category-container bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
-                <IoLocationSharp className="fill-current text-indigo-400 dark:text-indigo-500 w-6 h-6" />
+            <div className="info-container">
+              <div className="info-icon-container ">
+                <IoLocationSharp className="info-icon w-6 h-6" />
               </div>
               <div className="py-2">
-                <h6 className="font-semibold text-indigo-300 dark:text-indigo-400">
-                  Location
-                </h6>
-                <h5 className="font-semibold text-indigo-400 dark:text-indigo-500">
-                  Nike
-                </h5>
+                <h6 className="info-subtitle">Location</h6>
+                <h5 className="info-title">Nike</h5>
               </div>
             </div>
-            <div className="date-container bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center mt-3 mb-6">
-              <div className="category-container bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2">
-                <IoCalendarClear className="fill-current text-indigo-400 dark:text-indigo-500 w-5 h-5" />
+            <div className="info-container mt-3 mb-6">
+              <div className="info-icon-container">
+                <IoCalendarClear className="info-icon" />
               </div>
               <div className="py-2">
-                <h6 className="font-semibold text-indigo-300 dark:text-indigo-400">
-                  Date
-                </h6>
-                <h5 className="font-semibold text-indigo-400 dark:text-indigo-500">
-                  Today 01/04/2021
-                </h5>
+                <h6 className="info-subtitle">Date</h6>
+                <h5 className="info-title">{today}</h5>
               </div>
             </div>
           </div>
 
-          {/* Here is where the description starts */}
+          {/* Here is where the amount starts */}
 
           <label>Description</label>
           {errors.description?.message ? (
@@ -201,7 +213,7 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
               </div>
 
               {errors.amount?.message ? (
-                <div className="error-container">
+                <div className="error-container mb-0">
                   <HiOutlineExclamationCircle className="error-icon" />
                   <p className="error-message">
                     {errors.amount?.message
@@ -303,7 +315,6 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
               handleChange={handleCategoryChange}
               data={categoryList}
               dropdownPosition={true}
-              // additionalClasses={" -top-72 inset-y-0"}
             />
           </div>
 
@@ -319,7 +330,7 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
             </button>
             <button
               type="submit"
-              className="button-primary font-medium  text-sm w-1/2 ml-2 p-0 h-10"
+              className="button-primary font-medium text-sm w-1/2 ml-2 p-0 h-10"
             >
               Save transaction
             </button>

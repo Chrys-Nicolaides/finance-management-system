@@ -20,10 +20,10 @@ const Balance = ({ profile }) => {
             <div className="bg-indigo-500 bg-opacity-80 w-16 h-16 rounded-xl flex justify-center items-center">
               <IoCardOutline className="text-indigo-700 w-10 h-10" />
             </div>
-            <h3 className="font-display font-medium text-indigo-50 md:text-3xl text-xl pt-8">
+            <h3 className="font-display font-medium text-indigo-50 xl:text-3xl text-lg pt-8">
               Net Balance
             </h3>
-            <h3 className="font-display font-semibold text-white md:text-6xl text-5xl pb-1 pt-6">
+            <h3 className="font-display font-semibold text-white xl:text-6xl text-4xl pb-1 pt-6">
               {profile?.currency ? `${currency} ${profile.balance}` : ""}
             </h3>
             {/* <h3 className="font-display font-medium text-indigo-200 text-base">

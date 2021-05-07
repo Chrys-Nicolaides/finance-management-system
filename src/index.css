@@ -42,6 +42,9 @@
   .category-container {
     @apply w-8 h-7 rounded lg:mt-4 mr-2 lg:mr-4 lg:mb-4 flex justify-center items-center;
   }
+  .category-container svg {
+    @apply w-3.5 h-3.5;
+  }
   svg {
     @apply flex self-center;
   }
@@ -71,7 +74,7 @@
     border-transparent      ring-opacity-0      hover:border-indigo-400      focus:ring-indigo-200 active:border-indigo-400 focus:border-indigo-400 dark:focus:border-indigo-400;
   }
   input.input-error {
-    @apply mb-2 text-sm focus:text-gray-700 text-gray-600 dark:text-gray-200 dark:focus:text-gray-100 bg-red-50 border-2 dark:bg-red-300 dark:bg-opacity-30 border-red-200 hover:border-red-300 focus:border-red-300 focus:ring-red-100 dark:border-red-400 dark:hover:border-red-300 dark:focus:border-red-300 dark:focus:ring-red-400 dark:ring-opacity-10 w-full;
+    @apply mb-2 text-sm focus:text-gray-700 text-gray-600 dark:text-gray-200 dark:focus:text-gray-100 bg-red-50 border-2 dark:bg-red-300 dark:bg-opacity-30 border-red-200 hover:border-red-300 focus:border-red-300 focus:ring-red-100 dark:border-red-400 dark:hover:border-red-300 dark:focus:border-red-300 dark:focus:ring-red-400 dark:ring-opacity-10 w-full placeholder-gray-400 dark:placeholder-gray-300;
   }
   .error-message {
     @apply text-red-400 dark:text-red-400 text-xxs;
@@ -100,18 +103,27 @@
     @apply absolute left-0 pl-3 flex items-center pointer-events-none h-12 mt-0 mb-0;
   }
   .currency-span {
-    @apply text-gray-400 dark:text-gray-500 text-sm dark:bg-transparent z-10;
-  }
-  .t-head {
-    @apply text-gray-500 dark:text-gray-400 text-lg font-medium capitalize tracking-wider dark:bg-opacity-70 rounded-xl border-b border-gray-500 pl-0 pr-0 w-full;
-  }
-  .t-row {
-    @apply font-medium sm:text-gray-500 text-gray-700 sm:dark:text-gray-500 dark:text-gray-400 sm:text-lg text-sm;
+    @apply text-gray-400 dark:text-gray-400 text-sm dark:bg-transparent z-10;
   }
   .toggle-path {
     @apply w-6 h-2 rounded-full shadow-inner;
   }
   .toggle-circle {
     @apply absolute w-4 h-4 rounded-full shadow-sm -top-1 ease-in-out duration-300 -left-1;
+  }
+  .info-container {
+    @apply bg-indigo-50 dark:bg-indigo-300 h-14 w-full rounded-md flex items-center;
+  }
+  .info-icon-container {
+    @apply rounded lg:mt-4 mr-2 lg:mr-4 lg:mb-4 flex justify-center items-center bg-indigo-200 dark:bg-indigo-400 h-10 w-10 p-0 ml-2;
+  }
+  .info-icon {
+    @apply fill-current text-indigo-400 dark:text-indigo-500 w-5 h-5;
+  }
+  .info-title {
+    @apply font-semibold text-indigo-400 dark:text-indigo-500;
+  }
+  .info-subtitle {
+    @apply font-semibold text-indigo-300 dark:text-indigo-400;
   }
 }
