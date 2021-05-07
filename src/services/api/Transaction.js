@@ -1,4 +1,5 @@
 import { request } from "./Request";
+import dayjs from "dayjs";
 
 export const FetchTransactions = async (
   id,
@@ -16,7 +17,9 @@ export const FetchTransactions = async (
     "GET",
     `/profile/${id}/transactions?page=${page || 0}&per_page=${perPage || 5}${
       start_date && end_date
-        ? `&start_date=${start_date}&end_date=${end_date}`
+        ? `&start_date=${start_date}&end_date=${dayjs(end_date)
+            .add(1, "day")
+            .format("YYYY-MM-DD")}`
         : ""
     }`,
     {},

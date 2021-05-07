@@ -32,7 +32,7 @@ const TransactionsRecent = ({
 
   return (
     <div>
-      <Card fullWidth={true} additionalClasses={"mr-6"}>
+      <Card fullWidth={true} additionalClasses={"mr-6 overflow-auto"}>
         {showModal ? (
           <ModalForm
             setShowModal={setShowModal}
