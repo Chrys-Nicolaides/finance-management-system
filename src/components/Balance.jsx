@@ -1,8 +1,53 @@
+import dayjs from "dayjs";
 import React from "react";
+
 import Card from "../components/Card";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { IoCardOutline } from "react-icons/io5";
+// import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { IoCardOutline, IoCodeWorking } from "react-icons/io5";
 import { currencyHelper } from "../helpers";
+
+// number of days left
+
+const getRemainingDays = () => {
+  const date = new Date();
+  const time = new Date(date.getTime());
+  time.setMonth(date.getMonth() + 1);
+  time.setDate(0);
+  const days =
+    time.getDate() > date.getDate() ? time.getDate() - date.getDate() : 0;
+
+  return days;
+};
+
+getRemainingDays();
+
+// number of days in month
+
+const totalDaysInMonth = () => {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  const totalDays = new Date(year, month, 0).getDate();
+
+  return totalDays;
+};
+
+totalDaysInMonth();
+
+// Day in Month
+
+const dayOfMonth = () => {
+  const date = new Date();
+
+  const currentDay = date.getDate();
+
+  return currentDay;
+};
+
+dayOfMonth();
+
+//
 
 const Balance = ({ profile }) => {
   const currency = currencyHelper(profile?.currency);
@@ -24,7 +69,7 @@ const Balance = ({ profile }) => {
               Net Balance
             </h3>
             <h3 className="font-display font-semibold text-white xl:text-6xl text-4xl pb-1 pt-6">
-              {profile?.currency ? `${currency} ${profile.balance}` : ""}
+              {profile?.currency ? `${currency} ${profile.netBalance}` : ""}
             </h3>
             {/* <h3 className="font-display font-medium text-indigo-200 text-base">
             Net Balance
@@ -40,14 +85,18 @@ const Balance = ({ profile }) => {
         <div className="progress-bar w-full pt-10">
           <div>
             <div className="flex justify-between mr-2">
-              <label className="text-sm">Days until pay day</label>
-              <label className="text-xxs self-end">{} days</label>
+              <label className="text-sm text-gray-500 dark:text-gray-500">
+                Days left till pay day
+              </label>
+              <label className="text-lg text-gray-700 dark:text-gray-400">
+                {getRemainingDays()} days!
+              </label>
             </div>
             <progress
               min="0"
-              max="100"
-              value="60"
-              className="w-full rounded-full mt-3"
+              max={totalDaysInMonth()}
+              value={dayOfMonth()}
+              className="w-full rounded-full mt-1.5"
             ></progress>
           </div>
         </div>
