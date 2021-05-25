@@ -26,6 +26,7 @@ export const FetchProfileEmail = async (email, accessToken) => {
   const headers = new Headers();
 
   headers.set("Authorization", `Bearer ${accessToken}`);
+
   return request("GET", `/profile/by_email/${email}`, "", headers)
     .then((response) => response.json())
     .then((result) => {
@@ -41,11 +42,50 @@ export const FetchProfileEmail = async (email, accessToken) => {
 
 export const CreateProfile = async (body, accessToken) => {
   const headers = new Headers();
+
   headers.set("Authorization", `Bearer ${accessToken}`);
+
   return request("POST", `/profile`, body, headers)
     .then((response) => response.json())
     .then((result) => {
       return result;
     })
     .catch((error) => console.log("POST profile error:", error));
+};
+
+// reports
+
+export const FetchProfileCategories = async (id, accessToken) => {
+  const headers = new Headers();
+
+  headers.set("Authorization", `Bearer ${accessToken}`);
+
+  return request(
+    "GET",
+    `/profile/${id}/reports/expenses_by_category`,
+    {},
+    headers
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((error) =>
+      console.log("GET profile expenses categories error:", error)
+    );
+};
+
+export const FetchProfileExpenses = async (id, accessToken) => {
+  const headers = new Headers();
+
+  headers.set("Authorization", `Bearer ${accessToken}`);
+
+  return request("GET", `/profile/${id}/reports/income_expenses`, {}, headers)
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((error) =>
+      console.log("GET profile income & expenses error:", error)
+    );
 };

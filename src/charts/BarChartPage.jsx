@@ -1,43 +1,47 @@
 import React from "react";
 import BarChart from "../charts/BarChart";
 import theme from "../../tailwindConfig";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
-const BarChartPage = () => {
+const BarChartPage = (props) => {
+  const { data } = props;
+
+  dayjs.extend(customParseFormat);
+
+  const labels = data.map((item) =>
+    dayjs(`${item.year}.${item.month}`, "YYYY.M").format("DD-MM-YYYY")
+  );
+  const incomeData = data.map((item) => item.income);
+  const expensesData = data.map((item) => item.expenses);
+
   const chartData = {
-    labels: [
-      "12-01-2020",
-      "01-01-2021",
-      "02-01-2021",
-      "03-01-2021",
-      "04-01-2021",
-      "05-01-2021",
-    ],
+    // labels: Object.keys(data),
+    labels: labels,
     datasets: [
       // Light bars
       {
         label: "Income",
-        data: [800, 1600, 900, 1300, 1950, 1700],
+        data: incomeData,
         backgroundColor: theme.colors.indigo[400],
         hoverBackgroundColor: theme.colors.indigo[300],
-        barPercentage: 0.8,
-        // borderRadius: 8,
-        // categoryPercentage: 0.88,
+        barPercentage: 0.3,
+        borderRadius: 2,
       },
       // Dark bars
       {
         label: "Expenses",
-        data: [4900, 2600, 5350, 4800, 5200, 4800],
+        data: expensesData,
         backgroundColor: theme.colors.indigo[500],
         hoverBackgroundColor: theme.colors.indigo[400],
-        barPercentage: 0.8,
-        // borderRadius: 8,
-        // categoryPercentage: 0.66,
+        barPercentage: 0.3,
+        borderRadius: 2,
       },
     ],
   };
 
   return (
-    <div className="bar-parent">
+    <div className="bar-parent w-full flex-grow h-[230px]">
       {/* <header>
         <h2>Income vs Exepenses</h2>
       </header> */}

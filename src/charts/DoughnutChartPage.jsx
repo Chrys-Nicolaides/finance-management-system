@@ -6,26 +6,26 @@ const DoughnutChartPage = (props) => {
   const { data } = props;
 
   const chartData = {
-    labels: data,
+    labels: Object.keys(data),
     datasets: [
       {
         label: "Expenses",
-        data: [20, 20, 20, 20, 10, 10],
+        data: Object.values(data),
         backgroundColor: [
-          theme.colors.indigo[500],
-          theme.colors.indigo[300],
-          theme.colors.indigo[700],
           theme.colors.teal[300],
+          theme.colors.indigo[700],
+          theme.colors.indigo[500],
           theme.colors.red[300],
           theme.colors.orange[200],
+          theme.colors.indigo[300],
         ],
         hoverBackgroundColor: [
-          theme.colors.indigo[600],
-          theme.colors.indigo[400],
-          theme.colors.indigo[800],
           theme.colors.teal[400],
+          theme.colors.indigo[800],
+          theme.colors.indigo[600],
           theme.colors.red[400],
           theme.colors.orange[300],
+          theme.colors.indigo[400],
         ],
         borderStyle: ["solid"],
         borderColor: ["transparent"],
@@ -34,7 +34,7 @@ const DoughnutChartPage = (props) => {
   };
 
   return (
-    <div className="doughnut-parent">
+    <div className="doughnut-parent w-full">
       {/* <header className="">
         <h2 className="text-gray-500 dark:text-gray-400">
           Expenses by Category

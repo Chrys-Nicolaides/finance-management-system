@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import theme from "../../tailwindConfig";
+import useBreakpoint from "use-breakpoint";
 
 import {
   Chart,
@@ -12,9 +13,17 @@ import "chartjs-adapter-date-fns";
 
 Chart.register(DoughnutController, ArcElement, TimeScale, Tooltip);
 
+const BREAKPOINTS = { mobile: 0, tablet: 700, desktop: 1445 };
+
 function DoughnutChart({ data, width, height }) {
   const canvas = useRef(null);
   const legend = useRef(null);
+
+  let breakpoint;
+  const CurrentBreakpoint = () => {
+    breakpoint = useBreakpoint(BREAKPOINTS, "desktop").breakpoint;
+  };
+  CurrentBreakpoint();
 
   useEffect(() => {
     const ctx = canvas.current;
@@ -25,21 +34,23 @@ function DoughnutChart({ data, width, height }) {
       options: {
         cutout: "75%",
         layout: {
-          padding: 50,
+          padding: 20,
         },
         plugins: {
           legend: {
             display: true,
-            position: "left",
-            padding: 0,
+            position: breakpoint == "desktop" ? "left" : "bottom",
             labels: {
               boxWidth: 10,
               boxHeight: 10,
-              padding: 10,
+              padding: 20,
               color: [theme.colors.gray[500]],
               font: {
-                size: 12,
+                size: 14,
                 weight: "bold",
+                style: "normal",
+                family:
+                  "'-apple-system', 'BlinkMacSystemFont', '-apple-system', Roboto, 'Helvetica', 'sans-serif', 'Apple Color Emoji'",
               },
             },
           },
@@ -59,17 +70,17 @@ function DoughnutChart({ data, width, height }) {
         animation: {
           duration: 500,
         },
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
       },
     });
     return () => chart.destroy();
-  }, [data]);
+  }, [data, breakpoint]);
 
   return (
-    <div className="doughnut-child relative flex flex-grow flex-wrap m-auto w-full h-auto">
-      <canvas ref={canvas} width={width} height={height}></canvas>
-      <ul ref={legend} className=""></ul>
+    <div className="doughnut-child relative flex flex-grow flex-wrap m-auto w-full h-full">
+      {/* <canvas ref={canvas} width={width} height={height}></canvas> */}
+      <canvas ref={canvas}></canvas>
     </div>
   );
 }
