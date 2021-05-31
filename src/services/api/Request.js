@@ -1,7 +1,7 @@
 export const request = async (method, path, body, headers) => {
   headers?.set("Content-Type", "application/json");
 
-  const baseUrl = "https://finanzer.normans.co.za";
+  const baseUrl = "https://finanzer-api.normans.co.za";
   let fetchOptions = {};
 
   if (method === "GET") {

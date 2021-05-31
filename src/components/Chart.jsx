@@ -7,7 +7,14 @@ import { ReactComponent as ChartPicLight } from "../images/ChartPicLight.svg";
 import BarChartPage from "../charts/BarChartPage";
 import DoughnutChartPage from "../charts/DoughnutChartPage";
 
-const Chart = ({ darkTheme, profile, transactions, categories }) => {
+const Chart = ({
+  darkTheme,
+  profile,
+  transactions,
+  categories,
+  expensesCategories,
+  incomeExpenses,
+}) => {
   const [sortBy, setSortBy] = useState("sort by");
 
   const sortByList = [
@@ -49,14 +56,12 @@ const Chart = ({ darkTheme, profile, transactions, categories }) => {
               </div>
             </div>
           </div>
-          <div className="flex md:flex-row flex-col w-full h-auto items-center relative">
-            <div className="w-1/2">
-              <DoughnutChartPage
-                data={categories.map((category) => category.name || " ")}
-              />
+          <div className="flex md:flex-row flex-col w-full h-full items-center relative lg:gap-x-8 gap-y-20">
+            <div className="lg:w-1/2 w-full ">
+              <DoughnutChartPage data={expensesCategories} />
             </div>
-            <div className="w-1/2">
-              <BarChartPage />
+            <div className="lg:w-1/2 w-full flex-grow h-full">
+              <BarChartPage data={incomeExpenses} />
             </div>
           </div>
         </div>

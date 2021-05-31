@@ -1,17 +1,11 @@
 import React from "react";
 import dayjs from "dayjs";
 
+import { currencyHelper } from "../helpers";
+
 import * as ReactIcon from "react-icons/ai";
 
-const MyTable = ({
-  data,
-  columns,
-  index,
-  categories,
-  values,
-  dateFormat,
-  categoryList,
-}) => {
+const MyTable = ({ data }) => {
   return (
     <div>
       <div className="flex flex-row justify-between border-b border-gray-300 dark:border-gray-600 mb-4 text-gray-400">
@@ -79,7 +73,7 @@ const iconComponent = (input) => {
 const RowComponent = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const {
-    data: { description, amount, category, created },
+    data: { description, amount, category, created, currency },
     canOpen,
   } = props;
 
@@ -89,20 +83,31 @@ const RowComponent = (props) => {
     }
   };
 
+  const computedamount = (amount, currency) => {
+    if (amount > 0) {
+      return `- ${currencyHelper(currency)} ${Math.abs(amount)}`;
+    } else {
+      return `${currencyHelper(currency)} ${Math.abs(amount)}`;
+    }
+  };
+
   return (
     <div onClick={opener} className="flex flex-row items-center w-full ">
       <div className="py-4 lg:py-0">{iconComponent(category.name)}</div>
       <div className="flex flex-col-3 w-full justify-between">
         <div className="text-left w-1/3">
-          <h5 className="text-gray-700 dark:text-gray-300">{description}</h5>
-          <h6 className="text-gray-400 dark:text-gray-400">{category.name}</h6>
+          <h5 className="text-gray-700 dark:text-gray-300 text-base font-medium">
+            {description}
+          </h5>
+          <h6 className="text-gray-400 dark:text-gray-500 text-xs">
+            {category.name}
+          </h6>
         </div>
-        <h6 className="text-gray-400 dark:text-gray-400 text-center pt-1 w-1/3 sm:block hidden">
+        <h6 className="text-gray-400 dark:text-gray-500 text-center pt-1 w-1/3 sm:block hidden text-xs">
           {dayjs(created).format("DD.MM.YYYY")}
         </h6>
-        <h5 className="text-gray-700 dark:text-gray-300 text-right w-1/3">
-          {" "}
-          - € {amount}
+        <h5 className="text-gray-700 dark:text-gray-300 text-right w-1/3 text-base font-medium">
+          {computedamount(amount, currency)}
         </h5>
       </div>
       {isOpen ? (

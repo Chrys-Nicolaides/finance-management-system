@@ -55,8 +55,6 @@ const TransactionsHistoryPage = ({
     return dayjs(input, "DD.MM.YYYY").format("YYYY-MM-DD");
   };
 
-  console.log(dayjs(endDate).add(1, "day").format("YYYY-MM-DD"));
-
   useEffect(() => {
     const getCategories = async () => {
       const res = await FetchCategories(profile.id, accessToken);

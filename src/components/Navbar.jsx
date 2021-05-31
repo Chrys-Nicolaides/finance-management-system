@@ -35,10 +35,10 @@ const Navbar = ({ darkTheme, themeChange }) => {
           </li>
           <LogoutButton />
 
-          <li className="nav-item sm:hover:w-full hover:w-auto sm:my-auto my-0 mb-0 sm:-mb-2">
+          <li className="nav-item sm:hover:w-full hover:w-auto sm:my-auto my-0 mb-0 sm:-mb-2 cursor-pointer dark:focus:border-indigo-200 focus:border-2">
             <div className="nav-link sm:hover:px-0 hover:px-0">
               <button
-                className="focus:outline-none outline-none flex"
+                className="flex focus:outline-none outline-none py-3.5"
                 onClick={() => themeChange(!darkTheme)}
               >
                 <RiMoonClearLine className="svg-logo" />

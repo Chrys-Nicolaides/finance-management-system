@@ -69,6 +69,7 @@ function App() {
       getProfile();
     }
   }, [accessToken]);
+
   return (
     <BrowserRouter>
       <Switch>

@@ -6,7 +6,7 @@ const LogoutButton = () => {
   const { logout } = useAuth0();
 
   return (
-    <li className="nav-item sm:hover:w-full hover:w-auto">
+    <li className="nav-item sm:hover:w-full hover:w-auto cursor-pointer">
       <div className="nav-link sm:hover:px-0 hover:px-0">
         <button
           className=" focus:outline-none outline-none flex"

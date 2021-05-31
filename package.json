@@ -19,6 +19,7 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-super-responsive-table": "^5.2.0",
+    "use-breakpoint": "^2.0.0",
     "use-lilius": "^1.1.2",
     "yup": "^0.32.9"
   },

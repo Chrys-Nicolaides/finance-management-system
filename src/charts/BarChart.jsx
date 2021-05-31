@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import theme from "../../tailwindConfig";
+import useBreakpoint from "use-breakpoint";
 
 import {
   Chart,
@@ -21,9 +22,17 @@ Chart.register(
   Legend
 );
 
+const BREAKPOINTS = { mobile: 0, tablet: 700, desktop: 1445 };
+
 function BarChart({ data, width, height }) {
   const canvas = useRef(null);
   const legend = useRef(null);
+
+  let breakpoint;
+  const CurrentBreakpoint = () => {
+    breakpoint = useBreakpoint(BREAKPOINTS, "desktop").breakpoint;
+  };
+  CurrentBreakpoint();
 
   useEffect(() => {
     const ctx = canvas.current;
@@ -32,12 +41,7 @@ function BarChart({ data, width, height }) {
       data: data,
       options: {
         layout: {
-          padding: {
-            //   top: 12,
-            //   bottom: 16,
-            left: 20,
-            right: 20,
-          },
+          padding: 0,
         },
         scales: {
           y: {
@@ -45,6 +49,10 @@ function BarChart({ data, width, height }) {
               drawBorder: false,
             },
             ticks: {
+              font: {
+                size: 12,
+                weight: "bold",
+              },
               beginAtZero: true,
               maxTicksLimit: 5,
               callback: (value) => formatValue(value),
@@ -52,8 +60,9 @@ function BarChart({ data, width, height }) {
           },
           x: {
             type: "time",
+
             time: {
-              parser: "MM-dd-yyyy",
+              parser: "dd-MM-yyyy",
               unit: "month",
               displayFormats: {
                 month: "MMM",
@@ -63,20 +72,30 @@ function BarChart({ data, width, height }) {
               display: false,
               drawBorder: false,
             },
+            ticks: {
+              font: {
+                size: 14,
+                weight: "bold",
+              },
+            },
           },
         },
         plugins: {
           legend: {
             display: true,
-            position: "bottom",
+            position: breakpoint == "desktop" ? "right" : "bottom",
             labels: {
               boxWidth: 15,
               boxHeight: 15,
               borderRadius: 100,
+              padding: 30,
               color: [theme.colors.gray[500]],
               font: {
-                // size: 16,
+                size: 14,
                 weight: "bold",
+                style: "normal",
+                family:
+                  "'-apple-system', 'BlinkMacSystemFont', '-apple-system', Roboto, 'Helvetica', 'sans-serif', 'Apple Color Emoji'",
               },
             },
           },
@@ -94,12 +113,12 @@ function BarChart({ data, width, height }) {
         animation: {
           duration: 500,
         },
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
       },
     });
     return () => chart.destroy();
-  }, []);
+  }, [data, breakpoint]);
 
   const formatValue = (value) =>
     Intl.NumberFormat("de-DE", {
@@ -112,11 +131,9 @@ function BarChart({ data, width, height }) {
   //
 
   return (
-    <div className="bar-child relative flex flex-grow flex-wrap m-auto w-full h-auto">
-      {/* <ul ref={legend} className=""></ul> */}
-      {/* <div className=""> */}
-      <canvas ref={canvas} width={width} height={height}></canvas>
-      {/* </div> */}
+    <div className="bar-child relative flex flex-grow flex-wrap m-auto w-full h-full">
+      {/* <canvas ref={canvas} width={width} height={height}></canvas> */}
+      <canvas ref={canvas} height={height}></canvas>
     </div>
   );
 }
