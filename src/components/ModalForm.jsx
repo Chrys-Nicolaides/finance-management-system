@@ -24,7 +24,7 @@ const schema = yup.object().shape({
 const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
   const [values, setValues] = useState({
     description: "",
-    day: "1",
+    day: 1,
     amount: "",
     currency: "EUR",
     recurring: false,
