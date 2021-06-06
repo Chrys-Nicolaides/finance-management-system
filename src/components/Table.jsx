@@ -73,9 +73,10 @@ const iconComponent = (input) => {
 const RowComponent = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const {
-    data: { description, amount, category, created, currency },
+    data: { description, amount, created, currency },
     canOpen,
   } = props;
+  const category = props.data.Category;
 
   const opener = () => {
     if (canOpen) {
@@ -90,6 +91,8 @@ const RowComponent = (props) => {
       return `${currencyHelper(currency)} ${Math.abs(amount)}`;
     }
   };
+
+  console.log(props);
 
   return (
     <div onClick={opener} className="flex flex-row items-center w-full ">

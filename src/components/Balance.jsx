@@ -69,7 +69,9 @@ const Balance = ({ profile }) => {
               Net Balance
             </h3>
             <h3 className="font-display font-semibold text-white xl:text-6xl text-4xl pb-1 pt-6">
-              {profile?.currency ? `${currency} ${profile.netBalance}` : ""}
+              {profile?.currency
+                ? `${currency} ${profile.netBalance || "0"}`
+                : ""}
             </h3>
             {/* <h3 className="font-display font-medium text-indigo-200 text-base">
             Net Balance
