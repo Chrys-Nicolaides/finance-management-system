@@ -112,6 +112,8 @@ const ModalForm = ({ setShowModal, accessToken, profile, categoryList }) => {
     const tempObject = { ...values };
     tempObject.description = data.description;
     tempObject.amount = parseFloat(data.amount);
+    console.log(tempObject);
+    console.log("test");
     CreateTransaction(profile?.id, tempObject, accessToken);
     getTransactions();
     setShowModal(false);

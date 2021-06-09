@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import LogoutButton from "../components/auth-components/LogoutButton";
 import { RiMoonClearLine } from "react-icons/ri";
 import { IoChevronForwardCircleSharp } from "react-icons/io5";
-import { HiOutlineChartPie, HiOutlineClipboardList } from "react-icons/hi";
+import {
+  HiCog,
+  HiOutlineChartPie,
+  HiOutlineClipboardList,
+} from "react-icons/hi";
 
 const Navbar = ({ darkTheme, themeChange }) => {
   return (
@@ -21,18 +25,24 @@ const Navbar = ({ darkTheme, themeChange }) => {
               </span>
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className="nav-link" to="/charts">
               <HiOutlineChartPie className="svg-logo" />
               <span className="link-text">Charts</span>
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link className="nav-link" to="/transactionshistory">
               <HiOutlineClipboardList className="svg-logo" />
               <span className="link-text">Transactions</span>
             </Link>
           </li>
+          {/* <li className="nav-item">
+            <Link className="nav-link" to="/settings">
+              <HiCog className="svg-logo" />
+              <span className="link-text">Settings</span>
+            </Link>
+          </li> */}
           <LogoutButton />
 
           <li className="nav-item sm:hover:w-full hover:w-auto sm:my-auto my-0 mb-0 sm:-mb-2 cursor-pointer dark:focus:border-indigo-200 focus:border-2">

@@ -29,19 +29,23 @@ const HomePage = ({ themeChange, darkTheme, accessToken, profile }) => {
     };
     if (profile?.id) {
       getTransactions();
+    } else {
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     const getCategories = async () => {
       const res = await FetchCategories(profile.id, accessToken);
-      console.log(res);
       setCategories(res);
     };
     if (profile?.id) {
       getCategories();
     }
   }, []);
+
+  console.log(profile);
+  console.log(profile);
 
   // reports
 

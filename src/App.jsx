@@ -10,6 +10,7 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
 import ChartsPage from "./pages/ChartsPage";
+import SettingsPage from "./pages/SettingsPage";
 import LogoutPage from "./pages/LogoutPage";
 import { BadGatewayPage } from "./pages/ErrorPages";
 
@@ -44,31 +45,35 @@ function App() {
 
   const { getAccessTokenSilently, user } = useAuth0();
 
-  React.useEffect(() => {
+  // console.log(user);
+
+  useEffect(() => {
     const getAccessToken = async () => {
       try {
+        setTimeout(() => 5000);
         const tempToken = await getAccessTokenSilently({
           audience: import.meta.env.VITE_AUDIENCE,
           scopes: ["read:profile"],
         });
-        setAccessToken(tempToken);
+
+        if (tempToken) {
+          setAccessToken(tempToken);
+          getProfile(tempToken);
+          setLoading(false);
+        }
       } catch (e) {
+        console.log(e);
         setLoading(false);
       }
     };
+
     getAccessToken();
   }, []);
 
-  useEffect(() => {
-    const getProfile = async () => {
-      const profileResponse = await FetchProfileEmail(user.email, accessToken);
-      setProfile(profileResponse);
-    };
-
-    if (accessToken) {
-      getProfile();
-    }
-  }, [accessToken]);
+  const getProfile = async (accessToken) => {
+    const profileResponse = await FetchProfileEmail(user.email, accessToken);
+    setProfile(profileResponse);
+  };
 
   return (
     <BrowserRouter>
@@ -108,6 +113,10 @@ function App() {
         <ProtectedRoute
           path="/charts"
           component={() => <ChartsPage accessToken={accessToken} />}
+        />
+        <ProtectedRoute
+          path="/settings"
+          component={() => <SettingsPage accessToken={accessToken} />}
         />
       </Switch>
     </BrowserRouter>
